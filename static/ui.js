@@ -107,7 +107,7 @@ function startLogStream() {
     const p = document.createElement("p");
     p.textContent = event.data;
     logsEl.appendChild(p);
-    logsEl.scrollTop = logsEl.scrollHeight; // auto-scroll
+    logsEl.scrollTop = logsEl.scrollHeight;
   };
 
   evtSource.onerror = function() {
