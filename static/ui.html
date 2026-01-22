@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Local Print Agent</title>
+  <link rel="stylesheet" href="/static/ui.css">
+</head>
+<body>
+  <h1>🖨️ Local Print Agent</h1>
+
+  <div class="status-logs-container">
+    <div class="card status">
+      <h3>Status do Agente</h3>
+      <p><strong>Estado:</strong> <span id="agent-status">-</span></p>
+      <p><strong>Impressora ativa:</strong> <span id="active-printer">-</span></p>
+      <p><strong>Porta:</strong> <span id="agent-port">-</span></p>
+      <p><strong>Conexão:</strong> <span id="https-status">-</span></p>
+    </div>
+
+    <div class="card logs">
+      <h3>Logs em tempo real</h3>
+      <div id="logs"></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <label>Impressora ativa</label>
+    <select id="printers"></select>
+    <button onclick="savePrinter()">💾 Salvar</button>
+  </div>
+
+  <div class="card card-btntest">
+    <button onclick="testPrint()">🧪 Testar impressão</button>
+  </div>
+
+  <div id="status"></div>
+
+  <div id="toast-container"></div>
+
+  <script src="/static/ui.js"></script>
+</body>
+</html>

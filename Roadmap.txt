@@ -1,0 +1,62 @@
+🌟 Roadmap LocalPrint Agent (Padrão Atual)
+
+FASE 1 — Configuração Inicial
+✅ Criar agente Python básico com Flask
+✅ Configurar execução em localhost
+✅ Gerar e configurar certificado SSL autoassinado
+✅ Teste básico de impressão ZPL na Zebra
+
+FASE 2 — Payload Genérico
+✅ Receber payload raw via POST /print
+✅ Suporte a impressoras Zebra (ZPL)
+✅ Suporte a impressoras genéricas / laser (TEXT)
+✅ Modularizar backend (print_zebra.py, print_laser.py)
+✅ Logs de eventos (módulo eventlog.py)
+
+FASE 3 — Configuração de Impressora
+✅ Listar impressoras disponíveis (/printers)
+✅ Selecionar impressora via UI
+✅ Salvar impressora atual no config.json
+✅ Endpoint /config/printer para alterar impressora
+✅ Endpoint /config para carregar configurações
+✅ Endpoint /health mostrando impressora atual e porta
+✅ Endpoint de teste genérico (/test-print) atualizado para Zebra e impressoras genéricas
+
+FASE 4 — UI Web
+✅ Dashboard com impressora ativa e status do agente
+✅ Seleção e atualização de impressora via UI
+✅ Teste de impressão com feedback visual (toasts)
+✅ Layout responsivo (cards lado a lado para status e logs)
+✅ Logs visuais SSE em tempo real
+✅ Layout clean e profissional
+
+FASE 5 — Refinamento de UI & UX
+✅ Impressora ativa
+✅ Status do agente
+✅ Feedback via toasts
+✅ Indicador HTTPS ativo
+✅ Porta visível com copy
+✅ Botão “Recarregar impressoras”
+✅ Logs em SSE
+✅ Mensagens de erro visuais claras
+✅ Layout tipo mini-dashboard
+⬜ Versão do agente na UI
+
+FASE 6 — Robustez e Segurança
+⬜ Autenticação / token de API
+⬜ Validação de payload
+⬜ Rate limiting
+⬜ Verificação de certificado HTTPS
+⬜ Logs avançados via SSE
+⬜ Timestamps detalhados
+⬜ Última ação executada
+⬜ Fallback / retry para impressoras que falham
+⬜ Notificações de erro crítico
+
+FASE 7 — Funcionalidades Avançadas
+⬜ Suporte ESC/POS (térmica não-Zebra)
+⬜ Fila de impressão
+⬜ Retry automático de impressão
+⬜ API versionada (/v1/print)
+⬜ Integração com serviços externos
+⬜ Empacotamento (EXE / serviço Windows)

@@ -1,0 +1,33 @@
+[2026-01-22 17:34:18] TESTE | Impressão de teste enviada
+[2026-01-22 17:47:07] TESTE | Impressão genérica enviada
+[2026-01-22 17:47:16] TESTE | Impressão genérica enviada
+[2026-01-22 17:48:00] TESTE | Impressão genérica enviada
+[2026-01-22 17:48:46] TESTE | Impressão de teste enviada
+[2026-01-22 17:48:54] TESTE | Impressão de teste enviada
+[2026-01-22 17:53:36] TESTE | Impressão genérica enviada
+[2026-01-22 17:55:19] TESTE | Impressão genérica enviada
+[2026-01-22 17:55:35] TESTE | Impressão genérica enviada
+[2026-01-22 17:55:42] ERRO TESTE | (1804, 'StartDocPrinter', 'O tipo de dado especificado é inválido.')
+[2026-01-22 17:55:49] ERRO TESTE | (1804, 'StartDocPrinter', 'O tipo de dado especificado é inválido.')
+[2026-01-22 17:57:12] TESTE | Impressão de teste enviada
+[2026-01-22 18:00:59] TESTE | Zebra (ZPL)
+[2026-01-22 18:03:42] TESTE | Zebra (ZPL)
+[2026-01-22 18:03:46] TESTE | Zebra (ZPL)
+[2026-01-22 18:03:58] TESTE | Zebra (ZPL)
+[2026-01-22 18:08:39] TESTE | Zebra (ZPL ASCII)
+[2026-01-22 18:09:35] TESTE | Impressão de teste enviada
+[2026-01-22 18:10:44] TESTE | Impressão de teste enviada
+[2026-01-22 18:11:37] TESTE | Impressão de teste enviada
+[2026-01-22 18:13:54] TESTE | Zebra (ZPL)
+[2026-01-22 18:18:59] TESTE | Impressora genérica
+[2026-01-22 18:27:18] TESTE | OK
+[2026-01-22 18:27:37] OK | Printer=ZT411 | Bytes=264 | IP=127.0.0.1
+[2026-01-22 18:50:11] TESTE | OK
+[2026-01-22 18:51:23] TESTE | OK
+[2026-01-22 18:53:01] TESTE | OK
+[2026-01-22 18:53:16] TESTE | OK
+[2026-01-22 19:08:27] TESTE | OK
+[2026-01-22 19:08:51] TESTE | OK
+[2026-01-22 19:12:07] TESTE | OK
+[2026-01-22 19:22:37] TESTE | OK
+[2026-01-22 19:26:18] TESTE | OK
