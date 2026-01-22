@@ -40,7 +40,7 @@ FASE 5 — Refinamento de UI & UX
 ✅ Logs em SSE
 ✅ Mensagens de erro visuais claras
 ✅ Layout tipo mini-dashboard
-⬜ Versão do agente na UI
+✅ Versão do agente na UI
 
 FASE 6 — Robustez e Segurança
 ⬜ Autenticação / token de API

@@ -15,6 +15,7 @@
       <p><strong>Impressora ativa:</strong> <span id="active-printer">-</span></p>
       <p><strong>Porta:</strong> <span id="agent-port">-</span></p>
       <p><strong>Conexão:</strong> <span id="https-status">-</span></p>
+      <p><strong>Versão:</strong> <span id="agent-version">-</span></p>
     </div>
 
     <div class="card logs">
@@ -27,6 +28,7 @@
     <label>Impressora ativa</label>
     <select id="printers"></select>
     <button onclick="savePrinter()">💾 Salvar</button>
+    <button onclick="reloadPrinters()">🔄 Recarregar impressoras</button>
   </div>
 
   <div class="card card-btntest">

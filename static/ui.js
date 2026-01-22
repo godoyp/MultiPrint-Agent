@@ -18,7 +18,17 @@ function showToast(message, type = "info", timeout = 4000) {
   }, timeout);
 }
 
-// STATUS DO AGENTE
+// VERSION
+async function loadVersion() {
+  try {
+    const data = await fetch("/version").then(r => r.json());
+    document.getElementById("agent-version").innerText = data.version;
+  } catch {
+    document.getElementById("agent-version").innerText = "N/A";
+  }
+}
+
+// AGENT STATUS
 async function loadStatus() {
   try {
     const data = await fetch("/health").then(r => r.json());
@@ -39,7 +49,7 @@ async function loadStatus() {
   }
 }
 
-// IMPRESSORAS
+// PRINTERS
 async function loadPrinters() {
   const printers = await fetch("/printers").then(r => r.json());
   const config = await fetch("/config").then(r => r.json());
@@ -59,7 +69,7 @@ async function loadPrinters() {
   });
 }
 
-// SALVAR CONFIG
+// SAVE CONFIG
 async function savePrinter() {
   const printer = printersEl.value;
 
@@ -73,14 +83,21 @@ async function savePrinter() {
     showToast("Impressora atualizada com sucesso", "success");
 
     await loadStatus();
-    await loadPrinters();
 
   } catch {
     showToast("Erro ao salvar impressora", "error");
   }
 }
 
-// TESTE DE IMPRESSÃO
+// RELOAD PRINTERS
+async function reloadPrinters() {
+  showToast("Recarregando impressoras...", "info", 2000);
+  await loadPrinters();
+  showToast("Lista de impressoras atualizada", "success", 2000);
+}
+
+
+// PRINT TEST
 async function testPrint() {
   showToast("Enviando teste de impressão...", "info", 3000);
 
@@ -97,7 +114,7 @@ async function testPrint() {
   }
 }
 
-// LOGS EM TEMPO REAL
+// REAL-TIME LOGS
 function startLogStream() {
   if (!logsEl) return;
 
@@ -125,4 +142,5 @@ window.onload = () => {
   loadStatus();
   loadPrinters();
   startLogStream();
+  loadVersion();
 };

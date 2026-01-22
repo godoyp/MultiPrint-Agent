@@ -58,6 +58,7 @@ def print_label():
 @app.route("/printers", methods=["GET"])
 def list_printers():
     printers = [p[2] for p in win32print.EnumPrinters(2)]
+    log_event("IMPRESSORAS ATUALIZADAS")
     return jsonify(printers)
 
 # PRINTER HEALTH ROUTE
@@ -102,6 +103,7 @@ def set_printer():
         json.dump(CONFIG, f, indent=2, ensure_ascii=False)
 
     print(f"🖨️ Impressora alterada para: {printer}")
+    log_event(f"IMPRESSORA SELECIONADA | {printer}")
 
     return jsonify({"status": "ok", "printer": printer})
 
@@ -128,7 +130,7 @@ def test_print():
             )
 
         dispatch_print(CURRENT_PRINTER, payload)
-        log_event("TESTE | OK")
+        log_event("TESTE DE IMPRESSÃO | OK")
 
         return jsonify({"status": "ok"})
 
@@ -141,6 +143,11 @@ def test_print():
 @app.route("/logs/stream")
 def logs_stream():
     return Response(event_stream(), mimetype="text/event-stream")
+
+# VERSION ROUTE
+@app.route("/version", methods=["GET"])
+def version():
+    return jsonify({"version": CONFIG.get("version", "N/A")})
 
 # START
 
