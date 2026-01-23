@@ -1,62 +1,100 @@
 🌟 Roadmap LocalPrint Agent (Padrão Atual)
 
-FASE 1 — Configuração Inicial
+🖥️ FASE 1 — Configuração Inicial ✅
+🎯 Preparar o ambiente e garantir funcionamento local
+
 ✅ Criar agente Python básico com Flask
 ✅ Configurar execução em localhost
 ✅ Gerar e configurar certificado SSL autoassinado
 ✅ Teste básico de impressão ZPL na Zebra
 
-FASE 2 — Payload Genérico
-✅ Receber payload raw via POST /print
-✅ Suporte a impressoras Zebra (ZPL)
-✅ Suporte a impressoras genéricas / laser (TEXT)
-✅ Modularizar backend (print_zebra.py, print_laser.py)
-✅ Logs de eventos (módulo eventlog.py)
+🖥️ FASE 2 — Payload Genérico ✅
+🎯 Receber qualquer payload para impressão
 
-FASE 3 — Configuração de Impressora
-✅ Listar impressoras disponíveis (/printers)
-✅ Selecionar impressora via UI
-✅ Salvar impressora atual no config.json
-✅ Endpoint /config/printer para alterar impressora
-✅ Endpoint /config para carregar configurações
-✅ Endpoint /health mostrando impressora atual e porta
-✅ Endpoint de teste genérico (/test-print) atualizado para Zebra e impressoras genéricas
+✅ POST /print com payload raw
+✅ Suporte Zebra (ZPL)
+✅ Suporte impressoras genéricas / laser (TEXT)
+✅ Backend modular (print_zebra.py, print_laser.py)
+✅ Logs de eventos (eventlog.py)
 
-FASE 4 — UI Web
-✅ Dashboard com impressora ativa e status do agente
-✅ Seleção e atualização de impressora via UI
-✅ Teste de impressão com feedback visual (toasts)
-✅ Layout responsivo (cards lado a lado para status e logs)
-✅ Logs visuais SSE em tempo real
-✅ Layout clean e profissional
+🖥️ FASE 3 — Configuração de Impressora ✅
+🎯 Selecionar e persistir impressoras
 
-FASE 5 — Refinamento de UI & UX
-✅ Impressora ativa
+✅ Listar impressoras (/printers)
+✅ Seleção de impressora via UI
+✅ Persistência em config.json
+✅ Endpoint /config/printer
+✅ Endpoint /config
+✅ Endpoint /health (printer + porta)
+✅ /test-print para Zebra e genéricas
+
+🖥️ FASE 4 — UI Web ✅
+🎯 Interface clara e profissional
+
+✅ Dashboard com status do agente
+✅ Impressora ativa visível
+✅ Seleção de impressora via UI
+✅ Teste de impressão com feedback visual
+✅ Layout responsivo (status + logs)
+✅ Logs em tempo real via SSE
+✅ Porta visível
+✅ Layout clean tipo dashboard
+
+🖥️ FASE 5 — Refinamento de UI & UX ✅ (FINALIZADA)
+🎯 Produto utilizável e profissional
+
+Estado & UX
+
 ✅ Status do agente
+✅ Impressora ativa
 ✅ Feedback via toasts
+✅ Mensagens de erro visuais claras
+
+Observabilidade
+
+✅ Logs em SSE (streaming)
+✅ Última ação executada
+✅ Timestamp de eventos
+
+Impressoras
+
+✅ Botão Recarregar impressoras
+✅ Log ao recarregar impressoras
+✅ Log ao salvar impressora
+
+Segurança & Infra
+
 ✅ Indicador HTTPS ativo
 ✅ Porta visível com copy
-✅ Botão “Recarregar impressoras”
-✅ Logs em SSE
-✅ Mensagens de erro visuais claras
-✅ Layout tipo mini-dashboard
-✅ Versão do agente na UI
+✅ Aviso de certificado autoassinado
 
-FASE 6 — Robustez e Segurança
+Produto
+
+✅ Versão do agente na UI (via /version)
+✅ Mini-dashboard organizado
+
+Arquitetura
+
+✅ UI modularizada (ES Modules)
+✅ Backend organizado e desacoplado
+
+🛡️ FASE 6 — Robustez e Segurança ⏳
+🎯 Preparar para ambientes mais críticos
+
 ⬜ Autenticação / token de API
 ⬜ Validação de payload
 ⬜ Rate limiting
 ⬜ Verificação de certificado HTTPS
-⬜ Logs avançados via SSE
-⬜ Timestamps detalhados
-⬜ Última ação executada
-⬜ Fallback / retry para impressoras que falham
-⬜ Notificações de erro crítico
+⬜ Logs avançados
+⬜ Fallback / retry de impressão
+⬜ Notificação de erro crítico (opcional)
 
-FASE 7 — Funcionalidades Avançadas
-⬜ Suporte ESC/POS (térmica não-Zebra)
+🧩 FASE 7 — Funcionalidades Avançadas ⏳
+🎯 Produção e integrações
+
+⬜ Suporte ESC/POS
 ⬜ Fila de impressão
-⬜ Retry automático de impressão
+⬜ Retry automático
 ⬜ API versionada (/v1/print)
-⬜ Integração com serviços externos
+⬜ Integrações externas
 ⬜ Empacotamento (EXE / serviço Windows)
