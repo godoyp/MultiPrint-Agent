@@ -61,6 +61,7 @@ Impressoras
 ✅ Botão Recarregar impressoras
 ✅ Log ao recarregar impressoras
 ✅ Log ao salvar impressora
+✅ Validação de impressora offline antes de imprimir
 
 Segurança & Infra
 

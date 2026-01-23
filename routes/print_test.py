@@ -1,7 +1,7 @@
 from flask import Blueprint, jsonify
 from core.dispatcher import dispatch_print
 from core.printer_state import CURRENT_PRINTER
-from modules.printer_utils import is_zebra
+from modules.printer_utils import is_zebra, printer_is_online
 from modules.eventlog import log_event
 
 bp = Blueprint("print_test", __name__)
@@ -9,6 +9,13 @@ bp = Blueprint("print_test", __name__)
 @bp.route("/test-print", methods=["POST"])
 def test_print():
     try:
+        if not printer_is_online(CURRENT_PRINTER):
+            log_event(f"PRINT TEST FAILED | PRINTER OFFLINE | {CURRENT_PRINTER}")
+            return jsonify({
+                "error": "Printer offline or unavailable",
+                "printer": CURRENT_PRINTER
+            }), 503
+        
         if is_zebra(CURRENT_PRINTER):
             payload = (
                 "^XA\r\n"
