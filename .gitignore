@@ -1,5 +1,6 @@
 # Folders #
 certs/
+logs/
 
 # Logs and databases #
 *.log
