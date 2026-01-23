@@ -3,42 +3,42 @@
 <head>
   <meta charset="UTF-8">
   <title>Local Print Agent</title>
-  <link rel="stylesheet" href="/static/ui.css">
+  <link rel="stylesheet" href="/static/css/ui.css">
 </head>
 <body>
   <h1>🖨️ Local Print Agent</h1>
 
   <div class="status-logs-container">
     <div class="card status">
-      <h3>Status do Agente</h3>
-      <p><strong>Estado:</strong> <span id="agent-status">-</span></p>
-      <p><strong>Impressora ativa:</strong> <span id="active-printer">-</span></p>
-      <p><strong>Porta:</strong> <span id="agent-port">-</span></p>
-      <p><strong>Conexão:</strong> <span id="https-status">-</span></p>
-      <p><strong>Versão:</strong> <span id="agent-version">-</span></p>
+      <h3>Agent Status</h3>
+      <p><strong>Status:</strong> <span id="agent-status">-</span></p>
+      <p><strong>Active Printer:</strong> <span id="active-printer">-</span></p>
+      <p><strong>Port:</strong> <span id="agent-port">-</span></p>
+      <p><strong>Secure Connection:</strong> <span id="https-status">-</span></p>
+      <p><strong>Version:</strong> <span id="agent-version">-</span></p>
     </div>
 
     <div class="card logs">
-      <h3>Logs em tempo real</h3>
+      <h3>Real-Time Log</h3>
       <div id="logs"></div>
     </div>
   </div>
 
   <div class="card">
-    <label>Impressora ativa</label>
+    <label>Printers</label>
     <select id="printers"></select>
-    <button onclick="savePrinter()">💾 Salvar</button>
-    <button onclick="reloadPrinters()">🔄 Recarregar impressoras</button>
+    <button id="btn-save">💾 Save</button>
+    <button id="btn-reload">🔄 Reload Printers</button>
   </div>
 
   <div class="card card-btntest">
-    <button onclick="testPrint()">🧪 Testar impressão</button>
+    <button id="btn-test-print">🧪 Print Test</button>
   </div>
 
   <div id="status"></div>
 
   <div id="toast-container"></div>
 
-  <script src="/static/ui.js"></script>
+  <script type="module" src="/static/js/init.js"></script>
 </body>
 </html>
