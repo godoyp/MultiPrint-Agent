@@ -1,10 +1,15 @@
 # LocalPrint Agent 🖨️
 
 <div>
-  <img src="https://img.shields.io/badge/PYTHON-3.9%2B-blue?style=for-the-badge&logo=python" />
+  <img src="https://img.shields.io/badge/PYTHON-3.11.9-blue?style=for-the-badge&logo=python" />
+</div>
+<div>
   <img src="https://img.shields.io/badge/FLASK-Backend-black?style=for-the-badge&logo=flask" />
+</div>
+<div>
   <img src="https://img.shields.io/badge/STATUS-Active-success?style=for-the-badge" />
 </div>
+
 
 <h4>
 	Project status: Actively developed 🚀
