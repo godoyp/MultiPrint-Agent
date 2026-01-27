@@ -153,7 +153,7 @@ Content-Type: application/json
 }
 ```
 
-Implementation exemple:
+JavaScript implementation exemple:
 ```http
 fetch("https://localhost:9108/print", {
               method: "POST",
