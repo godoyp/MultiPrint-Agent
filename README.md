@@ -25,7 +25,7 @@ Topics :writing_hand:
 * [How to Use](#how-to-use-arrow_forward)
 * [API Endpoints](#api-endpoints-link)
 * [API Contract](#api-contract-)
-* [Roadmap](#roadmap-map)
+* [Roadmap](#roadmap-)
 * [Developers & Contributors](#developers--contributors-computer)
 * [License](#license-grey_exclamation)
 <!--te-->
