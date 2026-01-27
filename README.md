@@ -170,7 +170,70 @@ fetch("https://localhost:9108/print", {
 
 ```
 
- 
+ ## API Contract 🧩
+
+The LocalPrint Agent exposes a **simple and stable print API** designed to receive **raw print data**, independent of printer type.
+
+### 🔹 Endpoint
+
+```
+POST /print
+```
+
+### 🔹 Request Body
+
+The request **must** be a JSON object containing the `raw` field.
+
+```json
+{
+  "raw": "<RAW_PRINT_PAYLOAD>"
+}
+```
+
+### 🔹 `raw` Field
+
+- `raw` represents the **raw print payload**
+- It is sent **exactly as received** to the configured printer
+- Supported formats depend on the printer type:
+  - **Zebra printers** → ZPL
+  - **Generic / Laser printers** → Plain text
+  - (Future) ESC/POS, queued jobs, retries, etc.
+
+> ⚠️ The key name **must be `raw`**.  
+> If the field is missing or empty, the agent will reject the request with an error.
+
+---
+
+### 🔹 Example (JavaScript)
+
+```javascript
+fetch("https://localhost:5000/print", {
+  method: "POST",
+  headers: {
+    "Content-Type": "application/json"
+  },
+  body: JSON.stringify({
+    raw: "^XA^FO50,50^FDHello World^FS^XZ"
+  })
+})
+.then(response => response.json())
+.then(data => console.log(data))
+.catch(error => console.error(error));
+```
+
+---
+
+### 🧠 Design Philosophy
+
+- The **client does not need to know** the printer type
+- The agent automatically detects whether the printer is Zebra or generic
+- This keeps integrations:
+  - ✅ Simple  
+  - ✅ Stable  
+  - ✅ Printer-agnostic  
+
+The `raw` field acts as the **API contract** between external systems and the LocalPrint Agent.
+
             
 
 ---
