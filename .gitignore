@@ -3,6 +3,7 @@ certs/
 logs/
 __pycache__/
 .vscode/
+.venv/
 
 # Logs and databases #
 *.log
