@@ -52,6 +52,29 @@ It runs locally on Windows, exposes a secure HTTPS API, and allows applications 
 
 ---
 
+## Prerequisites :pushpin:
+
+- Windows OS
+- Python **3.11.9**
+- Printer drivers installed locally
+- HTTPS certificates generated (self-signed)
+
+Install dependencies:
+```bash
+pip install flask flask-cors pywin32
+```
+
+---
+
+## Used Libraries :books:
+
+- [Flask](https://pypi.org/project/Flask/)
+- [Flask-CORS](https://pypi.org/project/flask-cors/)
+- [pywin32](https://pypi.org/project/pywin32/)
+- Python Standard Library
+
+---
+
 ## Architecture :building_construction:
 
 - **Flask** backend with Blueprints
@@ -108,29 +131,6 @@ localprint-agent/
 
 ---
 
-## Prerequisites :pushpin:
-
-- Windows OS
-- Python **3.11.9**
-- Printer drivers installed locally
-- HTTPS certificates generated (self-signed)
-
-Install dependencies:
-```bash
-pip install flask flask-cors pywin32
-```
-
----
-
-## Used Libraries :books:
-
-- [Flask](https://pypi.org/project/Flask/)
-- [Flask-CORS](https://pypi.org/project/flask-cors/)
-- [pywin32](https://pypi.org/project/pywin32/)
-- Python Standard Library
-
----
-
 ## How to Use :arrow_forward:
 
 Start the agent:
@@ -152,6 +152,19 @@ Content-Type: application/json
   "raw": "^XA^FO50,50^FDHello World^FS^XZ"
 }
 ```
+---
+
+## API Endpoints :link:
+
+- `POST /print` — Send raw payload to printer
+- `POST /test-print` — Test printer
+- `GET /printers` — List printers
+- `POST /config/printer` — Set active printer
+- `GET /health` — Agent status
+- `GET /logs/stream` — Real-time logs (SSE)
+- `GET /version` — Agent version
+
+---
 
 
  ## API Contract 🧩
@@ -218,20 +231,7 @@ fetch("https://localhost:9108/print", {
   - ✅ Printer-agnostic  
 
 The `raw` field acts as the **API contract** between external systems and the LocalPrint Agent.
-
-            
-
----
-
-## API Endpoints :link:
-
-- `POST /print` — Send raw payload to printer
-- `POST /test-print` — Test printer
-- `GET /printers` — List printers
-- `POST /config/printer` — Set active printer
-- `GET /health` — Agent status
-- `GET /logs/stream` — Real-time logs (SSE)
-- `GET /version` — Agent version
+        
 
 ---
 
