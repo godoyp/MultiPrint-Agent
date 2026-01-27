@@ -1,6 +1,6 @@
 from flask import Flask
 from flask_cors import CORS
-from core.config import PORT
+from core.agent_config import AGENT_PORT
 from routes.print import bp as print_bp
 from routes.printers import bp as printers_bp
 from routes.config import bp as config_bp
@@ -26,6 +26,6 @@ if __name__ == "__main__":
     print("🖨️ LocalPrint Agent Initialized")
     app.run(
         host="127.0.0.1",
-        port=PORT,
+        port=AGENT_PORT,
         ssl_context=("certs/localhost.crt", "certs/localhost.key")
     )

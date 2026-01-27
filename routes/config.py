@@ -1,6 +1,6 @@
 import json
 from flask import Blueprint, request, jsonify
-from core.config import CONFIG
+from core.agent_config import CONFIG
 from core.printer_state import set_printer
 from modules.eventlog import log_event
 

@@ -1,0 +1,34 @@
+{
+  "meta": {
+    "description": "Zebra printer identification library"
+  },
+
+  "known_models": [
+    "zebra",
+    "zt230",
+    "zt410",
+    "zt420",
+    "zt510",
+    "zt610",
+    "zt620",
+    "zd220",
+    "zd230",
+    "zd410",
+    "zd420",
+    "zd500",
+    "zd621",
+    "gk420",
+    "gk430",
+    "gx420",
+    "gx430",
+    "lp2844",
+    "tlp2844",
+    "s4m",
+    "zm400",
+    "zm600"
+  ],
+
+  "custom_names": [
+    "cjm"
+  ]
+}

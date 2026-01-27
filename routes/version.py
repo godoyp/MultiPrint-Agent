@@ -1,5 +1,5 @@
 from flask import Blueprint, jsonify
-from core.config import CONFIG
+from core.agent_config import CONFIG
 
 bp = Blueprint("version", __name__)
 

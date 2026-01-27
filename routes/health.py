@@ -1,6 +1,6 @@
 from flask import Blueprint, jsonify
 from core.printer_state import get_printer
-from core.config import PORT
+from core.agent_config import AGENT_PORT
 
 bp = Blueprint("health", __name__)
 
@@ -9,5 +9,5 @@ def health():
     return jsonify({
         "status": "online",
         "printer": get_printer(),
-        "port": PORT
+        "port": AGENT_PORT
     })

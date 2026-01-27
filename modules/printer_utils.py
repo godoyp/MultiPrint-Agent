@@ -1,8 +1,7 @@
 import win32print
-
-import win32print
 import win32ui
 import pywintypes
+from core.agent_config import ZEBRA_PRINTERS
 
 def printer_is_online(printer_name: str) -> bool:
     try:
@@ -37,9 +36,20 @@ def printer_is_online(printer_name: str) -> bool:
 
     except Exception:
         return False
-
-
+    
 
 def is_zebra(printer_name: str) -> bool:
+    if not printer_name:
+        return False
+
     name = printer_name.lower()
-    return "zebra" in name or "zt" in name or "zdesigner" in name
+
+    for known in ZEBRA_PRINTERS.get("known_models", []):
+        if known.lower() in name:
+            return True
+
+    for custom in ZEBRA_PRINTERS.get("custom_names", []):
+        if custom.lower() in name:
+            return True
+
+    return False
