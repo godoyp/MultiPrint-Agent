@@ -154,15 +154,20 @@ Content-Type: application/json
 ```
 
 JavaScript implementation exemple:
-```http
+```javascript
 fetch("https://localhost:9108/print", {
-              method: "POST",
-              headers: {
-                "Content-Type": "application/json"
-              },
-              body: JSON.stringify({
-                raw: zpl
-              })
+  method: "POST",
+  headers: {
+    "Content-Type": "application/json"
+  },
+  body: JSON.stringify({
+    raw: "^XA^FO50,50^FDHello World^FS^XZ"
+  })
+})
+.then(response => response.json())
+.then(data => console.log(data))
+.catch(error => console.error(error));
+
 ```
 
  
