@@ -213,8 +213,10 @@ python app.py
 
 Access the UI:
 ```
-https://localhost:5000/ui
+https://localhost:9108/ui
 ```
+> ⚠️ The default port is **9108**.  
+> If this port is already in use on your machine, you can change it on config/agent_config.json (agent_port:).
 
 Send a print job:
 ```http
