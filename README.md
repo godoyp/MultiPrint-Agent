@@ -153,22 +153,6 @@ Content-Type: application/json
 }
 ```
 
-JavaScript implementation exemple:
-```javascript
-fetch("https://localhost:9108/print", {
-  method: "POST",
-  headers: {
-    "Content-Type": "application/json"
-  },
-  body: JSON.stringify({
-    raw: "YOUR_PAYLOAD_HERE" // 👈 Replace with your ZPL / RAW / TEXT payload
-  })
-})
-.then(response => response.json())
-.then(data => console.log(data))
-.catch(error => console.error(error));
-
-```
 
  ## API Contract 🧩
 
@@ -207,18 +191,19 @@ The request **must** be a JSON object containing the `raw` field.
 ### 🔹 Example (JavaScript)
 
 ```javascript
-fetch("https://localhost:5000/print", {
+fetch("https://localhost:9108/print", {
   method: "POST",
   headers: {
     "Content-Type": "application/json"
   },
   body: JSON.stringify({
-    raw: "^XA^FO50,50^FDHello World^FS^XZ"
+    raw: "YOUR_PAYLOAD_HERE" // 👈 Replace with your ZPL / RAW / TEXT payload
   })
 })
 .then(response => response.json())
 .then(data => console.log(data))
 .catch(error => console.error(error));
+
 ```
 
 ---
