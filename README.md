@@ -87,8 +87,8 @@ pip install flask flask-cors pywin32
 localprint-agent/
 ├── app.py
 ├── certs/
-│   ├── Your localhost self-signed certificate
-│   └── Your localhost self-signed key
+│   ├── Your localhost self-signed certificate (.crt file)
+│   └── Your localhost self-signed key (.key file)
 ├── config/
 │   ├── config.json
 │   └── zebra_printers.json
@@ -127,6 +127,78 @@ localprint-agent/
 │       └── toasts.js
 
 ```
+
+---
+
+# HTTPS & Self-Signed Certificate 🔐
+
+LocalPrint Agent **requires HTTPS** to work properly, especially for:
+- Browser-based integrations
+- JavaScript `fetch` requests
+- Secure local communication
+
+Because the agent runs locally, a **self-signed SSL certificate** must be generated for `localhost`.
+
+---
+
+## Why HTTPS is Required
+
+Modern browsers **block insecure (HTTP) requests** when accessing:
+- Local APIs
+- Printing services
+- System-level resources
+
+Running the agent with HTTPS avoids:
+- CORS issues
+- Mixed content errors
+- Browser security blocks
+
+---
+
+## Generating a Self-Signed Certificate (localhost)
+
+Create a `certs/` folder in the project root and generate the certificate:
+
+```bash
+mkdir certs
+
+openssl req -x509 -newkey rsa:2048 \
+  -keyout certs/localhost.key \
+  -out certs/localhost.crt \
+  -days 365 \
+  -nodes \
+  -subj "/CN=localhost"
+```
+
+**This will generate:**
+* `certs/localhost.crt`
+* `certs/localhost.key`
+
+---
+
+## Browser Warning (Expected)
+
+Because the certificate is self-signed, browsers will show a security warning on first access. **This is normal and expected.**
+
+### Steps:
+1. Open `https://localhost:<PORT>/ui`
+2. Proceed anyway / Trust the certificate
+
+---
+
+## Agent Startup with HTTPS
+
+The agent loads the certificate automatically on startup:
+
+```python
+app.run(
+    host="127.0.0.1",
+    port=AGENT_PORT,
+    ssl_context=("certs/localhost.crt", "certs/localhost.key")
+)
+```
+
+Once running, the UI will display **HTTPS Active**.
 
 ---
 
