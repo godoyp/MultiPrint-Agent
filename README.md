@@ -65,8 +65,8 @@ It runs locally on Windows, exposes a secure HTTPS API, and allows applications 
 localprint-agent/
 ├── app.py
 ├── certs/
-│   ├── localhost.crt
-│   └── localhost.key
+│   ├── Your localhost self-signed certificate
+│   └── Your localhost self-signed key
 ├── config/
 │   ├── config.json
 │   └── zebra_printers.json
