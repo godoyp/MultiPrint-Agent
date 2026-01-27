@@ -62,25 +62,48 @@ It runs locally on Windows, exposes a secure HTTPS API, and allows applications 
 - Secure HTTPS local server
 
 ```
-project-root/
+localprint-agent/
 ├── app.py
-├── core/
-│   └── agent_config.py
-├── routes/
-├── modules/
-│   ├── eventlog.py
-│   ├── print_zebra.py
-│   ├── print_laser.py
-│   └── printer_utils.py
-├── static/
-│   ├── ui.html
-│   ├── ui.css
-│   └── js/
-│       └── ui.js
+├── certs/
+│   ├── localhost.crt
+│   └── localhost.key
 ├── config/
 │   ├── config.json
 │   └── zebra_printers.json
-└── logs/
+├── core/
+│   ├── agent_config.py
+│   ├── dispatcher.py
+│   └── printer_state.py
+├── logs/
+│   └── agent.log
+├── modules/
+│   ├── eventlog.py
+│   ├── print_laser.py
+│   ├── print_zebra.py
+│   └── printer_utils.py
+├── routes/
+│   ├── config.py
+│   ├── health.py
+│   ├── logs.py
+│   ├── print.py
+│   ├── print_test.py
+│   ├── printers.py
+│   ├── ui.py
+│   └── version.py
+├── static/
+│   ├── ui.html
+│   ├── css/
+│   │   └── ui.css
+│   ├── images/
+│   │   └── logo.png
+│   └── js/
+│       ├── api.js
+│       ├── init.js
+│       ├── logs.js
+│       ├── printers.js
+│       ├── status.js
+│       └── toasts.js
+
 ```
 
 ---
