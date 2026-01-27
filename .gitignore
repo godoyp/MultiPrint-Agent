@@ -6,4 +6,6 @@ logs/
 *.log
 *.sql
 *.sqlite
+
+# Files #
 Roadmap.txt
