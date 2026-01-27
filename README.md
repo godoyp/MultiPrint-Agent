@@ -153,6 +153,21 @@ Content-Type: application/json
 }
 ```
 
+Implementation exemple:
+```http
+fetch("https://localhost:9108/print", {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json"
+              },
+              body: JSON.stringify({
+                raw: zpl
+              })
+```
+
+ 
+            
+
 ---
 
 ## API Endpoints :link:
