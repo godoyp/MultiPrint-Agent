@@ -1,6 +1,6 @@
 from flask import Blueprint, request, jsonify
 from core.dispatcher import dispatch_print
-from core.printer_state import CURRENT_PRINTER
+from core.printer_state import get_printer
 from modules.eventlog import log_event
 from modules.printer_utils import printer_is_online
 
@@ -15,18 +15,20 @@ def send_print():
         log_event("ERROR: Empty Payload")
         return jsonify({"error": "Empty Payload"}), 400
 
+    printer = get_printer()
+
     try:
-        if not printer_is_online(CURRENT_PRINTER):
-            log_event(f"PRINT FAILED | PRINTER OFFLINE | {CURRENT_PRINTER}")
+        if not printer_is_online(printer):
+            log_event(f"PRINT FAILED | PRINTER OFFLINE | {printer}")
             return jsonify({
                 "error": "Printer offline or unavailable",
-                "printer": CURRENT_PRINTER
+                "printer": printer
             }), 503
-        
-        dispatch_print(CURRENT_PRINTER, raw)
+
+        dispatch_print(printer, raw)
 
         log_event(
-            f"OK | Printer={CURRENT_PRINTER} | "
+            f"OK | Printer={printer} | "
             f"Bytes={len(raw)} | IP={request.remote_addr}"
         )
 
