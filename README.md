@@ -130,6 +130,7 @@ localprint-agent/
 │       ├── printers.js
 │       ├── status.js
 │       └── toasts.js
+└──────────────────────
 
 ```
 
