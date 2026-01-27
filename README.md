@@ -161,7 +161,7 @@ fetch("https://localhost:9108/print", {
     "Content-Type": "application/json"
   },
   body: JSON.stringify({
-    raw: "YOUR_PAYLOAD_HERE" // 👈 Replace with your ZPL / RAW payload
+    raw: "YOUR_PAYLOAD_HERE" // 👈 Replace with your ZPL / RAW / TEXT payload
   })
 })
 .then(response => response.json())
