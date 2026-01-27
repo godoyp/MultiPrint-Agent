@@ -1,6 +1,8 @@
 # Folders #
 certs/
 logs/
+__pycache__/
+.vscode/
 
 # Logs and databases #
 *.log
