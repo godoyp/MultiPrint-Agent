@@ -196,7 +196,7 @@ The request **must** be a JSON object containing the `raw` field.
   - **Generic / Laser printers** → Plain text
   - (Future) ESC/POS, queued jobs, retries, etc.
 
-  
+
 
 > ⚠️ The key name **must be `raw`**.  
 > If the field is missing or empty, the agent will reject the request with an error.
@@ -237,7 +237,7 @@ The `raw` field acts as the **API contract** between external systems and the Lo
 
 ---
 
-## Roadmap :map:
+## Roadmap 🧭
 
 ### ✅ Phase 1 — Initial Setup
 ### ✅ Phase 2 — Generic Payload
