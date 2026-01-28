@@ -19,7 +19,7 @@ app.register_blueprint(print_test_bp)
 app.register_blueprint(ui_bp)
 
 if __name__ == "__main__":
-    print("🖨️ LocalPrint Agent Initialized")
+    print("🖨️ MultiPrint Web Agent Initialized")
     app.run(
         host= "127.0.0.1",
         port= CONFIG.get("agent_port", 9108),

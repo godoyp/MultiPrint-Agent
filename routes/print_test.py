@@ -24,8 +24,8 @@ def test_print():
                 "^PW800\r\n"
                 "^LL480\r\n"
                 "^FO40,30^A0N,50,50^FDPRINT TEST^FS\r\n"
-                "^FO40,90^A0N,30,30^FDLocalPrint Agent^FS\r\n"
-                "^FO500,40^BQN,2,10^FDLA,LOCALPRINT-TEST-OK^FS\r\n"
+                "^FO40,90^A0N,30,30^FDMultiPrint Web Agent^FS\r\n"
+                "^FO500,40^BQN,2,10^FDLA,PRINT-TEST-OK^FS\r\n"
                 "^XZ\r\n"
             )
         else:
@@ -34,7 +34,7 @@ def test_print():
                 "======================================\n"
                 "               PRINT TEST             \n"
                 "--------------------------------------\n"
-                "            LocalPrint Agent          \n"
+                "            MultiPrint Web Agent      \n"
                 "     Printer configured successfully \n"
                 "======================================\n\n\n"
             )

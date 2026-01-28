@@ -1,4 +1,4 @@
-# LocalPrint Agent 🖨️
+# MultiPrint Web Agent 🖨️
 
 <div>
   <img src="https://img.shields.io/badge/PYTHON-3.11.9-blue?style=for-the-badge&logo=python" />
@@ -37,7 +37,7 @@ Topics :writing_hand:
 
 ## Project Description :file_folder:
 
-**LocalPrint Agent** is a lightweight local printing service designed to bridge **web systems** and **local printers** securely and reliably.
+**MultiPrint Web Agent** is a lightweight local printing service designed to bridge **web systems** and **local printers** securely and reliably.
 
 It runs locally on Windows, exposes a secure HTTPS API, and allows applications to send **raw print payloads** directly to printers such as **Zebra (ZPL)**, **laser**, and future **ESC/POS** devices.
 
@@ -89,7 +89,7 @@ pip install flask flask-cors pywin32
 - Secure HTTPS local server
 
 ```
-localprint-agent/
+MultiPrint_Web-agent/
 ├── app.py
 ├── certs/
 │   ├── Your localhost self-signed certificate (.crt file)
@@ -138,7 +138,7 @@ localprint-agent/
 
 # HTTPS & Self-Signed Certificate 🔐
 
-LocalPrint Agent **requires HTTPS** to work properly, especially for:
+MultiPrint Web Agent **requires HTTPS** to work properly, especially for:
 - Browser-based integrations
 - JavaScript `fetch` requests
 - Secure local communication
@@ -248,7 +248,7 @@ Content-Type: application/json
 
  ## API Contract 🧩
 
-The LocalPrint Agent exposes a **simple and stable print API** designed to receive **raw print data**, independent of printer type.
+The MultiPrint Web Agent exposes a **simple and stable print API** designed to receive **raw print data**, independent of printer type.
 
 ### 🔹 Endpoint
 
@@ -311,7 +311,7 @@ fetch("https://localhost:9108/print", {
   - ✅ Stable  
   - ✅ Printer-agnostic  
 
-The `raw` field acts as the **API contract** between external systems and the LocalPrint Agent.
+The `raw` field acts as the **API contract** between external systems and the MultiPrint Web Agent.
         
 
 ---
@@ -340,4 +340,4 @@ The `raw` field acts as the **API contract** between external systems and the Lo
 
 MIT License
 
-Copyright © 2026 — LocalPrint Agent
+Copyright © 2026 — MultiPrint Web Agent
