@@ -30,9 +30,13 @@ def test_print():
             )
         else:
             payload = (
-                "PRINT TEST\n"
-                "LocalPrint Agent\n"
-                "Printer configured successfully.\n"
+                "\n\n"
+                "======================================\n"
+                "               PRINT TEST             \n"
+                "--------------------------------------\n"
+                "            LocalPrint Agent          \n"
+                "     Printer configured successfully \n"
+                "======================================\n\n\n"
             )
 
         dispatch_print(printer, payload)
