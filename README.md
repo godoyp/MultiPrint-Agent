@@ -323,8 +323,9 @@ The `raw` field acts as the **API contract** between external systems and the Mu
 ### ✅ Phase 3 — Printer Configuration
 ### ✅ Phase 4 — Web UI
 ### ✅ Phase 5 — UI & UX Refinement
-### ⬜ Phase 6 — Robustness & Security
-### ⬜ Phase 7 — Advanced Features
+### ✅ Phase 6 — New Features
+### ⬜ Phase 7 — Robustness & Security
+### ⬜ Phase 8 — Production
 
 ---
 
