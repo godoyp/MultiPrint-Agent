@@ -53,3 +53,22 @@ def is_zebra(printer_name: str) -> bool:
             return True
 
     return False
+
+def get_printer_details(printer_name: str) -> dict:
+
+    handle = win32print.OpenPrinter(printer_name)
+    info = win32print.GetPrinter(handle, 2)
+    win32print.ClosePrinter(handle)
+
+    devmode = info.get("pDevMode")
+
+    return {
+        "name": printer_name,
+        "driver": info.get("pDriverName"),
+        "port": info.get("pPortName"),
+        "location": info.get("pLocation") or "N/A",
+        "comment": info.get("pComment") or "N/A",
+        "orientation": (
+            "Portrait" if devmode and devmode.Orientation == 1 else "Landscape"
+        ) if devmode else "N/A",
+    }

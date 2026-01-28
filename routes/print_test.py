@@ -3,6 +3,9 @@ from core.dispatcher import dispatch_print
 from core.agent_config import get_printer
 from modules.printer_utils import is_zebra, printer_is_online
 from modules.eventlog import log_event
+from modules.test_assets import generate_laser_test_pdf_base64
+from modules.payload_utils import detect_payload
+
 
 bp = Blueprint("print_test", __name__)
 
@@ -29,14 +32,12 @@ def test_print():
                 "^XZ\r\n"
             )
         else:
-            payload = (
-                "\n\n"
-                "======================================\n"
-                "               PRINT TEST             \n"
-                "--------------------------------------\n"
-                "            MultiPrint Web Agent      \n"
-                "     Printer configured successfully \n"
-                "======================================\n\n\n"
+            raw = generate_laser_test_pdf_base64(printer)
+
+            payload = detect_payload(
+                raw=raw,
+                content_type="application/pdf",
+                encoding="base64"
             )
 
         dispatch_print(printer, payload)
