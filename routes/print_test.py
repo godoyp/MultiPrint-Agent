@@ -1,6 +1,6 @@
 from flask import Blueprint, jsonify
 from core.dispatcher import dispatch_print
-from core.printer_state import get_printer
+from core.agent_config import get_printer
 from modules.printer_utils import is_zebra, printer_is_online
 from modules.eventlog import log_event
 

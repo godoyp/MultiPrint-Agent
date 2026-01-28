@@ -14,3 +14,13 @@ export async function apiPost(url, body = null) {
     if (!res.ok) throw new Error("POST failed");
     return res;
 }
+
+export async function apiPut(url, data) {
+    const res = await fetch(url, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data)
+    });
+    if (!res.ok) throw new Error("API PUT failed");
+    return res.json();
+}

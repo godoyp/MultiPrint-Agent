@@ -1,4 +1,4 @@
-import { loadStatus, loadVersion } from "./status.js";
+import { loadStatus } from "./status.js";
 import { loadPrinters, savePrinter, reloadPrinters, testPrint } from "./printers.js";
 import { logStream } from "./logs.js";
 
@@ -13,7 +13,6 @@ function bindEvents() {
 window.onload = () => {
     loadStatus();
     loadPrinters();
-    loadVersion();
     logStream();
     bindEvents();
 };

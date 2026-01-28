@@ -1,6 +1,6 @@
 from flask import Blueprint, request, jsonify
 from core.dispatcher import dispatch_print
-from core.printer_state import get_printer
+from core.agent_config import get_printer
 from modules.eventlog import log_event
 from modules.printer_utils import printer_is_online
 

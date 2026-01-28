@@ -1,4 +1,4 @@
-import { apiGet, apiPost } from "./api.js";
+import { apiGet, apiPost, apiPut } from "./api.js";
 import { showToast } from "./toasts.js";
 import { loadStatus } from "./status.js";
 
@@ -6,7 +6,7 @@ const printersEl = document.getElementById("printers");
 
 export async function loadPrinters() {
     const printers = await apiGet("/printers");
-    const config = await apiGet("/config");
+    const state = await apiGet("/state");
 
     printersEl.innerHTML = "";
 
@@ -15,7 +15,7 @@ export async function loadPrinters() {
         opt.value = printer;
         opt.textContent = printer;
 
-        if (printer === config.printer_name) {
+        if (printer === state.printer_name) {
             opt.selected = true;
         }
 
@@ -27,7 +27,7 @@ export async function savePrinter() {
     const printer = printersEl.value;
 
     try {
-        await apiPost("/config/printer", { printer });
+        await apiPut("/printer", { printer });
         showToast(`Printer Selected: ${printer}`, "success");
         await loadStatus();
     } catch {
