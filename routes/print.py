@@ -2,7 +2,7 @@ from flask import Blueprint, request, jsonify
 from core.dispatcher import dispatch_print
 from modules.eventlog import log_event
 from modules.printer_utils import printer_is_online, resolve_printer_by_payload, PrinterNotConfiguredError
-from modules.payload_utils import detect_payload
+from modules.payload_utils import detect_payload, payload_size_bytes
 
 
 bp = Blueprint("print", __name__)
@@ -32,8 +32,10 @@ def print_route():
 
         dispatch_print(printer, payload)
 
+        size = payload_size_bytes(payload)
+
         log_event(
-            f"PRINT OK | printer={printer} | type={payload['kind']}"
+            f"PRINT OK | printer={printer} | type={payload['kind']} | bytes={size}"
         )
 
         return jsonify({"status": "ok"})

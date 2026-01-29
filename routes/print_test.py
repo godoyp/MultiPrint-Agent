@@ -4,7 +4,7 @@ from core.agent_config import get_thermal_printer, get_laser_printer
 from modules.printer_utils import printer_is_online
 from modules.eventlog import log_event
 from modules.test_assets import generate_laser_test_pdf_base64
-from modules.payload_utils import detect_payload
+from modules.payload_utils import detect_payload, payload_size_bytes
 
 bp = Blueprint("print_test", __name__)
 
@@ -38,8 +38,10 @@ def test_print():
                     "raw": zpl_payload
                 }
 
+                size = payload_size_bytes(payload)
+
                 dispatch_print(thermal, payload)
-                log_event(f"TEST PRINT | THERMAL OK | {thermal}")
+                log_event(f"TEST PRINT | THERMAL OK | {thermal} | BYTES= {size}")
 
         if laser:
             if not printer_is_online(laser):
@@ -53,8 +55,10 @@ def test_print():
                     encoding="base64"
                 )
 
+                size = payload_size_bytes(payload)
+
                 dispatch_print(laser, payload)
-                log_event(f"TEST PRINT | LASER OK | {laser}")
+                log_event(f"TEST PRINT | LASER OK | {laser} | BYTES= {size}")
 
         return jsonify({"status": "ok"})
 
