@@ -2,6 +2,8 @@ import win32print
 import win32ui
 import pywintypes
 from core.agent_config import ZEBRA_PRINTERS
+from core.agent_config import get_thermal_printer, get_laser_printer
+
 
 def printer_is_online(printer_name: str) -> bool:
     try:
@@ -72,3 +74,27 @@ def get_printer_details(printer_name: str) -> dict:
             "Portrait" if devmode and devmode.Orientation == 1 else "Landscape"
         ) if devmode else "N/A",
     }
+
+
+class PrinterNotConfiguredError(RuntimeError):
+    pass
+
+
+def resolve_printer_by_payload(payload: dict) -> str:
+
+    kind = payload.get("kind")
+
+    if kind == "zpl":
+        printer = get_thermal_printer()
+        if not printer:
+            raise PrinterNotConfiguredError(
+                "Thermal printer not configured"
+            )
+        return printer
+
+    printer = get_laser_printer()
+    if not printer:
+        raise PrinterNotConfiguredError(
+            "Laser printer not configured"
+        )
+    return printer

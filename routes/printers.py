@@ -1,6 +1,6 @@
 import win32print
 from flask import Blueprint, request, jsonify
-from core.agent_config import set_printer
+from core.agent_config import set_printer, is_thermal_printer_name
 from modules.eventlog import log_event
 
 bp = Blueprint("printers", __name__)
@@ -11,19 +11,37 @@ def list_printers():
     log_event("PRINTER LIST UPDATED")
     return jsonify(printers)
 
+@bp.route("/printers/classified", methods=["GET"])
+def list_printers_classified():
+    printers = [p[2] for p in win32print.EnumPrinters(2)]
+
+    classified = []
+    for printer in printers:
+        classified.append({
+            "name": printer,
+            "type": "thermal" if is_thermal_printer_name(printer) else "laser"
+        })
+
+    return jsonify(classified)
 
 @bp.route("/printer", methods=["PUT"])
 def select_printer():
-    data = request.get_json()
-    printer = data.get("printer")
+    data = request.get_json(force=True)
 
-    if not printer:
-        return jsonify({"error": "Invalid Printer"}), 400
+    role = data.get("role", "thermal")   
+    printer = data.get("printer")      
 
-    set_printer(printer)
-    log_event(f"SELECTED PRINTER | {printer}")
+    if role not in ("laser", "thermal"):
+        return jsonify({"error": "Invalid role"}), 400
+
+    set_printer(role, printer)
+
+    log_event(
+        f"SELECTED PRINTER | role={role} | printer={printer or 'NONE'}"
+    )
 
     return jsonify({
         "status": "ok",
+        "role": role,
         "printer": printer
     })

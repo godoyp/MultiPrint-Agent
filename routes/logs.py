@@ -5,4 +5,5 @@ bp = Blueprint("logs", __name__)
 
 @bp.route("/logs/stream")
 def logs_stream():
-    return Response(event_stream(), mimetype="text/event-stream")
+    return Response(event_stream(), mimetype="text/event-stream", headers={"Cache-Control": "no-cache", "X-Accel-Buffering": "no"}
+    )

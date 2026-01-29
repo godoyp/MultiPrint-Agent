@@ -7,38 +7,58 @@
   <link rel="icon" href="/static/images/logo.png" type="image/x-icon">
 </head>
 <body>
-  <div class="header-container">
-    <img id="logo" src="/static/images/logo.png">
-    <h1>MultiPrint Web Agent</h1>
-  </div>
-  <div class="status-logs-container">
-    <div class="card status">
-      <h3>Agent Status</h3>
-      <p><strong>Status:</strong> <span id="agent-status">-</span></p>
-      <p><strong>Active Printer:</strong> <span id="active-printer">-</span></p>
-      <p><strong>Port:</strong> <span id="agent-port">-</span></p>
-      <p><strong>Secure Connection:</strong> <span id="https-status">-</span></p>
-      <p><strong>Version:</strong> <span id="agent-version">-</span></p>
+
+  <!-- Header Bar -->
+  <header class="top-bar">
+    <div class="top-left">
+      <img src="/static/images/logo.png" class="logo">
+      <span class="title">MultiPrint Web Agent</span>
     </div>
 
-    <div class="card logs">
-      <h3>Real-Time Log</h3>
-      <div id="logs"></div>
+    <div class="top-status">
+      <span id="agent-status" class="badge online">Online</span>
+      <span id="https-status" class="badge online">HTTPS</span>
+      <span>Laser: <strong id="laser-printer">-</strong></span>
+      <span>Thermal: <strong id="thermal-printer">-</strong></span>
+      <span>Port: <strong id="agent-port">-</strong></span>
+      <span class="version">Version: <strong id="agent-version">-</strong></span>
     </div>
-  </div>
+  </header>
 
-  <div class="card">
-    <label>Printers</label>
-    <select id="printers"></select>
-    <button id="btn-save">💾 Save</button>
-    <button id="btn-reload">🔄 Reload Printers</button>
-  </div>
+  <!-- Main Content -->
+  <main class="main-wrapper">
+    <div class="main-container">
 
-  <div class="card card-btntest">
-    <button id="btn-test-print">🧪 Print Test</button>
-  </div>
+      <!-- Printer Configuration -->
+      <div class="card printer-config">
+        <h3>Printer Configuration</h3>
 
-  <div id="status"></div>
+        <div class="form-group">
+          <label for="thermal-printers">Thermal printer (ZPL labels)</label>
+          <select id="thermal-printers"></select>
+        </div>
+
+        <div class="form-group">
+          <label for="laser-printers">Laser printer (PDF / documents)</label>
+          <select id="laser-printers"></select>
+        </div>
+
+        <div class="button-group">
+          <button id="btn-save">💾 Save configuration</button>
+          <button id="btn-reload">🔄 Reload Printers</button>
+        </div>
+
+        <button id="btn-test-print" class="btn-test">🧪 Print Test</button>
+      </div>
+
+      <!-- Logs -->
+      <div class="card logs">
+        <h3>Real-Time Log</h3>
+        <div id="logs"></div>
+      </div>
+    </div>
+
+  </main>
 
   <div id="toast-container"></div>
 
