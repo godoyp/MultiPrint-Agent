@@ -18,10 +18,17 @@ def test_print():
             "error": "No printers configured"
         }), 400
 
+    results = {
+        "thermal": None,
+        "laser": None
+    }
+
     try:
+        # ---- Thermal ----
         if thermal:
             if not printer_is_online(thermal):
                 log_event(f"TEST PRINT | THERMAL OFFLINE | {thermal}")
+                results["thermal"] = "offline"
             else:
                 zpl_payload = (
                     "^XA\r\n"
@@ -41,11 +48,16 @@ def test_print():
                 size = payload_size_bytes(payload)
 
                 dispatch_print(thermal, payload)
-                log_event(f"TEST PRINT | THERMAL OK | {thermal} | BYTES= {size}")
+                log_event(
+                    f"TEST PRINT | THERMAL OK | {thermal} | BYTES={size}"
+                )
+                results["thermal"] = "ok"
 
+        # ---- Laser ----
         if laser:
             if not printer_is_online(laser):
                 log_event(f"TEST PRINT | LASER OFFLINE | {laser}")
+                results["laser"] = "offline"
             else:
                 raw = generate_laser_test_pdf_base64(laser)
 
@@ -58,9 +70,19 @@ def test_print():
                 size = payload_size_bytes(payload)
 
                 dispatch_print(laser, payload)
-                log_event(f"TEST PRINT | LASER OK | {laser} | BYTES= {size}")
+                log_event(
+                    f"TEST PRINT | LASER OK | {laser} | BYTES={size}"
+                )
+                results["laser"] = "ok"
 
-        return jsonify({"status": "ok"})
+        # ---- HTTP status decision ----
+        if all(v == "offline" for v in results.values() if v is not None):
+            return jsonify(results), 503
+
+        if any(v == "offline" for v in results.values()):
+            return jsonify(results), 207  # Multi-Status
+
+        return jsonify(results), 200
 
     except Exception as e:
         log_event(f"TEST PRINT ERROR | {str(e)}")

@@ -2,6 +2,9 @@
   "printers": {
     "thermal": {
       "name": "ZT411"
+    },
+    "laser": {
+      "name": "CAJAMAR_ADM_COLOR"
     }
   },
   "agent_port": 9108,

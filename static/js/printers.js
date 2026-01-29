@@ -82,12 +82,18 @@ export async function reloadPrinters() {
 }
 
 export async function testPrint() {
-    showToast("Sending Print Test...", "info", 3000);
+  showToast("Sending Print Test...", "info", 2000);
 
-    try {
-        await apiPost("/test-print");
-        showToast("Print Test Successful", "success");
-    } catch {
-        showToast("Print Test Failed", "error");
+  try {
+    const res = await fetch("/test-print", { method: "POST" });
+
+    if (!res.ok) {
+      const data = await res.json().catch(() => ({}));
+      throw new Error(data.error || "Print test failed");
     }
+
+    showToast("Print Test Successful", "success");
+  } catch (err) {
+    showToast(`Print Test Failed`, "error");
+  }
 }
