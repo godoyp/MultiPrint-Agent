@@ -6,13 +6,13 @@ from modules.eventlog import log_event
 bp = Blueprint("printers", __name__)
 
 @bp.route("/printers", methods=["GET"])
-def list_printers():
+def list_printers_route():
     printers = [p[2] for p in win32print.EnumPrinters(2)]
     log_event("PRINTER LIST UPDATED")
     return jsonify(printers)
 
 @bp.route("/printers/classified", methods=["GET"])
-def list_printers_classified():
+def list_printers_classified_route():
     printers = [p[2] for p in win32print.EnumPrinters(2)]
 
     classified = []
@@ -25,7 +25,7 @@ def list_printers_classified():
     return jsonify(classified)
 
 @bp.route("/printer", methods=["PUT"])
-def select_printer():
+def select_printer_route():
     data = request.get_json(force=True)
 
     role = data.get("role", "thermal")   

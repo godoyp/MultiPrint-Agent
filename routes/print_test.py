@@ -9,7 +9,7 @@ from modules.payload_utils import detect_payload, payload_size_bytes
 bp = Blueprint("print_test", __name__)
 
 @bp.route("/test-print", methods=["POST"])
-def test_print():
+def print_test_route():
     thermal = get_thermal_printer()
     laser = get_laser_printer()
 
