@@ -1,9 +1,0 @@
-{
-  "printers": {
-    "thermal": {
-      "name": "ZT411"
-    }
-  },
-  "agent_port": 9108,
-  "agent_version": "0.7"
-}
