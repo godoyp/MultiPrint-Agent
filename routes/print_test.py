@@ -3,7 +3,7 @@ from modules.printing.dispatcher import dispatch_print
 from core.agent_config import get_thermal_printer, get_laser_printer
 from modules.printers.utils import printer_is_online
 from modules.observability.eventlog import log_event
-from modules.test_assets import generate_laser_test_pdf_base64
+from modules.test_assets import generate_laser_test_pdf_base64, generate_thermal_test_zpl
 from modules.payload.utils import detect_payload, payload_size_bytes
 from modules.payload.validator import validate_payload
 from modules.payload.errors import PayloadValidationError
@@ -39,19 +39,12 @@ def print_test_route():
                 log_event(f"TEST PRINT | THERMAL OFFLINE | {thermal}")
                 results["thermal"] = "offline"
             else:
-                zpl_payload = (
-                    "^XA\r\n"
-                    "^PW800\r\n"
-                    "^LL480\r\n"
-                    "^FO40,30^A0N,50,50^FDPRINT TEST^FS\r\n"
-                    "^FO40,90^A0N,30,30^FDMultiPrint Web Agent^FS\r\n"
-                    "^FO500,40^BQN,2,10^FDLA,PRINT-TEST-OK^FS\r\n"
-                    "^XZ\r\n"
-                )
+
+                raw = generate_thermal_test_zpl()
 
                 payload = {
                     "kind": "zpl",
-                    "raw": zpl_payload,
+                    "raw": raw,
                     "encoding": None
                 }
 

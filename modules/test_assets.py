@@ -120,3 +120,17 @@ def generate_laser_test_pdf_base64(printer_name: str) -> str:
     buffer.close()
 
     return base64.b64encode(pdf_bytes).decode("utf-8")
+
+def generate_thermal_test_zpl():
+
+    zpl_payload = (
+                    "^XA\r\n"
+                    "^PW800\r\n"
+                    "^LL480\r\n"
+                    "^FO40,30^A0N,50,50^FDPRINT TEST^FS\r\n"
+                    "^FO40,90^A0N,30,30^FDMultiPrint Web Agent^FS\r\n"
+                    "^FO500,40^BQN,2,10^FDLA,PRINT-TEST-OK^FS\r\n"
+                    "^XZ\r\n"
+                )
+
+    return zpl_payload
