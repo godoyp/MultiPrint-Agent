@@ -1,4 +1,5 @@
 from flask import Blueprint, request, jsonify
+
 from modules.printing.dispatcher import dispatch_print
 from core.agent_config import get_thermal_printer, get_laser_printer
 from modules.printers.utils import printer_is_online
@@ -10,20 +11,16 @@ from modules.payload.errors import PayloadValidationError
 from modules.security.auth import require_session_token
 from modules.security.rate_limit import rate_limit, rate_key_from_request, TEST_PRINT_LIMIT, TEST_PRINT_WINDOW
 
-
 bp = Blueprint("print_test", __name__)
+
 
 @bp.route("/test-print", methods=["POST"])
 def print_test_route():
-
-    # Authentication
 
     auth = require_session_token()
     if auth:
         return auth
 
-    # Rate Limit
-    
     token = (
         request.headers.get("Authorization", "")
         .replace("Bearer ", "")
@@ -33,48 +30,40 @@ def print_test_route():
     key = rate_key_from_request(
         route="test-print",
         token=token,
-        ip=request.remote_addr
+        ip=request.remote_addr,
     )
 
     if not rate_limit(key, TEST_PRINT_LIMIT, TEST_PRINT_WINDOW):
         log_event("RATE LIMIT | /test-print")
         return jsonify({"error": "Rate limit exceeded"}), 429
 
-
     thermal = get_thermal_printer()
     laser = get_laser_printer()
 
     if not thermal and not laser:
-        return jsonify({
-            "error": "No printers configured"
-        }), 400
+        return jsonify({"error": "No printers configured"}), 400
 
-    results = {
-        "thermal": None,
-        "laser": None
-    }
+    results = {"thermal": None, "laser": None}
 
     try:
-
         if thermal:
             if not printer_is_online(thermal):
                 log_event(f"TEST PRINT | THERMAL OFFLINE | {thermal}")
                 results["thermal"] = "offline"
             else:
-
                 raw = generate_thermal_test_zpl(thermal)
 
                 payload = {
                     "kind": "zpl",
                     "raw": raw,
-                    "encoding": None
+                    "encoding": None,
                 }
 
                 validate_payload(payload)
 
                 size = payload_size_bytes(payload)
-
                 dispatch_print(thermal, payload)
+
                 log_event(
                     f"TEST PRINT | THERMAL OK | {thermal} | BYTES={size}"
                 )
@@ -90,26 +79,18 @@ def print_test_route():
                 payload = detect_payload(
                     raw=raw,
                     content_type="application/pdf",
-                    encoding="base64"
+                    encoding="base64",
                 )
 
                 validate_payload(payload)
 
                 size = payload_size_bytes(payload)
-
                 dispatch_print(laser, payload)
+
                 log_event(
                     f"TEST PRINT | LASER OK | {laser} | BYTES={size}"
                 )
                 results["laser"] = "ok"
-
-        if all(v == "offline" for v in results.values() if v is not None):
-            return jsonify(results), 503
-
-        if any(v == "offline" for v in results.values()):
-            return jsonify(results), 207  
-
-        return jsonify(results), 200
 
     except PayloadValidationError as e:
         log_event(f"TEST PRINT REJECTED | {e.message}")
@@ -118,3 +99,11 @@ def print_test_route():
     except Exception as e:
         log_event(f"TEST PRINT ERROR | {str(e)}")
         return jsonify({"error": "Internal test print error"}), 500
+
+    if all(v == "offline" for v in results.values() if v is not None):
+        return jsonify(results), 503
+
+    if any(v == "offline" for v in results.values()):
+        return jsonify(results), 207  # partial success
+
+    return jsonify(results), 200

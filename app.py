@@ -8,7 +8,9 @@ from routes.logs import bp as logs_bp
 from routes.print_test import bp as print_test_bp
 from routes.ui import bp as ui_bp
 from routes.auth import bp as auth_bp
+from core.ssl_config import get_ssl_context
 
+ssl_context = get_ssl_context()
 
 app = Flask(__name__)
 CORS(app)
@@ -27,5 +29,5 @@ if __name__ == "__main__":
     app.run(
         host= "127.0.0.1",
         port= AGENT_CONFIG.get("agent_port", 9108),
-        ssl_context=("certs/localhost.crt", "certs/localhost.key")
+        ssl_context=ssl_context,
     )

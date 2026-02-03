@@ -1,12 +1,17 @@
 from flask import request, jsonify
-from core.agent_config import get_api_key
+from core.security import get_api_key, SecurityConfigError
 from modules.security.session_tokens import validate_session
 
 
 def require_api_key():
-    
     api_key = request.headers.get("X-API-KEY")
-    if api_key != get_api_key():
+
+    try:
+        expected_key = get_api_key()
+    except SecurityConfigError as e:
+        return jsonify({"error": "Server security misconfiguration"}), 500
+
+    if not api_key or api_key != expected_key:
         return jsonify({"error": "Unauthorized"}), 401
 
     return None
@@ -18,7 +23,7 @@ def require_session_token():
         .replace("Bearer ", "")
         .strip()
         or request.headers.get("X-SESSION-TOKEN")
-        or request.args.get("token")  # SSE
+        or request.args.get("token") 
     )
 
     if not token or not validate_session(token):

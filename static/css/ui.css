@@ -85,6 +85,10 @@ button:hover {
   background: #dc2626;
 }
 
+.badge.busy {
+  background: #2563eb;
+}
+
 /* ---------- Main Layout ---------- */
 
 .main-container {

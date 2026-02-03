@@ -15,6 +15,8 @@ window.onload = async () => {
         logStream();         // 🔐 agora pode abrir SSE
 
         await loadStatus();
+        setInterval(loadStatus, 500);
+
         await loadPrinters();
 
         bindEvents();

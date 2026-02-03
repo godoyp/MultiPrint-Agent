@@ -1,8 +1,10 @@
 import win32print
 from flask import Blueprint, request, jsonify
-from core.agent_config import set_printer, is_thermal_printer_name
+from core.agent_config import set_printer
 from modules.observability.eventlog import log_event
 from modules.security.auth import require_session_token
+from modules.printers.detector import is_zebra_printer
+
 
 bp = Blueprint("printers", __name__)
 
@@ -20,7 +22,7 @@ def list_printers_classified_route():
     for printer in printers:
         classified.append({
             "name": printer,
-            "type": "thermal" if is_thermal_printer_name(printer) else "laser"
+            "type": "thermal" if is_zebra_printer(printer) else "laser"
         })
 
     return jsonify(classified)
@@ -31,14 +33,19 @@ def select_printer_route():
     auth = require_session_token()
     if auth:
         return auth
-    
-    data = request.get_json(force=True)
 
-    role = data.get("role", "thermal")   
-    printer = data.get("printer")      
+    data = request.get_json(silent=True)
+    if not data:
+        return jsonify({"error": "Invalid JSON payload"}), 400
+
+    role = data.get("role", "thermal")
+    printer = data.get("printer")
 
     if role not in ("laser", "thermal"):
         return jsonify({"error": "Invalid role"}), 400
+
+    if printer is not None and not isinstance(printer, str):
+        return jsonify({"error": "Invalid printer name"}), 400
 
     set_printer(role, printer)
 
@@ -49,5 +56,6 @@ def select_printer_route():
     return jsonify({
         "status": "ok",
         "role": role,
-        "printer": printer
+        "printer": printer,
     })
+

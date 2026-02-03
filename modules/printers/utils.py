@@ -1,7 +1,6 @@
 import win32print
 import win32ui
 import pywintypes
-from core.agent_config import ZEBRA_PRINTERS
 from core.agent_config import get_thermal_printer, get_laser_printer
 
 
@@ -39,22 +38,6 @@ def printer_is_online(printer_name: str) -> bool:
     except Exception:
         return False
     
-
-def is_zebra(printer_name: str) -> bool:
-    if not printer_name:
-        return False
-
-    name = printer_name.lower()
-
-    for known in ZEBRA_PRINTERS.get("known_models", []):
-        if known.lower() in name:
-            return True
-
-    for custom in ZEBRA_PRINTERS.get("custom_names", []):
-        if custom.lower() in name:
-            return True
-
-    return False
 
 def get_printer_details(printer_name: str) -> dict:
 
