@@ -1,6 +1,6 @@
-from modules.print_zebra import print_zebra
-from modules.print_laser import print_laser
-from modules.renderer import render_to_images
+from modules.printing.zebra import print_zebra
+from modules.printing.laser import print_laser
+from modules.printing.renderer import render_to_images
 
 
 def dispatch_print(printer: str, payload: dict):

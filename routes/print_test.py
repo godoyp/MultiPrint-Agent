@@ -1,11 +1,14 @@
 from flask import Blueprint, jsonify
-from core.dispatcher import dispatch_print
+from modules.printing.dispatcher import dispatch_print
 from core.agent_config import get_thermal_printer, get_laser_printer
-from modules.printer_utils import printer_is_online
-from modules.eventlog import log_event
+from modules.printers.utils import printer_is_online
+from modules.observability.eventlog import log_event
 from modules.test_assets import generate_laser_test_pdf_base64
-from modules.payload_utils import detect_payload, payload_size_bytes
+from modules.payload.utils import detect_payload, payload_size_bytes
+from modules.payload.validator import validate_payload
+from modules.payload.errors import PayloadValidationError
 from modules.security.auth import require_session_token
+
 
 bp = Blueprint("print_test", __name__)
 
@@ -15,7 +18,7 @@ def print_test_route():
     auth = require_session_token()
     if auth:
         return auth
-    
+
     thermal = get_thermal_printer()
     laser = get_laser_printer()
 
@@ -30,7 +33,7 @@ def print_test_route():
     }
 
     try:
-        # ---- Thermal ----
+
         if thermal:
             if not printer_is_online(thermal):
                 log_event(f"TEST PRINT | THERMAL OFFLINE | {thermal}")
@@ -48,8 +51,11 @@ def print_test_route():
 
                 payload = {
                     "kind": "zpl",
-                    "raw": zpl_payload
+                    "raw": zpl_payload,
+                    "encoding": None
                 }
+
+                validate_payload(payload)
 
                 size = payload_size_bytes(payload)
 
@@ -59,7 +65,6 @@ def print_test_route():
                 )
                 results["thermal"] = "ok"
 
-        # ---- Laser ----
         if laser:
             if not printer_is_online(laser):
                 log_event(f"TEST PRINT | LASER OFFLINE | {laser}")
@@ -73,6 +78,8 @@ def print_test_route():
                     encoding="base64"
                 )
 
+                validate_payload(payload)
+
                 size = payload_size_bytes(payload)
 
                 dispatch_print(laser, payload)
@@ -81,15 +88,18 @@ def print_test_route():
                 )
                 results["laser"] = "ok"
 
-        # ---- HTTP status decision ----
         if all(v == "offline" for v in results.values() if v is not None):
             return jsonify(results), 503
 
         if any(v == "offline" for v in results.values()):
-            return jsonify(results), 207  # Multi-Status
+            return jsonify(results), 207  
 
         return jsonify(results), 200
 
+    except PayloadValidationError as e:
+        log_event(f"TEST PRINT REJECTED | {e.message}")
+        return jsonify({"error": e.message}), 400
+
     except Exception as e:
         log_event(f"TEST PRINT ERROR | {str(e)}")
-        return jsonify({"error": str(e)}), 500
+        return jsonify({"error": "Internal test print error"}), 500

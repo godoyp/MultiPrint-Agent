@@ -1,5 +1,5 @@
 from flask import Blueprint, Response
-from modules.eventlog import event_stream
+from modules.observability.eventlog import event_stream
 from modules.security.auth import require_session_token
 
 bp = Blueprint("logs", __name__)

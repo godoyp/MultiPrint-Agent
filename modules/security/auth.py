@@ -1,12 +1,10 @@
 from flask import request, jsonify
-from core.agent_config import is_security_enabled, get_api_key
+from core.agent_config import get_api_key
 from modules.security.session_tokens import validate_session
 
 
 def require_api_key():
-    if not is_security_enabled():
-        return None
-
+    
     api_key = request.headers.get("X-API-KEY")
     if api_key != get_api_key():
         return jsonify({"error": "Unauthorized"}), 401

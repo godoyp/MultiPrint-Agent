@@ -4,18 +4,24 @@ import os
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 CONFIG_DIR = os.path.join(BASE_DIR, "config")
 
-CONFIG_PATH = os.path.join(CONFIG_DIR, "config.json")
+AGENT_PATH = os.path.join(CONFIG_DIR, "agent.json")
+SECURITY_PATH = os.path.join(CONFIG_DIR, "security.json")
 ZEBRA_PATH = os.path.join(CONFIG_DIR, "zebra_printers.json")
 
-# LOAD CONFIG
 
-with open(CONFIG_PATH, encoding="utf-8") as f:
-    CONFIG = json.load(f)
+# LOAD FILES (once, in memory)
 
-# LOAD ZEBRA LIB
+with open(AGENT_PATH, encoding="utf-8") as f:
+    AGENT_CONFIG = json.load(f)
+
+with open(SECURITY_PATH, encoding="utf-8") as f:
+    SECURITY_CONFIG = json.load(f)
 
 with open(ZEBRA_PATH, encoding="utf-8") as f:
     ZEBRA_PRINTERS = json.load(f)
+
+
+# PRINTER HELPERS
 
 def is_thermal_printer_name(printer_name: str) -> bool:
     if not printer_name:
@@ -35,43 +41,40 @@ def is_thermal_printer_name(printer_name: str) -> bool:
 
     return False
 
-# SAVE CONFIG AND SELECTED PRINTER
 
-def save_config():
-    with open(CONFIG_PATH, "w", encoding="utf-8") as f:
-        json.dump(CONFIG, f, indent=2, ensure_ascii=False)
+# AGENT CONFIG (state)
+
+def save_agent_config():
+    with open(AGENT_PATH, "w", encoding="utf-8") as f:
+        json.dump(AGENT_CONFIG, f, indent=2, ensure_ascii=False)
 
 def set_printer(role: str, printer: str | None):
-    CONFIG.setdefault("printers", {})
 
-    if printer:
-        CONFIG["printers"][role] = {"name": printer}
-    else:
-        CONFIG["printers"].pop(role, None)
+    AGENT_CONFIG.setdefault("printers", {})
+    AGENT_CONFIG["printers"].setdefault("thermal", {"name": None})
+    AGENT_CONFIG["printers"].setdefault("laser", {"name": None})
 
-    save_config()
+    AGENT_CONFIG["printers"][role]["name"] = printer
+
+    save_agent_config()
 
 
-# EXPORT CONFIG VALUES
+# READ-ONLY EXPORTS
 
 def get_version() -> str:
-    return CONFIG.get("agent_version", "N/A")
+    return AGENT_CONFIG.get("agent_version", "N/A")
 
 def get_port() -> int:
-    return CONFIG.get("agent_port", 9108)
+    return AGENT_CONFIG.get("agent_port", 9108)
 
-def get_thermal_printer():
-    return CONFIG.get("printers", {}).get("thermal", {}).get("name")
+def get_thermal_printer() -> str | None:
+    return AGENT_CONFIG.get("printers", {}).get("thermal", {}).get("name")
 
-
-def get_laser_printer():
-    return CONFIG.get("printers", {}).get("laser", {}).get("name")
-
-# SECURITY CONFIG
-
-def is_security_enabled() -> bool:
-    return bool(CONFIG.get("security", {}).get("enabled", False))
+def get_laser_printer() -> str | None:
+    return AGENT_CONFIG.get("printers", {}).get("laser", {}).get("name")
 
 
-def get_api_key() -> str | None:
-    return CONFIG.get("security", {}).get("api_key")
+# SECURITY 
+
+def get_api_key() -> str:
+    return SECURITY_CONFIG.get("api_key")

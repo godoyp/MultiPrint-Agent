@@ -6,7 +6,7 @@ from reportlab.pdfgen import canvas
 from reportlab.lib.units import mm
 from reportlab.lib.colors import black, grey
 from reportlab.lib.utils import ImageReader
-from modules.printer_utils import get_printer_details
+from modules.printers.utils import get_printer_details
 
 
 def generate_laser_test_pdf_base64(printer_name: str) -> str:

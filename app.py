@@ -1,6 +1,6 @@
 from flask import Flask
 from flask_cors import CORS
-from core.agent_config import CONFIG
+from core.agent_config import AGENT_CONFIG
 from routes.print import bp as print_bp
 from routes.printers import bp as printers_bp
 from routes.state import bp as state_bp
@@ -26,6 +26,6 @@ if __name__ == "__main__":
     print("🖨️ MultiPrint Web Agent Initialized")
     app.run(
         host= "127.0.0.1",
-        port= CONFIG.get("agent_port", 9108),
+        port= AGENT_CONFIG.get("agent_port", 9108),
         ssl_context=("certs/localhost.crt", "certs/localhost.key")
     )

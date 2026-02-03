@@ -5,7 +5,7 @@ import io
 import base64
 
 
-def render_pdf(pdf_bytes: bytes, dpi: int = 300) -> List[Image.Image]:
+def render_pdf(pdf_bytes: bytes, dpi: int = 400) -> List[Image.Image]:
     doc = fitz.open(stream=pdf_bytes, filetype="pdf")
 
     zoom = dpi / 72

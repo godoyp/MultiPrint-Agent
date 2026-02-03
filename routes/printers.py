@@ -1,7 +1,7 @@
 import win32print
 from flask import Blueprint, request, jsonify
 from core.agent_config import set_printer, is_thermal_printer_name
-from modules.eventlog import log_event
+from modules.observability.eventlog import log_event
 from modules.security.auth import require_session_token
 
 bp = Blueprint("printers", __name__)
