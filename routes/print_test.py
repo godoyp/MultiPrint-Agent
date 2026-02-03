@@ -5,11 +5,17 @@ from modules.printer_utils import printer_is_online
 from modules.eventlog import log_event
 from modules.test_assets import generate_laser_test_pdf_base64
 from modules.payload_utils import detect_payload, payload_size_bytes
+from modules.security.auth import require_session_token
 
 bp = Blueprint("print_test", __name__)
 
 @bp.route("/test-print", methods=["POST"])
 def print_test_route():
+
+    auth = require_session_token()
+    if auth:
+        return auth
+    
     thermal = get_thermal_printer()
     laser = get_laser_printer()
 

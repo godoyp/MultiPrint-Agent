@@ -1,9 +1,16 @@
+import { getSessionToken } from "./auth.js";
+
 const logsEl = document.getElementById("logs");
 
 export function logStream() {
     if (!logsEl) return;
 
-    const evtSource = new EventSource("/logs/stream");
+    const token = getSessionToken();
+    if (!token) return;
+
+    const evtSource = new EventSource(
+        `/logs/stream?token=${encodeURIComponent(token)}`
+    );
 
     evtSource.onmessage = event => {
         const p = document.createElement("p");

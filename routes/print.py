@@ -3,12 +3,18 @@ from core.dispatcher import dispatch_print
 from modules.eventlog import log_event
 from modules.printer_utils import printer_is_online, resolve_printer_by_payload, PrinterNotConfiguredError
 from modules.payload_utils import detect_payload, payload_size_bytes
+from modules.security.auth import require_session_token
 
 
 bp = Blueprint("print", __name__)
 
 @bp.route("/print", methods=["POST"])
 def print_route():
+
+    auth = require_session_token()
+    if auth:
+        return auth
+    
     data = request.get_json(force=True, silent=True)
 
     if not data or "raw" not in data:

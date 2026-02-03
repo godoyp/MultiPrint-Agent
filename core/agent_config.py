@@ -66,3 +66,12 @@ def get_thermal_printer():
 
 def get_laser_printer():
     return CONFIG.get("printers", {}).get("laser", {}).get("name")
+
+# SECURITY CONFIG
+
+def is_security_enabled() -> bool:
+    return bool(CONFIG.get("security", {}).get("enabled", False))
+
+
+def get_api_key() -> str | None:
+    return CONFIG.get("security", {}).get("api_key")

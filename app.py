@@ -7,6 +7,8 @@ from routes.state import bp as state_bp
 from routes.logs import bp as logs_bp
 from routes.print_test import bp as print_test_bp
 from routes.ui import bp as ui_bp
+from routes.auth import bp as auth_bp
+
 
 app = Flask(__name__)
 CORS(app)
@@ -17,6 +19,8 @@ app.register_blueprint(state_bp)
 app.register_blueprint(logs_bp)
 app.register_blueprint(print_test_bp)
 app.register_blueprint(ui_bp)
+app.register_blueprint(auth_bp)
+
 
 if __name__ == "__main__":
     print("🖨️ MultiPrint Web Agent Initialized")

@@ -7,11 +7,7 @@ bp = Blueprint("state", __name__)
 def state_route():
     return jsonify({
         "status": "online",
-
-        # compatibilidade com UI antiga
-        "printer_name": get_laser_printer(),
-
-        # novo modelo (UI nova usa isso)
+        
         "printers": {
             "laser": get_laser_printer(),
             "thermal": get_thermal_printer(),

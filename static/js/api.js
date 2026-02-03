@@ -1,5 +1,17 @@
+import { getSessionToken } from "./auth.js";
+
+function authHeaders(extra = {}) {
+    const token = getSessionToken();
+    return token
+        ? { ...extra, "Authorization": `Bearer ${token}` }
+        : extra;
+}
+
 export async function apiGet(url) {
-    const res = await fetch(url);
+    const res = await fetch(url, {
+        headers: authHeaders()
+    });
+
     if (!res.ok) throw new Error("GET failed");
     return res.json();
 }
@@ -7,7 +19,9 @@ export async function apiGet(url) {
 export async function apiPost(url, body = null) {
     const res = await fetch(url, {
         method: "POST",
-        headers: body ? { "Content-Type": "application/json" } : {},
+        headers: authHeaders(
+            body ? { "Content-Type": "application/json" } : {}
+        ),
         body: body ? JSON.stringify(body) : null
     });
 
@@ -18,9 +32,12 @@ export async function apiPost(url, body = null) {
 export async function apiPut(url, data) {
     const res = await fetch(url, {
         method: "PUT",
-        headers: { "Content-Type": "application/json" },
+        headers: authHeaders({
+            "Content-Type": "application/json"
+        }),
         body: JSON.stringify(data)
     });
+
     if (!res.ok) throw new Error("API PUT failed");
     return res.json();
 }
