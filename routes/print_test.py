@@ -40,7 +40,7 @@ def print_test_route():
                 results["thermal"] = "offline"
             else:
 
-                raw = generate_thermal_test_zpl()
+                raw = generate_thermal_test_zpl(thermal)
 
                 payload = {
                     "kind": "zpl",

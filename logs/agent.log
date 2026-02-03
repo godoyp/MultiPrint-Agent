@@ -399,3 +399,13 @@
 [2026-02-02 22:07:27] SELECTED PRINTER | role=thermal | printer=ZT411
 [2026-02-02 22:07:27] SELECTED PRINTER | role=laser | printer=NONE
 [2026-02-02 22:07:30] TEST PRINT | THERMAL OK | ZT411 | BYTES=150
+[2026-02-02 22:50:05] TEST PRINT ERROR | generate_thermal_test_zpl() missing 1 required positional argument: 'printer_name'
+[2026-02-02 22:51:10] TEST PRINT ERROR | generate_thermal_test_zpl() missing 1 required positional argument: 'printer_name'
+[2026-02-02 22:53:23] TEST PRINT | THERMAL OK | ZT411 | BYTES=190
+[2026-02-02 23:06:49] TEST PRINT | THERMAL OK | ZT411 | BYTES=192
+[2026-02-02 23:15:30] TEST PRINT | THERMAL OK | ZT411 | BYTES=308
+[2026-02-02 23:17:12] TEST PRINT | THERMAL OK | ZT411 | BYTES=308
+[2026-02-02 23:20:21] SELECTED PRINTER | role=thermal | printer=ZT411
+[2026-02-02 23:20:22] SELECTED PRINTER | role=laser | printer=CAJAMAR_ADM_COLOR
+[2026-02-02 23:20:34] SELECTED PRINTER | role=thermal | printer=ZT411
+[2026-02-02 23:20:34] SELECTED PRINTER | role=laser | printer=NONE
