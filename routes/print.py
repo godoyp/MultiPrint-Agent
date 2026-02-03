@@ -6,6 +6,7 @@ from modules.payload.utils import detect_payload, payload_size_bytes
 from modules.payload.validator import validate_payload
 from modules.payload.errors import PayloadValidationError
 from modules.security.auth import require_session_token
+from modules.security.rate_limit import rate_limit, rate_key_from_request, PRINT_LIMIT, PRINT_WINDOW
 
 
 bp = Blueprint("print", __name__)
@@ -13,9 +14,30 @@ bp = Blueprint("print", __name__)
 @bp.route("/print", methods=["POST"])
 def print_route():
 
+    # Authentication
+
     auth = require_session_token()
     if auth:
         return auth
+    
+    # Rate Limit
+
+    token = (
+        request.headers.get("Authorization", "")
+        .replace("Bearer ", "")
+        .strip()
+    )
+
+    key = rate_key_from_request(
+        route="print",
+        token=token,
+        ip=request.remote_addr
+    )
+
+    if not rate_limit(key, PRINT_LIMIT, PRINT_WINDOW):
+        log_event("RATE LIMIT | /print")
+        return jsonify({"error": "Rate limit exceeded"}), 429
+    
 
     data = request.get_json(force=True, silent=True)
 

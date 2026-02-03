@@ -250,6 +250,10 @@ button:hover {
   background: #2563eb !important;
 }
 
+.toast.warning {
+    background: #f59e0b !important;
+}
+
 
 /* ---------- Responsive ---------- */
 

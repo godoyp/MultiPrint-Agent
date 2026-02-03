@@ -12,6 +12,10 @@ export async function apiGet(url) {
         headers: authHeaders()
     });
 
+    if (res.status === 429) {
+        throw new Error("RATE_LIMIT");
+    }
+
     if (!res.ok) throw new Error("GET failed");
     return res.json();
 }
@@ -25,6 +29,10 @@ export async function apiPost(url, body = null) {
         body: body ? JSON.stringify(body) : null
     });
 
+    if (res.status === 429) {
+        throw new Error("RATE_LIMIT");
+    }
+
     if (!res.ok) throw new Error("POST failed");
     return res;
 }
@@ -37,6 +45,10 @@ export async function apiPut(url, data) {
         }),
         body: JSON.stringify(data)
     });
+
+    if (res.status === 429) {
+        throw new Error("RATE_LIMIT");
+    }
 
     if (!res.ok) throw new Error("API PUT failed");
     return res.json();

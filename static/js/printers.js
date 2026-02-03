@@ -88,6 +88,12 @@ export async function testPrint() {
         await apiPost("/test-print");
         showToast("Print Test Successful", "success");
     } catch (err) {
+
+        if (err.message === "RATE_LIMIT") {
+            showToast("Rate Limit Exceeded.", "warning");
+            return;
+        }
+
         console.error(err);
         showToast("Print Test Failed", "error");
     }
