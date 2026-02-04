@@ -48,9 +48,6 @@ Toda a lógica de validação, decisão e despacho acontece dentro do agente.
 > Caso essa porta já esteja em uso na sua máquina, é possível alterá-la no arquivo  
 > `config/agent_config.json`, ajustando a propriedade `agent_port`.
 
-> 🔐 Como o agente é executado localmente, ele **utiliza um certificado SSL autoassinado (self-signed)** para o domínio `localhost`,  
-> que é **gerado automaticamente durante o processo de instalação**.
-
 ---
 
 ## 🔐 Por que HTTPS é necessário
@@ -65,7 +62,7 @@ Executar o agente utilizando **HTTPS** evita:
 - Erros de *mixed content*
 - Bloqueios de segurança do navegador
 
-O certificado SSL utilizado é **autoassinado** e **gerado automaticamente durante o processo de instalação** do agente.
+> ⚠️ O certificado SSL utilizado é **autoassinado** e **gerado automaticamente durante o processo de instalação** do agente.
 
 ---
 
