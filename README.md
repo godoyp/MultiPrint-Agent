@@ -80,13 +80,6 @@ Após isso, o aviso não será exibido novamente para o mesmo navegador.
 
 ---
 
-## 🚀 Inicialização do agente com HTTPS
-
-O agente carrega automaticamente o certificado SSL durante a inicialização,  
-não sendo necessária nenhuma configuração manual por parte do usuário.
-
----
-
 ## 🧠 Filosofia de Design
 
 O MultiPrint Web Agent foi projetado para **simplificar integrações** e **isolar a complexidade da impressão** do lado do client.
