@@ -17,31 +17,31 @@
 
 ---
 
-**MultiPrint Web Agent** é um agente local de impressão que expõe uma **API HTTP simples** para integração com sistemas externos, abstraindo a complexidade de drivers, tipos de impressoras e sistema operacional.
+**MultiPrint Web Agent** is a local printing agent that exposes a **simple HTTP API** for integration with external systems, abstracting the complexity of printer drivers, printer types, and the operating system.
 
-Ele permite que qualquer aplicação envie jobs de impressão via HTTP, enquanto o agente resolve segurança, validação e despacho para impressoras **laser** ou **térmicas (Zebra)**.
+It allows any application to send print jobs via HTTP, while the agent handles security, validation, and dispatching to **laser** or **thermal (Zebra)** printers.
 
-Este projeto é ideal para sistemas que precisam **imprimir localmente** sem lidar diretamente com:
-- drivers de impressora
-- spoolers do sistema operacional
-- diferenças entre impressoras laser e térmicas
-
----
-
-## ✨ Principais características
-
-- 🖨️ Suporte a impressoras **Laser** e **Térmicas (ZPL / Zebra)**
-- 🌐 API HTTP simples e previsível
-- 🔐 Segurança com **session token**
-- 🚦 Rate limit por rota
-- 🧠 Detecção e validação de payload
-- 📊 Estado do agente disponível via API
-- 🧪 UI local para configuração e diagnóstico
-- 🧱 Arquitetura modular e extensível
+This project is ideal for systems that need to **print locally** without dealing directly with:
+- printer drivers
+- operating system spoolers
+- differences between laser and thermal printers
 
 ---
 
-## 🏗️ Visão geral
+## ✨ Key Features
+
+- 🖨️ Support for **Laser** and **Thermal (ZPL / Zebra)** printers
+- 🌐 Simple and predictable HTTP API
+- 🔐 Security with **session tokens**
+- 🚦 Per-route rate limiting
+- 🧠 Payload detection and validation
+- 📊 Agent state available via API
+- 🧪 Local UI for configuration and diagnostics
+- 🧱 Modular and extensible architecture
+
+---
+
+## 🏗️ Overview
 
 ```
 External Client
@@ -51,124 +51,124 @@ MultiPrint Web Agent
 System Printers (Laser / Thermal)
 ```
 
-O client **nunca fala diretamente com a impressora**.  
-Toda a lógica de validação, decisão e despacho acontece dentro do agente.
+The client **never communicates directly with the printer**.  
+All validation, decision-making, and dispatch logic happens inside the agent.
 
-> ⚠️ A porta padrão do agente é **9108**.  
-> Caso essa porta já esteja em uso na sua máquina, é possível alterá-la no arquivo  
-> `config/agent_config.json`, ajustando a propriedade `agent_port`.
-
----
-
-## 🔐 Por que HTTPS é necessário
-
-Navegadores modernos **bloqueiam requisições inseguras (HTTP)** ao acessar:
-- APIs locais
-- Serviços de impressão
-- Recursos em nível de sistema
-
-Executar o agente utilizando **HTTPS** evita:
-- Problemas de CORS
-- Erros de *mixed content*
-- Bloqueios de segurança do navegador
-
-> ⚠️ O certificado SSL utilizado é **autoassinado** e **gerado automaticamente durante o processo de instalação** do agente.
+> ⚠️ The agent’s default port is **9108**.  
+> If this port is already in use on your machine, you can change it in  
+> `config/agent_config.json` by adjusting the `agent_port` property.
 
 ---
 
-## 🌐 Aviso do navegador (comportamento esperado)
+## 🔐 Why HTTPS Is Required
 
-Como o certificado SSL utilizado é **autoassinado**, o navegador exibirá um **aviso de segurança no primeiro acesso**.  
-**Esse comportamento é normal e esperado.**
+Modern browsers **block insecure (HTTP) requests** when accessing:
+- Local APIs
+- Printing services
+- System-level resources
 
-### Passos:
-1. Acesse `https://localhost:<PORT>/ui`
-2. Escolha a opção **Avançado** / **Prosseguir mesmo assim**
-3. Confirme a confiança no certificado
+Running the agent using **HTTPS** avoids:
+- CORS issues
+- Mixed content errors
+- Browser security blocks
 
-Após isso, o aviso não será exibido novamente para o mesmo navegador.
-
----
-
-## 🧠 Filosofia de Design
-
-O MultiPrint Web Agent foi projetado para **simplificar integrações** e **isolar a complexidade da impressão** do lado do client.
-
-Princípios fundamentais:
-
-- O **client não precisa saber** o tipo de impressora utilizada
-- O agente detecta automaticamente se a impressora é:
-  - térmica (Zebra / ZPL)
-  - ou genérica (laser)
-- A lógica específica de hardware fica **centralizada no agente**, não espalhada nos sistemas clientes
-
-Isso garante integrações que são:
-- ✅ Simples  
-- ✅ Estáveis  
-- ✅ Independentes de modelo ou fabricante de impressora  
-
-O campo `raw` atua como o **contrato da API** entre sistemas externos e o MultiPrint Web Agent, permitindo que o client envie dados sem precisar conhecer detalhes de renderização, drivers ou spool do sistema operacional.
-
-Esse modelo reduz acoplamento, facilita manutenção e permite que o ambiente de impressão evolua sem impacto nas integrações existentes.
-
-## ❌ O que este projeto não é
-
-Para deixar o escopo claro, o MultiPrint Web Agent:
-
-- ❌ Não é um serviço de impressão em nuvem
-- ❌ Não expõe impressoras diretamente para a rede
-- ❌ Não substitui drivers do sistema operacional
-- ❌ Não exige que o client conheça detalhes de hardware
-
-O objetivo do projeto é **centralizar e abstrair a complexidade da impressão local**, mantendo integrações simples e estáveis.
+> ⚠️ The SSL certificate used is **self-signed** and **automatically generated during the agent installation process**.
 
 ---
 
-## 📦 Payload de impressão
+## 🌐 Browser Warning (Expected)
 
-O endpoint `/print` aceita um payload flexível.  
-O único campo **obrigatório** é `raw`.
+Because the SSL certificate is **self-signed**, the browser will display a **security warning on first access**.  
+**This behavior is normal and expected.**
 
-Campos adicionais **não são obrigatórios**, mas **auxiliam o agente na identificação correta do tipo de payload**, tornando o processamento mais confiável.
+### Steps:
+1. Open `https://localhost:<PORT>/ui`
+2. Choose **Advanced** / **Proceed anyway**
+3. Confirm trust for the certificate
 
-### Campos suportados
-
-| Campo          | Obrigatório | Descrição |
-|---------------|-------------|-----------|
-| `raw`         | ✅ Sim      | Conteúdo bruto a ser impresso |
-| `contentType` | ❌ Não      | Tipo MIME do conteúdo (ex: `application/pdf`) |
-| `encoding`    | ❌ Não      | Codificação do payload (ex: `base64`) |
+After this, the warning will no longer appear for the same browser.
 
 ---
 
-### 🔍 Como o agente identifica o payload
+## 🧠 Design Philosophy
 
-O agente utiliza uma combinação de **inspeção de conteúdo** e **metadados auxiliares**:
+MultiPrint Web Agent is designed to **simplify integrations** and **isolate printing complexity** from the client side.
+
+Core principles:
+
+- The **client does not need to know** the printer type
+- The agent automatically detects whether the printer is:
+  - thermal (Zebra / ZPL)
+  - or generic (laser)
+- Hardware-specific logic is **centralized in the agent**, not spread across client systems
+
+This ensures integrations that are:
+- ✅ Simple  
+- ✅ Stable  
+- ✅ Printer-agnostic  
+
+The `raw` field acts as the **API contract** between external systems and the MultiPrint Web Agent, allowing clients to send data without needing to understand rendering details, drivers, or OS-level spooling.
+
+This model reduces coupling, simplifies maintenance, and allows the printing environment to evolve without impacting existing integrations.
+
+## ❌ What This Project Is Not
+
+To clearly define scope, MultiPrint Web Agent:
+
+- ❌ Is not a cloud printing service
+- ❌ Does not expose printers directly to the network
+- ❌ Does not replace operating system drivers
+- ❌ Does not require clients to understand hardware details
+
+The goal of the project is to **centralize and abstract local printing complexity**, keeping integrations simple and stable.
+
+---
+
+## 📦 Print Payload
+
+The `/print` endpoint accepts a flexible payload.  
+The only **required** field is `raw`.
+
+Additional fields are **optional**, but they **help the agent identify the payload type more accurately**, making processing more reliable.
+
+### Supported fields
+
+| Field         | Required | Description |
+|---------------|----------|-------------|
+| `raw`         | ✅ Yes   | Raw content to be printed |
+| `contentType` | ❌ No    | MIME type of the content (e.g. `application/pdf`) |
+| `encoding`    | ❌ No    | Payload encoding (e.g. `base64`) |
+
+---
+
+### 🔍 How the agent detects the payload
+
+The agent uses a combination of **content inspection** and **auxiliary metadata**:
 
 - **ZPL**
-  - Detectado automaticamente pela presença de comandos `^XA` e `^XZ`
-  - Não requer `contentType` ou `encoding`
+  - Automatically detected by the presence of `^XA` and `^XZ` commands
+  - Does not require `contentType` or `encoding`
 
 - **PDF**
-  - Pode ser identificado por:
+  - Identified by:
     - `contentType: application/pdf`
-    - ou assinatura `%PDF` após decodificação base64
+    - or `%PDF` signature after base64 decoding
 
-- **Imagens**
-  - Identificadas por assinatura binária (PNG ou JPEG) após decodificação base64
+- **Images**
+  - Identified by binary signatures (PNG or JPEG) after base64 decoding
 
-- **Texto**
-  - Utilizado como fallback quando nenhum padrão específico é detectado
+- **Text**
+  - Used as a fallback when no specific pattern is detected
 
-Campos como `contentType` e `encoding` **não são obrigatórios**, mas ajudam o agente a identificar o tipo correto de payload de forma mais precisa, especialmente em cenários ambíguos.
+Fields such as `contentType` and `encoding` are **not mandatory**, but help the agent make more accurate decisions in ambiguous scenarios.
 
 ---
 
-## 🔌 API – Endpoints principais
+## 🔌 API – Main Endpoints
 
 ### 🔐 POST /auth/handshake
 
-Cria uma sessão e retorna um **session token**.
+Creates a session and returns a **session token**.
 
 ```json
 {
@@ -181,7 +181,7 @@ Cria uma sessão e retorna um **session token**.
 
 ### 🖨️ POST /print
 
-Envia um job de impressão.
+Sends a print job.
 
 **Headers**
 ```
@@ -189,7 +189,7 @@ Authorization: Bearer <SESSION_TOKEN>
 Content-Type: application/json
 ```
 
-**Body (exemplo ZPL)**
+**Body (ZPL example)**
 ```json
 {
   "raw": "^XA^FO50,50^FDHello World^FS^XZ"
@@ -200,7 +200,7 @@ Content-Type: application/json
 
 ### 📊 GET /state
 
-Retorna o estado atual do agente.
+Returns the current agent state.
 
 ```json
 {
@@ -216,7 +216,7 @@ Retorna o estado atual do agente.
 
 ---
 
-## 🚀 Exemplo de integração (JavaScript)
+## 🚀 Integration Example (JavaScript)
 
 ```js
 async function getToken(forceRenew = false) {
@@ -242,7 +242,7 @@ async function printPayload(payload) {
     body: JSON.stringify(payload)
   });
 
-  // Token expirado → renova e tenta novamente
+  // Token expired → renew and retry
   if (res.status === 401) {
     token = await getToken(true);
     res = await fetch("https://localhost:9108/print", {
@@ -260,19 +260,19 @@ async function printPayload(payload) {
   }
 }
 
-// Exemplo ZPL (campos auxiliares não necessários)
+// ZPL example (auxiliary fields not required)
 printPayload({
   raw: "^XA^FO50,50^FDHello World^FS^XZ"
 });
 
-// Exemplo PDF (base64 + metadados auxiliares)
+// PDF example (base64 + auxiliary metadata)
 printPayload({
   raw: pdfBase64,
   encoding: "base64",
   contentType: "application/pdf"
 });
 
-// Exemplo imagem (PNG/JPEG em base64)
+// Image example (PNG/JPEG in base64)
 printPayload({
   raw: imageBase64,
   encoding: "base64",
@@ -282,113 +282,113 @@ printPayload({
 
 ---
 
-## 🧪 UI local (Configuração)
+## 🧪 Local UI (Configuration)
 
-O agente inclui uma **UI local** usada apenas para:
+The agent includes a **local UI** used only for:
 
-- Listar impressoras do sistema
-- Classificar impressoras (laser / térmica)
-- Selecionar impressora por função
-- Executar test print
-- Visualizar logs
-- Ver estado do agente
+- Listing system printers
+- Classifying printers (laser / thermal)
+- Selecting printers by role
+- Running test prints
+- Viewing logs
+- Checking agent state
 
-> ⚠️ A UI **não faz parte da integração externa**  
-> Ela existe apenas para setup e diagnóstico local.
-
----
-
-## 🔐 Segurança
-
-- Session token obrigatório para rotas protegidas
-- Rate limit por rota
-- Handshake restrito ao ambiente local
-- Tokens renováveis automaticamente pelo client em caso de expiração
+> ⚠️ The UI **is not part of the external integration**  
+> It exists only for local setup and diagnostics.
 
 ---
 
-## 🏗️ Arquitetura
+## 🔐 Security
 
-O MultiPrint Web Agent foi projetado com foco em **modularidade**, **clareza de responsabilidades** e **facilidade de evolução**.
+- Session tokens required for protected routes
+- Per-route rate limiting
+- Handshake restricted to the local environment
+- Tokens automatically renewable by the client when expired
 
-> ℹ️ Atualmente, o agente é focado em ambientes **Windows**, devido à integração direta com o subsistema de impressão do sistema operacional.
+---
 
-### 🔧 Visão técnica
+## 🏗️ Architecture
 
-- Backend em **Flask**, organizado com **Blueprints**
-- Motores de impressão modulares:
-  - `print_zebra` (impressão térmica / ZPL)
-  - `print_laser` (impressão genérica / SO)
-- Carregamento centralizado de configurações
-- Logs em tempo real via **SSE (Server-Sent Events)**
-- UI Web local desenvolvida em **JavaScript ES6+ (ES Modules)**
-- Servidor local executando com **HTTPS** e certificado autoassinado
+MultiPrint Web Agent is designed with a focus on **modularity**, **clear responsibilities**, and **ease of evolution**.
 
-### 🧠 Arquitetura interna (por responsabilidade)
+> ℹ️ Currently, the agent is focused on **Windows** environments due to direct integration with the OS printing subsystem.
 
-O código é organizado por domínios bem definidos:
+### 🔧 Technical overview
+
+- **Flask** backend organized with **Blueprints**
+- Modular print engines:
+  - `print_zebra` (thermal / ZPL printing)
+  - `print_laser` (generic / OS printing)
+- Centralized configuration loading
+- Real-time logs via **SSE (Server-Sent Events)**
+- Local Web UI built with **JavaScript ES6+ (ES Modules)**
+- Local server running with **HTTPS** and a self-signed certificate
+
+### 🧠 Internal architecture (by responsibility)
+
+The codebase is organized into well-defined domains:
 
 - **security**  
-  Autenticação, sessão, rate limit e controles de acesso
+  Authentication, sessions, rate limiting, and access control
 
 - **payload**  
-  Detecção, normalização e validação de dados de impressão
+  Detection, normalization, and validation of print data
 
 - **printers**  
-  Detecção de impressoras, verificação de status e classificação
+  Printer detection, status checks, and classification
 
 - **printing**  
-  Renderização e despacho de jobs para o sistema operacional
+  Rendering and dispatching print jobs to the OS
 
 - **observability**  
-  Logs, eventos e mecanismos de diagnóstico
+  Logs, events, and diagnostics
 
 - **core**  
-  Configuração central e estado runtime do agente
+  Central configuration and agent runtime state
 
-Essa separação garante baixo acoplamento, facilita testes e permite evolução do sistema sem impactos nas integrações existentes.
+This separation ensures low coupling, easier testing, and future evolution without breaking existing integrations.
 
 ---
 
-## 📦 Status do projeto
+## 📦 Project Status
 
-**Versão atual:** `v1.0.0`
+**Current version:** `v1.0.0`
 
-✔️ Arquitetura consolidada  
-✔️ Fluxos bem definidos  
-✔️ Pronto para uso local em produção  
+✔️ Architecture consolidated  
+✔️ Well-defined flows  
+✔️ Ready for local production use  
 
 ---
 
 ## 🧭 Roadmap
 
-### ✅ Fase 1 — Configuração Inicial
-Estrutura básica do agente, setup do projeto e bootstrap do servidor.
+### ✅ Phase 1 — Initial Setup
+Base agent structure, project setup, and server bootstrap.
 
-### ✅ Fase 2 — Payload Genérico
-Suporte a diferentes tipos de payload (ZPL, PDF, imagens), com detecção automática.
+### ✅ Phase 2 — Generic Payload
+Support for multiple payload types (ZPL, PDF, images) with automatic detection.
 
-### ✅ Fase 3 — Configuração de Impressoras
-Seleção e persistência de impressoras laser e térmicas.
+### ✅ Phase 3 — Printer Configuration
+Selection and persistence of laser and thermal printers.
 
-### ✅ Fase 4 — Interface Web
-Criação da UI local para configuração e diagnóstico do agente.
+### ✅ Phase 4 — Web UI
+Creation of the local UI for configuration and diagnostics.
 
-### ✅ Fase 5 — Refinamento de UI & UX
-Melhorias visuais, feedbacks, estados e experiência do usuário.
+### ✅ Phase 5 — UI & UX Refinement
+Visual improvements, feedback, states, and user experience.
 
-### ✅ Fase 6 — Novas Funcionalidades
-Test print, logs, classificação de impressoras e recursos adicionais.
+### ✅ Phase 6 — New Features
+Test print, logs, printer classification, and additional capabilities.
 
-### ✅ Fase 7 — Robustez & Segurança
-Session tokens, rate limit, validações, tratamento de falhas e hardening geral.
+### ✅ Phase 7 — Robustness & Security
+Session tokens, rate limiting, validation, failure handling, and hardening.
 
-### ⬜ Fase 8 — Produção
-Empacotamento final, documentação completa e preparação para uso em produção.
+### ⬜ Phase 8 — Production
+Final packaging, complete documentation, and production readiness.
 
 ---
 
-## 📝 Licença
+## 📝 License
 
 MIT License
 
