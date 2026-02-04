@@ -195,6 +195,72 @@ Retorna o estado atual do agente.
 
 ---
 
+## 🚀 Exemplo de integração (JavaScript)
+
+```js
+async function getToken(forceRenew = false) {
+  if (!window.cachedToken || forceRenew) {
+    const res = await fetch("https://localhost:9108/auth/handshake", {
+      method: "POST"
+    });
+    const { token } = await res.json();
+    window.cachedToken = token;
+  }
+  return window.cachedToken;
+}
+
+async function printPayload(payload) {
+  let token = await getToken();
+
+  let res = await fetch("https://localhost:9108/print", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "Authorization": "Bearer " + token
+    },
+    body: JSON.stringify(payload)
+  });
+
+  // Token expirado → renova e tenta novamente
+  if (res.status === 401) {
+    token = await getToken(true);
+    res = await fetch("https://localhost:9108/print", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": "Bearer " + token
+      },
+      body: JSON.stringify(payload)
+    });
+  }
+
+  if (!res.ok) {
+    throw new Error("Print failed");
+  }
+}
+
+// Exemplo ZPL (campos auxiliares não necessários)
+printPayload({
+  raw: "^XA^FO50,50^FDHello World^FS^XZ"
+});
+
+// Exemplo PDF (base64 + metadados auxiliares)
+printPayload({
+  raw: pdfBase64,
+  encoding: "base64",
+  contentType: "application/pdf"
+});
+
+// Exemplo imagem (PNG/JPEG em base64)
+printPayload({
+  raw: imageBase64,
+  encoding: "base64",
+  contentType: "image/png"
+});
+```
+
+---
+
 ## 🧪 UI local (Configuração)
 
 O agente inclui uma **UI local** usada apenas para:
@@ -228,52 +294,6 @@ O agente inclui uma **UI local** usada apenas para:
 - printing – renderização e despacho
 - observability – logs e eventos
 - core – configuração e estado do agente
-
----
-
-## 🚀 Exemplo de integração (JavaScript)
-
-```js
-async function getToken(forceRenew = false) {
-  if (!window.cachedToken || forceRenew) {
-    const res = await fetch("https://localhost:9108/auth/handshake", {
-      method: "POST"
-    });
-    const { token } = await res.json();
-    window.cachedToken = token;
-  }
-  return window.cachedToken;
-}
-
-async function printZpl(zpl) {
-  let token = await getToken();
-
-  let res = await fetch("https://localhost:9108/print", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      "Authorization": "Bearer " + token
-    },
-    body: JSON.stringify({ raw: zpl })
-  });
-
-  if (res.status === 401) {
-    token = await getToken(true);
-    res = await fetch("https://localhost:9108/print", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "Authorization": "Bearer " + token
-      },
-      body: JSON.stringify({ raw: zpl })
-    });
-  }
-
-  if (!res.ok) {
-    throw new Error("Print failed");
-  }
-}
-```
 
 ---
 
