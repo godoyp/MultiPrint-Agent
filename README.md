@@ -48,8 +48,8 @@ Toda a lógica de validação, decisão e despacho acontece dentro do agente.
 > Caso essa porta já esteja em uso na sua máquina, é possível alterá-la no arquivo  
 > `config/agent_config.json`, ajustando a propriedade `agent_port`.
 
-> 🔐 Como o agente é executado localmente, é necessário gerar um  
-> **certificado SSL autoassinado (self-signed)** para o domínio `localhost`.
+> 🔐 Como o agente é executado localmente, ele **utiliza um certificado SSL autoassinado (self-signed)** para o domínio `localhost`,  
+> que é **gerado automaticamente durante o processo de instalação**.
 
 ---
 
