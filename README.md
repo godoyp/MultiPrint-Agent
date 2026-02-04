@@ -1,4 +1,14 @@
-# MultiPrint Web Agent
+# MultiPrint Web Agent 🖨️
+
+<div>
+  <img src="https://img.shields.io/badge/PYTHON-3.11.9-blue?style=for-the-badge&logo=python" />
+  &nbsp;&nbsp;
+  <img src="https://img.shields.io/badge/JAVASCRIPT-ES6+-yellow?style=for-the-badge&logo=javascript" />
+  &nbsp;&nbsp;
+  <img src="https://img.shields.io/badge/FLASK-Backend-black?style=for-the-badge&logo=flask" />
+  &nbsp;&nbsp;
+  <img src="https://img.shields.io/badge/STATUS-Active-success?style=for-the-badge" />
+</div>
 
 **MultiPrint Web Agent** é um agente local de impressão que expõe uma **API HTTP simples** para integração com sistemas externos, abstraindo a complexidade de drivers, tipos de impressoras e sistema operacional.
 
