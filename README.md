@@ -190,6 +190,34 @@ async function printZpl(zpl) {
 
 ---
 
+## 🧭 Roadmap
+
+### ✅ Fase 1 — Configuração Inicial
+Estrutura básica do agente, setup do projeto e bootstrap do servidor.
+
+### ✅ Fase 2 — Payload Genérico
+Suporte a diferentes tipos de payload (ZPL, PDF, imagens), com detecção automática.
+
+### ✅ Fase 3 — Configuração de Impressoras
+Seleção e persistência de impressoras laser e térmicas.
+
+### ✅ Fase 4 — Interface Web
+Criação da UI local para configuração e diagnóstico do agente.
+
+### ✅ Fase 5 — Refinamento de UI & UX
+Melhorias visuais, feedbacks, estados e experiência do usuário.
+
+### ✅ Fase 6 — Novas Funcionalidades
+Test print, logs, classificação de impressoras e recursos adicionais.
+
+### ✅ Fase 7 — Robustez & Segurança
+Session tokens, rate limit, validações, tratamento de falhas e hardening geral.
+
+### ⬜ Fase 8 — Produção
+Empacotamento final, documentação completa e preparação para uso em produção.
+
+---
+
 ## 📝 Licença
 
 MIT License
