@@ -103,6 +103,46 @@ Esse modelo reduz acoplamento, facilita manutenção e permite que o ambiente de
 
 ---
 
+## 📦 Payload de impressão
+
+O endpoint `/print` aceita um payload flexível.  
+O único campo **obrigatório** é `raw`.
+
+Campos adicionais **não são obrigatórios**, mas **auxiliam o agente na identificação correta do tipo de payload**, tornando o processamento mais confiável.
+
+### Campos suportados
+
+| Campo          | Obrigatório | Descrição |
+|---------------|-------------|-----------|
+| `raw`         | ✅ Sim      | Conteúdo bruto a ser impresso |
+| `contentType` | ❌ Não      | Tipo MIME do conteúdo (ex: `application/pdf`) |
+| `encoding`    | ❌ Não      | Codificação do payload (ex: `base64`) |
+
+---
+
+### 🔍 Como o agente identifica o payload
+
+O agente utiliza uma combinação de **inspeção de conteúdo** e **metadados auxiliares**:
+
+- **ZPL**
+  - Detectado automaticamente pela presença de comandos `^XA` e `^XZ`
+  - Não requer `contentType` ou `encoding`
+
+- **PDF**
+  - Pode ser identificado por:
+    - `contentType: application/pdf`
+    - ou assinatura `%PDF` após decodificação base64
+
+- **Imagens**
+  - Identificadas por assinatura binária (PNG ou JPEG) após decodificação base64
+
+- **Texto**
+  - Utilizado como fallback quando nenhum padrão específico é detectado
+
+Campos como `contentType` e `encoding` **não são obrigatórios**, mas ajudam o agente a identificar o tipo correto de payload de forma mais precisa, especialmente em cenários ambíguos.
+
+---
+
 ## 🔌 API – Endpoints principais
 
 ### 🔐 POST /auth/handshake
