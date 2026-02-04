@@ -56,7 +56,7 @@ All validation, decision-making, and dispatch logic happens inside the agent.
 
 > ⚠️ The agent’s default port is **9108**.  
 > If this port is already in use on your machine, you can change it in  
-> `config/agent_config.json` by adjusting the `agent_port` property.
+> `config/agent.json` by adjusting the `agent_port` property.
 
 ---
 
