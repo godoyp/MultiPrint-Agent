@@ -286,14 +286,44 @@ O agente inclui uma **UI local** usada apenas para:
 
 ---
 
-## 🧠 Arquitetura interna
+## 🏗️ Arquitetura
 
-- security – autenticação, sessão, rate limit
-- payload – detecção e validação
-- printers – detecção e status
-- printing – renderização e despacho
-- observability – logs e eventos
-- core – configuração e estado do agente
+O MultiPrint Web Agent foi projetado com foco em **modularidade**, **clareza de responsabilidades** e **facilidade de evolução**.
+
+### 🔧 Visão técnica
+
+- Backend em **Flask**, organizado com **Blueprints**
+- Motores de impressão modulares:
+  - `print_zebra` (impressão térmica / ZPL)
+  - `print_laser` (impressão genérica / SO)
+- Carregamento centralizado de configurações
+- Logs em tempo real via **SSE (Server-Sent Events)**
+- UI Web local desenvolvida em **JavaScript puro (ES Modules)**
+- Servidor local executando com **HTTPS** e certificado autoassinado
+
+### 🧠 Arquitetura interna (por responsabilidade)
+
+O código é organizado por domínios bem definidos:
+
+- **security**  
+  Autenticação, sessão, rate limit e controles de acesso
+
+- **payload**  
+  Detecção, normalização e validação de dados de impressão
+
+- **printers**  
+  Detecção de impressoras, verificação de status e classificação
+
+- **printing**  
+  Renderização e despacho de jobs para o sistema operacional
+
+- **observability**  
+  Logs, eventos e mecanismos de diagnóstico
+
+- **core**  
+  Configuração central e estado runtime do agente
+
+Essa separação garante baixo acoplamento, facilita testes e permite evolução do sistema sem impactos nas integrações existentes.
 
 ---
 
