@@ -7,6 +7,10 @@
   &nbsp;&nbsp;
   <img src="https://img.shields.io/badge/FLASK-Backend-black?style=for-the-badge&logo=flask" />
   &nbsp;&nbsp;
+  <img src="https://img.shields.io/badge/HTTPS-Local%20Secure-success?style=for-the-badge" />
+  &nbsp;&nbsp;
+  <img src="https://img.shields.io/badge/License-MIT-blue?style=for-the-badge" />
+  &nbsp;&nbsp;
   <img src="https://img.shields.io/badge/STATUS-Active-success?style=for-the-badge" />
 </div>
 
