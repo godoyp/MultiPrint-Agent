@@ -10,6 +10,8 @@
   <img src="https://img.shields.io/badge/STATUS-Active-success?style=for-the-badge" />
 </div>
 
+---
+
 **MultiPrint Web Agent** é um agente local de impressão que expõe uma **API HTTP simples** para integração com sistemas externos, abstraindo a complexidade de drivers, tipos de impressoras e sistema operacional.
 
 Ele permite que qualquer aplicação envie jobs de impressão via HTTP, enquanto o agente resolve segurança, validação e despacho para impressoras **laser** ou **térmicas (Zebra)**.
