@@ -21,6 +21,11 @@
 
 Ele permite que qualquer aplicação envie jobs de impressão via HTTP, enquanto o agente resolve segurança, validação e despacho para impressoras **laser** ou **térmicas (Zebra)**.
 
+Este projeto é ideal para sistemas que precisam **imprimir localmente** sem lidar diretamente com:
+- drivers de impressora
+- spoolers do sistema operacional
+- diferenças entre impressoras laser e térmicas
+
 ---
 
 ## ✨ Principais características
@@ -105,6 +110,17 @@ Isso garante integrações que são:
 O campo `raw` atua como o **contrato da API** entre sistemas externos e o MultiPrint Web Agent, permitindo que o client envie dados sem precisar conhecer detalhes de renderização, drivers ou spool do sistema operacional.
 
 Esse modelo reduz acoplamento, facilita manutenção e permite que o ambiente de impressão evolua sem impacto nas integrações existentes.
+
+## ❌ O que este projeto não é
+
+Para deixar o escopo claro, o MultiPrint Web Agent:
+
+- ❌ Não é um serviço de impressão em nuvem
+- ❌ Não expõe impressoras diretamente para a rede
+- ❌ Não substitui drivers do sistema operacional
+- ❌ Não exige que o client conheça detalhes de hardware
+
+O objetivo do projeto é **centralizar e abstrair a complexidade da impressão local**, mantendo integrações simples e estáveis.
 
 ---
 
@@ -294,6 +310,8 @@ O agente inclui uma **UI local** usada apenas para:
 ## 🏗️ Arquitetura
 
 O MultiPrint Web Agent foi projetado com foco em **modularidade**, **clareza de responsabilidades** e **facilidade de evolução**.
+
+> ℹ️ Atualmente, o agente é focado em ambientes **Windows**, devido à integração direta com o subsistema de impressão do sistema operacional.
 
 ### 🔧 Visão técnica
 
