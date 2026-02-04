@@ -350,6 +350,33 @@ This separation ensures low coupling, easier testing, and future evolution witho
 
 ---
 
+## ⚙️ Configuration Files and Certificates
+
+For security reasons, some files are **not versioned in the repository**:
+
+- `certs/`  
+  Contains the SSL certificate and private key used by the agent.
+
+- `config/security.json`  
+  Contains sensitive security-related configuration for the agent.
+
+These files are **automatically generated during the agent installation process**.
+
+### Manual execution (development environment)
+
+If the agent is executed directly via Python, you must ensure that:
+
+- the `certs/` directory exists
+- the `config/security.json` file is present
+
+The repository includes **example configuration files** that can be used as a starting point:
+
+- `config/security.example.json`
+
+These files should be copied and adjusted locally before running the agent.
+
+---
+
 ## 📦 Project Status
 
 **Current version:** `v1.0.0`
