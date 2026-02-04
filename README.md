@@ -193,3 +193,5 @@ async function printZpl(zpl) {
 ## 📝 Licença
 
 MIT License
+
+Copyright © 2026 — MultiPrint Web Agent
