@@ -298,7 +298,7 @@ O MultiPrint Web Agent foi projetado com foco em **modularidade**, **clareza de 
   - `print_laser` (impressão genérica / SO)
 - Carregamento centralizado de configurações
 - Logs em tempo real via **SSE (Server-Sent Events)**
-- UI Web local desenvolvida em **JavaScript puro (ES Modules)**
+- UI Web local desenvolvida em **JavaScript ES6+ (ES Modules)**
 - Servidor local executando com **HTTPS** e certificado autoassinado
 
 ### 🧠 Arquitetura interna (por responsabilidade)
