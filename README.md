@@ -44,6 +44,73 @@ System Printers (Laser / Thermal)
 O client **nunca fala diretamente com a impressora**.  
 Toda a lógica de validação, decisão e despacho acontece dentro do agente.
 
+> ⚠️ A porta padrão do agente é **9108**.  
+> Caso essa porta já esteja em uso na sua máquina, é possível alterá-la no arquivo  
+> `config/agent_config.json`, ajustando a propriedade `agent_port`.
+
+> 🔐 Como o agente é executado localmente, é necessário gerar um  
+> **certificado SSL autoassinado (self-signed)** para o domínio `localhost`.
+
+---
+
+## 🔐 Por que HTTPS é necessário
+
+Navegadores modernos **bloqueiam requisições inseguras (HTTP)** ao acessar:
+- APIs locais
+- Serviços de impressão
+- Recursos em nível de sistema
+
+Executar o agente utilizando **HTTPS** evita:
+- Problemas de CORS
+- Erros de *mixed content*
+- Bloqueios de segurança do navegador
+
+O certificado SSL utilizado é **autoassinado** e **gerado automaticamente durante o processo de instalação** do agente.
+
+---
+
+## 🌐 Aviso do navegador (comportamento esperado)
+
+Como o certificado SSL utilizado é **autoassinado**, o navegador exibirá um **aviso de segurança no primeiro acesso**.  
+**Esse comportamento é normal e esperado.**
+
+### Passos:
+1. Acesse `https://localhost:<PORT>/ui`
+2. Escolha a opção **Avançado** / **Prosseguir mesmo assim**
+3. Confirme a confiança no certificado
+
+Após isso, o aviso não será exibido novamente para o mesmo navegador.
+
+---
+
+## 🚀 Inicialização do agente com HTTPS
+
+O agente carrega automaticamente o certificado SSL durante a inicialização,  
+não sendo necessária nenhuma configuração manual por parte do usuário.
+
+---
+
+## 🧠 Filosofia de Design
+
+O MultiPrint Web Agent foi projetado para **simplificar integrações** e **isolar a complexidade da impressão** do lado do client.
+
+Princípios fundamentais:
+
+- O **client não precisa saber** o tipo de impressora utilizada
+- O agente detecta automaticamente se a impressora é:
+  - térmica (Zebra / ZPL)
+  - ou genérica (laser)
+- A lógica específica de hardware fica **centralizada no agente**, não espalhada nos sistemas clientes
+
+Isso garante integrações que são:
+- ✅ Simples  
+- ✅ Estáveis  
+- ✅ Independentes de modelo ou fabricante de impressora  
+
+O campo `raw` atua como o **contrato da API** entre sistemas externos e o MultiPrint Web Agent, permitindo que o client envie dados sem precisar conhecer detalhes de renderização, drivers ou spool do sistema operacional.
+
+Esse modelo reduz acoplamento, facilita manutenção e permite que o ambiente de impressão evolua sem impacto nas integrações existentes.
+
 ---
 
 ## 🔌 API – Endpoints principais
