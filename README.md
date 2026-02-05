@@ -1,4 +1,7 @@
 # MultiPrint Web Agent 🖨️
+<div align="right">
+🇺🇸 English | 🇧🇷 [Português](README_PT-Br.md)
+</div>
 
 <div>
   <img src="https://img.shields.io/badge/PYTHON-3.11.9-blue?style=for-the-badge&logo=python" />
@@ -14,10 +17,6 @@
   &nbsp;&nbsp;
   <img src="https://img.shields.io/badge/STATUS-Active-success?style=for-the-badge" />
 </div>
-
----
-
-🇺🇸 English | 🇧🇷 [Português](README_PT-Br.md)
 
 ---
 
