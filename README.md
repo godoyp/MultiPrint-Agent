@@ -305,6 +305,61 @@ The agent includes a **local UI** used only for:
 - Handshake restricted to the local environment
 - Tokens automatically renewable by the client when expired
 
+The sections below describe how security is configured and enforced.
+
+## 🔐 Security Configuration
+
+The MultiPrint Web Agent separates **secrets** from **behavioral security settings**.
+
+This ensures a secure setup while keeping the system easy to configure across different environments.
+
+### Environment Variable (Required)
+
+The API key used to authenticate external clients **must be provided via environment variable**.
+
+This value is considered sensitive and **must not be stored in configuration files or version control**.
+
+#### Required variable
+
+- `MULTIPRINT_API_KEY`  
+  API key used by external systems to authenticate print requests.
+
+If this variable is not set, the agent will **fail to start**.
+
+### Session TTL Configuration
+
+The session expiration time is configurable via the `security.json` file.
+
+This setting defines how long a session token remains valid after being issued.
+
+```json
+{
+  "session_ttl": 1800 // 30 minutes
+}
+```
+
+- The value is expressed in **seconds**
+- This file contains **non-sensitive configuration**
+- It is safe to keep it under version control
+- If the file or value is missing, a safe default is used
+
+### How Session Expiration Works
+
+- The session TTL is loaded from `security.json`
+- The value is applied during `/auth/handshake`
+- Each issued token receives its own expiration timestamp
+- Expired tokens are automatically invalidated
+
+This design keeps session policy explicit, configurable, and isolated from core security bootstrap logic.
+
+### Design Rationale
+
+- **Secrets** (API keys) are loaded from environment variables
+- **Security behavior** (such as session lifetime) is loaded from configuration files
+- **Session logic** remains stateless and policy-agnostic
+
+This separation avoids accidental secret exposure while keeping the agent flexible across environments.
+
 ---
 
 ## 🏗️ Architecture
