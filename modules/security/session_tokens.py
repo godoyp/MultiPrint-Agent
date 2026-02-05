@@ -3,7 +3,7 @@ import time
 
 _SESSIONS: dict[str, float] = {}
 
-def issue_session(ttl: int = 1800) -> str:
+def issue_session(ttl: int) -> str:
     token = secrets.token_urlsafe(32)
     _SESSIONS[token] = time.time() + ttl
     return token

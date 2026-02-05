@@ -1,5 +1,6 @@
 # Folders #
-certs/
+certs/*
+!certs/.gitkeep
 logs/
 __pycache__/
 .vscode/
@@ -12,4 +13,3 @@ __pycache__/
 
 # Files #
 Roadmap.txt
-config/security.json

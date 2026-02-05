@@ -1,6 +1,7 @@
 from flask import Blueprint, request, jsonify
 from modules.security.session_tokens import issue_session
 from modules.security.rate_limit import rate_limit, rate_key_from_request, HANDSHAKE_LIMIT, HANDSHAKE_WINDOW
+from modules.security.config import get_session_ttl
 
 bp = Blueprint("auth", __name__)
 
@@ -20,9 +21,10 @@ def handshake_route():
     if request.remote_addr not in ("127.0.0.1", "::1"):
         return jsonify({"error": "Unauthorized"}), 401
 
-    token = issue_session()
+    ttl = get_session_ttl()
+    token = issue_session(ttl)
 
     return jsonify({
         "token": token,
-        "expires_in": 1800,
+        "expires_in": ttl,
     })
