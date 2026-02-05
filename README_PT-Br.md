@@ -180,7 +180,6 @@ Cria uma sessão e retorna um **token de sessão**.
 }
 ```
 
----
 
 ### 🖨️ POST /print
 
@@ -199,7 +198,6 @@ Content-Type: application/json
 }
 ```
 
----
 
 ### 📊 GET /state
 
