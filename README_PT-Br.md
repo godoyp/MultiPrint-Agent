@@ -78,7 +78,6 @@ Executar o agente usando **HTTPS** evita:
 
 > ⚠️ O certificado SSL utilizado é **autoassinado** e **gerado automaticamente durante o processo de instalação do agente**.
 
----
 
 ## 🌐 Aviso do Navegador (Esperado)
 
