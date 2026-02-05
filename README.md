@@ -79,7 +79,6 @@ Running the agent using **HTTPS** avoids:
 
 > ⚠️ The SSL certificate used is **self-signed** and **automatically generated during the agent installation process**.
 
----
 
 ## 🌐 Browser Warning (Expected)
 
@@ -144,7 +143,6 @@ Additional fields are **optional**, but they **help the agent identify the paylo
 | `contentType` | ❌ No    | MIME type of the content (e.g. `application/pdf`) |
 | `encoding`    | ❌ No    | Payload encoding (e.g. `base64`) |
 
----
 
 ### 🔍 How the agent detects the payload
 
@@ -182,7 +180,6 @@ Creates a session and returns a **session token**.
 }
 ```
 
----
 
 ### 🖨️ POST /print
 
@@ -201,7 +198,6 @@ Content-Type: application/json
 }
 ```
 
----
 
 ### 📊 GET /state
 
