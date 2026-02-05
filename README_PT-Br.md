@@ -142,7 +142,7 @@ Campos adicionais são **opcionais**, mas **ajudam o agente a identificar o tipo
 | `contentType` | ❌ Não      | Tipo MIME do conteúdo (ex: `application/pdf`) |
 | `encoding`    | ❌ Não      | Codificação do payload (ex: `base64`) |
 
----
+
 
 ### 🔍 Como o agente detecta o payload
 
