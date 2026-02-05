@@ -475,4 +475,4 @@ Final packaging, complete documentation, and production readiness.
 
 MIT License
 
-Copyright © 2026 — MultiPrint Web Agent
+Copyright © 2026 — Pedro Godoy - MultiPrint Web Agent
