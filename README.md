@@ -16,6 +16,8 @@
   <img src="https://img.shields.io/badge/STATUS-Active-success?style=for-the-badge" />
 </div>
 
+🇺🇸 English | 🇧🇷 [Português](README_PT-Br.md)
+
 ---
 
 **MultiPrint Web Agent** is a local printing agent that exposes a **simple HTTP API** for integration with external systems, abstracting the complexity of printer drivers, printer types, and the operating system.
