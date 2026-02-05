@@ -16,7 +16,7 @@
 </div>
 
 
-## Readme Language: 
+## Idioma: 
 🇺🇸 [English](README.md) | 🇧🇷 Português
 
 ---
