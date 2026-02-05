@@ -15,8 +15,8 @@
   <img src="https://img.shields.io/badge/STATUS-Active-success?style=for-the-badge" />
 </div>
 
----
 
+## Readme Language: 
 🇺🇸 [English](README.md) | 🇧🇷 Português
 
 ---
