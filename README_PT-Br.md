@@ -242,7 +242,7 @@ async function printPayload(payload) {
     body: JSON.stringify(payload)
   });
 
-  // Token expirado → renova e tenta novamente
+  // Token expired → renew and retry
   if (res.status === 401) {
     token = await getToken(true);
     res = await fetch("https://localhost:9108/print", {
@@ -256,9 +256,28 @@ async function printPayload(payload) {
   }
 
   if (!res.ok) {
-    throw new Error("Falha na impressão");
+    throw new Error("Print failed");
   }
 }
+
+// ZPL example (auxiliary fields not required)
+printPayload({
+  raw: "^XA^FO50,50^FDHello World^FS^XZ"
+});
+
+// PDF example (base64 + auxiliary metadata)
+printPayload({
+  raw: pdfBase64,
+  encoding: "base64",
+  contentType: "application/pdf"
+});
+
+// Image example (PNG/JPEG in base64)
+printPayload({
+  raw: imageBase64,
+  encoding: "base64",
+  contentType: "image/png"
+});
 ```
 
 ---
