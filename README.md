@@ -1,6 +1,3 @@
-<div align="right">
-🇺🇸 English | 🇧🇷 <a href="README_PT-Br.md">Português</a>
-</div>
 # MultiPrint Web Agent 🖨️
 
 
