@@ -1,5 +1,9 @@
 <p align="center">
-  <img src="/multiprint_web_agent/static/images/logo-white.png" width="150">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="/multiprint_web_agent/static/images/logo-white.png">
+    <source media="(prefers-color-scheme: light)" srcset="/multiprint_web_agent/static/images/logo.png">
+    <img src="/multiprint_web_agent/static/images/logo-white.png" width="150">
+  </picture>
 </p>
 
 <h1 align="center">MultiPrint Web Agent</h1>
