@@ -50,7 +50,7 @@ Este projeto é ideal para sistemas que precisam **imprimir localmente** sem lid
 ## 🧪 Local UI
 
 <p align="center">
-  <img src="/static/images/MultiPrint.png" width="1000">
+  <img src="/static/images/MultiPrint.png">
 </p>
 
 ---
