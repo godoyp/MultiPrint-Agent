@@ -47,6 +47,12 @@ This project is ideal for systems that need to **print locally** without dealing
 - 🧪 Local UI for configuration and diagnostics
 - 🧱 Modular and extensible architecture
 
+## 🧪 Local UI
+
+<p align="center">
+  <img src="/static/images/MultiPrint.png" width="150">
+</p>
+
 ---
 
 ## 🏗️ Overview
