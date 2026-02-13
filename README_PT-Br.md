@@ -47,6 +47,12 @@ Este projeto é ideal para sistemas que precisam **imprimir localmente** sem lid
 - 🧪 UI local para configuração e diagnóstico
 - 🧱 Arquitetura modular e extensível
 
+## 🧪 Local UI
+
+<p align="center">
+  <img src="/static/images/MultiPrint.png" width="1000">
+</p>
+
 ---
 
 ## 🏗️ Visão Geral
