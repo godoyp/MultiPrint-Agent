@@ -47,12 +47,6 @@ This project is ideal for systems that need to **print locally** without dealing
 - 🧪 Local UI for configuration and diagnostics
 - 🧱 Modular and extensible architecture
 
-## 🧪 Local UI
-
-<p align="center">
-  <img src="/static/images/MultiPrint.png">
-</p>
-
 ---
 
 ## 🏗️ Overview
@@ -288,6 +282,10 @@ The agent includes a **local UI** used only for:
 
 > ⚠️ The UI **is not part of the external integration**  
 > It exists only for local setup and diagnostics.
+
+<p align="center">
+  <img src="/static/images/MultiPrint.png">
+</p>
 
 ---
 
