@@ -19,7 +19,7 @@
     &nbsp;&nbsp;
     <img src="https://img.shields.io/badge/STATUS-Active-success?style=for-the-badge" />
     &nbsp;&nbsp;
-    <img src="https://img.shields.io/badge/POETRY-Dependency%20Management-blueviolet?style=for-the-badge&logo=python" />
+    <img src="https://img.shields.io/badge/Poetry-Package%20Manager-blue?style=for-the-badge" />
   </div>
 
 ## Language: 
