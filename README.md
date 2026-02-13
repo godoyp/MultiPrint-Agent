@@ -423,8 +423,6 @@ These files should be copied and adjusted locally before running the agent.
 
 ---
 
-------------------------------------------------------------------------
-
 ## 🛠️ Development Setup (Poetry)
 
 MultiPrint Web Agent uses **Poetry** for dependency management and
@@ -446,8 +444,6 @@ pip install poetry
 Or follow the official instructions:\
 https://python-poetry.org/docs/
 
-------------------------------------------------------------------------
-
 ### Install Dependencies
 
 Inside the project root:
@@ -456,8 +452,6 @@ Inside the project root:
 poetry install
 ```
 
-------------------------------------------------------------------------
-
 ### Run the Agent (Development Mode)
 
 ``` bash
@@ -465,8 +459,6 @@ poetry run python -m multiprint_web_agent.app
 ```
 
 The agent will start using HTTPS on the configured port.
-
-------------------------------------------------------------------------
 
 ### Adding New Dependencies
 
@@ -482,8 +474,6 @@ To add a development-only dependency:
 poetry add --group dev <package-name>
 ```
 
-------------------------------------------------------------------------
-
 ### Dependency File
 
 All dependencies are defined in:
@@ -492,7 +482,7 @@ All dependencies are defined in:
 
 There is no `requirements.txt` file in this project.
 
-
+---
 
 ## 📦 Project Status
 
