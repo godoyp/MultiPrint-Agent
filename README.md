@@ -18,6 +18,8 @@
     <img src="https://img.shields.io/badge/License-MIT-blue?style=for-the-badge" />
     &nbsp;&nbsp;
     <img src="https://img.shields.io/badge/STATUS-Active-success?style=for-the-badge" />
+    &nbsp;&nbsp;
+    <img src="https://img.shields.io/badge/POETRY-Dependency%20Management-blueviolet?style=for-the-badge&logo=python" />
   </div>
 
 ## Language: 
