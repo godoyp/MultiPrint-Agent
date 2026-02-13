@@ -1,4 +1,12 @@
-# MultiPrint Web Agent 🖨️
+<p align="center">
+  <img src="assets/logo.png" width="150">
+</p>
+
+<h1 align="center">MultiPrint Web Agent</h1>
+
+<p align="center">
+  Local secure print agent with multi-printer support
+</p>
 
 
 <div>
