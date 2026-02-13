@@ -4,11 +4,8 @@
 
 <h1 align="center">MultiPrint Web Agent</h1>
 
-<p align="center">
-  Local secure print agent with multi-printer support
-</p>
+---
 
-<p align="center">
   <div>
     <img src="https://img.shields.io/badge/PYTHON-3.11.9-blue?style=for-the-badge&logo=python" />
     &nbsp;&nbsp;
@@ -23,7 +20,6 @@
     &nbsp;&nbsp;
     <img src="https://img.shields.io/badge/STATUS-Active-success?style=for-the-badge" />
   </div>
-</p>
 
 ## Language: 
 🇺🇸 English | 🇧🇷 [Português](README_PT-Br.md)
