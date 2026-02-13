@@ -1,6 +1,0 @@
-flask
-flask-cors
-pywin32
-pymupdf
-pillow
-reportlab
