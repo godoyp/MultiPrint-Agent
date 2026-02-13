@@ -50,7 +50,7 @@ This project is ideal for systems that need to **print locally** without dealing
 ## 🧪 Local UI
 
 <p align="center">
-  <img src="/static/images/MultiPrint.png" width="1000">
+  <img src="/static/images/MultiPrint.png">
 </p>
 
 ---
