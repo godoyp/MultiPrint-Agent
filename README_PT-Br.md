@@ -1,13 +1,17 @@
-# MultiPrint Web Agent 🖨️
+<p align="center">
+  <img src="/static/images/logo-white.png" width="150">
+</p>
 
-<div>
+<h1 align="center">MultiPrint Web Agent</h1>
+
+<div align="center">
   <img src="https://img.shields.io/badge/PYTHON-3.11.9-blue?style=for-the-badge&logo=python" />
   &nbsp;&nbsp;
   <img src="https://img.shields.io/badge/JAVASCRIPT-ES6+-yellow?style=for-the-badge&logo=javascript" />
   &nbsp;&nbsp;
   <img src="https://img.shields.io/badge/FLASK-Backend-black?style=for-the-badge&logo=flask" />
 </div>
-<div>
+<div align="center">
   <img src="https://img.shields.io/badge/HTTPS-Local%20Secure-success?style=for-the-badge" />
   &nbsp;&nbsp;
   <img src="https://img.shields.io/badge/License-MIT-blue?style=for-the-badge" />
