@@ -129,7 +129,7 @@ O objetivo do projeto é **centralizar e abstrair a complexidade da impressão l
 
 ## 📦 Payload de Impressão
 
-O endpoint `/print` aceita um payload flexível.  
+O endpoint `/api/print` aceita um payload flexível.  
 O único campo **obrigatório** é `raw`.
 
 Campos adicionais são **opcionais**, mas **ajudam o agente a identificar o tipo de payload com mais precisão**, tornando o processamento mais confiável.
@@ -181,7 +181,7 @@ Cria uma sessão e retorna um **token de sessão**.
 ```
 
 
-### 🖨️ POST /print
+### 🖨️ POST /api/print
 
 Envia um job de impressão.
 
@@ -195,23 +195,6 @@ Content-Type: application/json
 ```json
 {
   "raw": "^XA^FO50,50^FDHello World^FS^XZ"
-}
-```
-
-
-### 📊 GET /state
-
-Retorna o estado atual do agente.
-
-```json
-{
-  "status": "online",
-  "printers": {
-    "laser": "HP LaserJet",
-    "thermal": "Zebra ZT230"
-  },
-  "port": 9108,
-  "version": "1.0.0"
 }
 ```
 
@@ -234,7 +217,7 @@ async function getToken(forceRenew = false) {
 async function printPayload(payload) {
   let token = await getToken();
 
-  let res = await fetch("https://localhost:9108/print", {
+  let res = await fetch("https://localhost:9108/api/print", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -246,7 +229,7 @@ async function printPayload(payload) {
   // Token expired → renew and retry
   if (res.status === 401) {
     token = await getToken(true);
-    res = await fetch("https://localhost:9108/print", {
+    res = await fetch("https://localhost:9108/api/print", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

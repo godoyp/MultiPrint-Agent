@@ -130,7 +130,7 @@ The goal of the project is to **centralize and abstract local printing complexit
 
 ## 📦 Print Payload
 
-The `/print` endpoint accepts a flexible payload.  
+The `/api/print` endpoint accepts a flexible payload.  
 The only **required** field is `raw`.
 
 Additional fields are **optional**, but they **help the agent identify the payload type more accurately**, making processing more reliable.
@@ -169,7 +169,7 @@ Fields such as `contentType` and `encoding` are **not mandatory**, but help the 
 
 ## 🔌 API – Main Endpoints
 
-### 🔐 POST /auth/handshake
+### 🔐 POST /api/auth/handshake
 
 Creates a session and returns a **session token**.
 
@@ -181,7 +181,7 @@ Creates a session and returns a **session token**.
 ```
 
 
-### 🖨️ POST /print
+### 🖨️ POST /api/print
 
 Sends a print job.
 
@@ -198,23 +198,6 @@ Content-Type: application/json
 }
 ```
 
-
-### 📊 GET /state
-
-Returns the current agent state.
-
-```json
-{
-  "status": "online",
-  "printers": {
-    "laser": "HP LaserJet",
-    "thermal": "Zebra ZT230"
-  },
-  "port": 9108,
-  "version": "1.0.0"
-}
-```
-
 ---
 
 ## 🚀 Integration Example (JavaScript)
@@ -222,7 +205,7 @@ Returns the current agent state.
 ```js
 async function getToken(forceRenew = false) {
   if (!window.cachedToken || forceRenew) {
-    const res = await fetch("https://localhost:9108/auth/handshake", {
+    const res = await fetch("https://localhost:9108/api/auth/handshake", {
       method: "POST"
     });
     const { token } = await res.json();
@@ -234,7 +217,7 @@ async function getToken(forceRenew = false) {
 async function printPayload(payload) {
   let token = await getToken();
 
-  let res = await fetch("https://localhost:9108/print", {
+  let res = await fetch("https://localhost:9108/api/print", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -246,7 +229,7 @@ async function printPayload(payload) {
   // Token expired → renew and retry
   if (res.status === 401) {
     token = await getToken(true);
-    res = await fetch("https://localhost:9108/print", {
+    res = await fetch("https://localhost:9108/api/print", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
