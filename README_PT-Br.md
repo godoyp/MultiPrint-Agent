@@ -424,6 +424,69 @@ Esses arquivos devem ser copiados e ajustados localmente antes de executar o age
 
 ---
 
+
+## 🛠️ Configuração de Desenvolvimento (Poetry)
+
+O MultiPrint Web Agent utiliza **Poetry** para gerenciamento de
+dependências e empacotamento.
+
+### Requisitos
+
+-   Python 3.11+
+-   Poetry instalado
+
+### Instalar o Poetry
+
+Caso o Poetry não esteja instalado:
+
+``` bash
+pip install poetry
+```
+
+Ou siga as instruções oficiais:\
+https://python-poetry.org/docs/
+
+### Instalar Dependências
+
+Na raiz do projeto:
+
+``` bash
+poetry install
+```
+
+### Executar o Agent (Modo de Desenvolvimento)
+
+``` bash
+poetry run python -m multiprint_web_agent.app
+```
+
+O agent será iniciado utilizando HTTPS na porta configurada.
+
+### Adicionar Novas Dependências
+
+Para adicionar uma dependência de runtime:
+
+``` bash
+poetry add <package-name>
+```
+
+Para adicionar uma dependência apenas de desenvolvimento:
+
+``` bash
+poetry add --group dev <package-name>
+```
+
+### Arquivo de Dependências
+
+Todas as dependências estão definidas em:
+
+`pyproject.toml`
+
+Não existe arquivo `requirements.txt` neste projeto.
+
+---
+
+
 ## 📦 Status do Projeto
 
 **Versão atual:** `v1.0.0`
