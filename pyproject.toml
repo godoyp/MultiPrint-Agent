@@ -1,0 +1,24 @@
+[project]
+name = "multiprint-web-agent"
+version = "0.1.0"
+description = ""
+authors = [
+    {name = "godoyp",email = "pedro_godoy2@hotmail.com"}
+]
+package-mode = false
+readme = "README.md"
+requires-python = "^3.11"
+dependencies = [
+    "flask (>=3.1.2,<4.0.0)",
+    "pywin32 (>=311,<312)",
+    "flask-cors (>=6.0.2,<7.0.0)",
+    "pymupdf (>=1.27.1,<2.0.0)",
+    "pillow (>=12.1.1,<13.0.0)",
+    "reportlab (>=4.4.10,<5.0.0)",
+]
+
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
+

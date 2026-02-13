@@ -1,6 +1,8 @@
 # Folders #
 certs/*
 !certs/.gitkeep
+*/certs/*
+!*/certs/.gitkeep
 logs/
 __pycache__/
 .vscode/
