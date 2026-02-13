@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="/static/images/logo-white.png" width="150">
+  <img src="/multiprint_web_agent/static/images/logo-white.png" width="150">
 </p>
 
 <h1 align="center">MultiPrint Web Agent</h1>
@@ -285,7 +285,7 @@ O agente inclui uma **UI local** utilizada apenas para:
 > Ela existe apenas para configuração e diagnóstico local.
 
 <p align="center">
-  <img src="/static/images/MultiPrint.png">
+  <img src="/multiprint_web_agent/static/images/MultiPrint.png">
 </p>
 
 ---
