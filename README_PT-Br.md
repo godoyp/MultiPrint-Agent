@@ -47,12 +47,6 @@ Este projeto é ideal para sistemas que precisam **imprimir localmente** sem lid
 - 🧪 UI local para configuração e diagnóstico
 - 🧱 Arquitetura modular e extensível
 
-## 🧪 Local UI
-
-<p align="center">
-  <img src="/static/images/MultiPrint.png">
-</p>
-
 ---
 
 ## 🏗️ Visão Geral
@@ -289,6 +283,10 @@ O agente inclui uma **UI local** utilizada apenas para:
 
 > ⚠️ A UI **não faz parte da integração externa**  
 > Ela existe apenas para configuração e diagnóstico local.
+
+<p align="center">
+  <img src="/static/images/MultiPrint.png">
+</p>
 
 ---
 
