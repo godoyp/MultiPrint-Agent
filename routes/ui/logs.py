@@ -2,7 +2,8 @@ from flask import Blueprint, Response
 from modules.observability.eventlog import event_stream
 from modules.security.auth import require_session_token
 
-bp = Blueprint("logs", __name__)
+
+bp = Blueprint("logs", __name__, url_prefix="/ui")
 
 @bp.route("/logs/stream")
 def logs_stream_route():

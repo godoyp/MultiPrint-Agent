@@ -1,5 +1,4 @@
 from flask import Blueprint, request, jsonify
-
 from modules.printing.dispatcher import dispatch_print
 from core.agent_config import get_thermal_printer, get_laser_printer
 from modules.printers.utils import printer_is_online
@@ -11,7 +10,8 @@ from modules.payload.errors import PayloadValidationError
 from modules.security.auth import require_session_token
 from modules.security.rate_limit import rate_limit, rate_key_from_request, TEST_PRINT_LIMIT, TEST_PRINT_WINDOW
 
-bp = Blueprint("print_test", __name__)
+
+bp = Blueprint("print_test", __name__, url_prefix="/ui")
 
 
 @bp.route("/test-print", methods=["POST"])

@@ -3,8 +3,8 @@ from modules.security.session_tokens import issue_session
 from modules.security.rate_limit import rate_limit, rate_key_from_request, HANDSHAKE_LIMIT, HANDSHAKE_WINDOW
 from modules.security.config import get_session_ttl
 
-bp = Blueprint("auth", __name__)
 
+bp = Blueprint("auth", __name__, url_prefix="/api")
 
 @bp.route("/auth/handshake", methods=["POST"])
 def handshake_route():

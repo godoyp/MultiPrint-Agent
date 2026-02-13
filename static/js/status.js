@@ -2,7 +2,7 @@ import { apiGet } from "./api.js";
 
 export async function loadStatus() {
   try {
-    const data = await apiGet("/state");
+    const data = await apiGet("/ui/state");
 
     const statusEl = document.getElementById("agent-status");
 

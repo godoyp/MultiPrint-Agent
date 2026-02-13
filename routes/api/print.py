@@ -8,8 +8,8 @@ from modules.payload.errors import PayloadValidationError
 from modules.security.auth import require_session_token
 from modules.security.rate_limit import rate_limit, rate_key_from_request, PRINT_LIMIT, PRINT_WINDOW
 
-bp = Blueprint("print", __name__)
 
+bp = Blueprint("print", __name__, url_prefix="/api")
 
 @bp.route("/print", methods=["POST"])
 def print_route():

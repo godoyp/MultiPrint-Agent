@@ -9,7 +9,7 @@ export function isAuthenticated() {
 }
 
 export async function handshake() {
-    const res = await fetch("/auth/handshake", {
+    const res = await fetch("/api/auth/handshake", {
         method: "POST"
     });
 

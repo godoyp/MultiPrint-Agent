@@ -6,7 +6,7 @@ from modules.security.auth import require_session_token
 from modules.printers.detector import is_zebra_printer
 
 
-bp = Blueprint("printers", __name__)
+bp = Blueprint("printers", __name__, url_prefix="/ui")
 
 @bp.route("/printers", methods=["GET"])
 def list_printers_route():

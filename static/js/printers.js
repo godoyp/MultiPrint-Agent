@@ -14,8 +14,8 @@ function addNoneOption(select) {
 
 export async function loadPrinters() {
     try {
-        const printers = await apiGet("/printers/classified");
-        const state = await apiGet("/state");
+        const printers = await apiGet("/ui/printers/classified");
+        const state = await apiGet("/ui/state");
 
         thermalSelect.innerHTML = "";
         laserSelect.innerHTML = "";
@@ -56,12 +56,12 @@ export async function savePrinter() {
     const laser = laserSelect.value || null;
 
     try {
-        await apiPut("/printer", {
+        await apiPut("/ui/printer", {
             role: "thermal",
             printer: thermal
         });
 
-        await apiPut("/printer", {
+        await apiPut("/ui/printer", {
             role: "laser",
             printer: laser
         });
@@ -85,7 +85,7 @@ export async function testPrint() {
     showToast("Sending Print Test...", "info", 2000);
 
     try {
-        await apiPost("/test-print");
+        await apiPost("/ui/test-print");
         showToast("Print Test Successful", "success");
     } catch (err) {
 

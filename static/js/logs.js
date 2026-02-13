@@ -9,7 +9,7 @@ export function logStream() {
     if (!token) return;
 
     const evtSource = new EventSource(
-        `/logs/stream?token=${encodeURIComponent(token)}`
+        `/ui/logs/stream?token=${encodeURIComponent(token)}`
     );
 
     evtSource.onmessage = event => {
