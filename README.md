@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="/static/images/logo-white.png" width="150">
+  <img src="multiprint_web_agent/static/images/logo-white.png" width="150">
 </p>
 
 <h1 align="center">MultiPrint Web Agent</h1>
