@@ -4,7 +4,6 @@
 
 <h1 align="center">MultiPrint Web Agent</h1>
 
----
 
   <div>
     <img src="https://img.shields.io/badge/PYTHON-3.11.9-blue?style=for-the-badge&logo=python" />
