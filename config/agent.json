@@ -3,10 +3,10 @@
   "agent_version": "1.0.0",
   "printers": {
     "thermal": {
-      "name": "ZT411"
+      "name": null
     },
     "laser": {
-      "name": null
+      "name": "CAJAMAR_ADM_COLOR"
     }
   }
 }
