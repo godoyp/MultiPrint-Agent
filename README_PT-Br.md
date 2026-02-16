@@ -55,6 +55,7 @@ sem lidar diretamente com:
 -   [✨ Principais Funcionalidades](#-principais-funcionalidades)
 -   [🏗️ Visão Geral](#️-visão-geral)
 -   [🔐 Por Que HTTPS É Necessário](#-por-que-https-e-necessario)
+-   [🔐 Por Que HTTPS É Necessário](#-porque-https-é-necessario)
 -   [🌐 Aviso do Navegador (Esperado)](#-browser-warning-expected)
 -   [🧠 Filosofia de Design](#-design-philosophy)
 -   [❌ O Que Este Projeto Não É](#-what-this-project-is-not)
