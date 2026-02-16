@@ -486,12 +486,6 @@ This will generate:
 
 The certificate will be valid for **365 days**.
 
-### ⚠️ Important Notes
-
--   This certificate is **self-signed**
--   Browsers will show a security warning on first access
--   This setup is intended **only for local development**
-
 ---
 
 ## 🛠️ Development Setup (Poetry)
