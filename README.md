@@ -43,6 +43,35 @@ This project is ideal for systems that need to **print locally** without dealing
 
 ---
 
+## 📑 Table of Contents
+
+- [✨ Key Features](#-key-features)
+- [🏗️ Overview](#️-overview)
+- [🔐 Why HTTPS Is Required](#-why-https-is-required)
+- [🌐 Browser Warning (Expected)](#-browser-warning-expected)
+- [🧠 Design Philosophy](#-design-philosophy)
+- [❌ What This Project Is Not](#-what-this-project-is-not)
+- [📦 Print Payload](#-print-payload)
+  - [🔍 How the agent detects the payload](#-how-the-agent-detects-the-payload)
+- [🔌 API – Main Endpoints](#-api--main-endpoints)
+  - [🔐 POST /api/auth/handshake](#-post-apiauthhandshake)
+  - [🖨️ POST /api/print](#️-post-apiprint)
+- [🚀 Integration Example (JavaScript)](#-integration-example-javascript)
+- [🧪 Local UI (Configuration)](#-local-ui-configuration)
+- [🔐 Security](#-security)
+- [🔐 Security Configuration](#-security-configuration)
+  - [Session TTL Configuration](#-session-ttl-configuration)
+  - [How Session Expiration Works](#-how-session-expiration-works)
+  - [Design Rationale](#-design-rationale)
+- [🏗️ Architecture](#️-architecture)
+- [⚙️ Configuration Files and Certificates](#️-configuration-files-and-certificates)
+- [🛠️ Development Setup (Poetry)](#️-development-setup-poetry)
+- [📦 Project Status](#-project-status)
+- [🧭 Roadmap](#-roadmap)
+- [📝 License](#-license)
+
+---
+
 ## ✨ Key Features
 
 - 🖨️ Support for **Laser** and **Thermal (ZPL / Zebra)** printers
