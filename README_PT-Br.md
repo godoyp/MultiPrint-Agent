@@ -53,8 +53,8 @@ sem lidar diretamente com:
 ## 📑 Índice
 
 -   [✨ Principais Funcionalidades](#-principais-funcionalidades)
--   [🏗️ Visão Geral](#️-visao-geral)
--   [🔐 Por Que HTTPS É Necessário](#-por-que-https-e-necessario)
+-   [🏗️ Visão Geral](#️-visão-geral)
+-   [🔐 Por Que HTTPS É Necessário](#-por-que-https-é-necessario)
 -   [🌐 Aviso do Navegador (Esperado)](#-browser-warning-expected)
 -   [🧠 Filosofia de Design](#-design-philosophy)
 -   [❌ O Que Este Projeto Não É](#-what-this-project-is-not)
