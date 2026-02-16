@@ -495,8 +495,6 @@ The certificate will be valid for **365 days**.
 setx MULTIPRINT_API_KEY "mp_dev_your_generated_key_here"
 ```
 
----
-
 ### 🛠️ Poetry
 
 MultiPrint Web Agent uses **Poetry** for dependency management and
