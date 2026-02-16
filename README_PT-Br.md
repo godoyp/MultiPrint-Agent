@@ -52,21 +52,19 @@ sem lidar diretamente com:
 
 ## 📑 Índice
 
--   [✨ Principais Funcionalidades](#-key-features)
--   [🏗️ Visão Geral](#️-overview)
--   [🔐 Por Que HTTPS É Necessário](#-why-https-is-required)
+-   [✨ Principais Funcionalidades](#-principais-funcionalidades)
+-   [🏗️ Visão Geral](#️-visao-geral)
+-   [🔐 Por Que HTTPS É Necessário](#-por-que-https-e-necessario)
 -   [🌐 Aviso do Navegador (Esperado)](#-browser-warning-expected)
 -   [🧠 Filosofia de Design](#-design-philosophy)
 -   [❌ O Que Este Projeto Não É](#-what-this-project-is-not)
 -   [📦 Payload de Impressão](#-print-payload)
 -   [🔌 API -- Principais Endpoints](#-api--main-endpoints)
--   [🚀 Exemplo de Integração
-    (JavaScript)](#-integration-example-javascript)
+-   [🚀 Exemplo de Integração (JavaScript)](#-integration-example-javascript)
 -   [🧪 Interface Local (Configuração)](#-local-ui-configuration)
 -   [🏗️ Arquitetura](#️-architecture)
 -   [🔐 Segurança](#-security)
--   [🧪 Setup de Desenvolvimento (Execução
-    Manual)](#-development-setup-manual-execution)
+-   [🧪 Setup de Desenvolvimento (Execução Manual)](#-development-setup-manual-execution)
 -   [🛠️ Poetry](#️-poetry)
 -   [📦 Status do Projeto](#-project-status)
 -   [📝 Licença](#-license)
