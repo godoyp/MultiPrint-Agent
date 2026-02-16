@@ -28,7 +28,7 @@
   </div>
 
 ## Idioma:
-🇺🇸 English \| 🇧🇷 [Português](README_PT-Br.md)
+🇺🇸 [English](README.md)| 🇧🇷 Português
 
 ---
 
