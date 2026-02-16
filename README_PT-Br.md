@@ -311,6 +311,25 @@ async function printPayload(payload) {
   }
 }
 ```
+---
+
+## 🧪 Interface Local (Configuração)
+
+O agente inclui uma **interface local (UI)** utilizada apenas para:
+
+- Listar as impressoras do sistema
+- Classificar impressoras (laser / térmica)
+- Selecionar impressoras por função
+- Executar impressões de teste
+- Visualizar logs
+- Verificar o estado do agente
+
+> ⚠️ A interface **não faz parte da integração externa**
+> Ela existe apenas para configuração local e diagnósticos.
+
+<p align="center">
+  <img src="/multiprint_web_agent/static/images/MultiPrint.png">
+</p>
 
 ------------------------------------------------------------------------
 
