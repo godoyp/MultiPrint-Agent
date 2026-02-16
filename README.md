@@ -381,6 +381,17 @@ This design keeps session policy explicit, configurable, and isolated from core 
 
 This separation avoids accidental secret exposure while keeping the agent flexible across environments.
 
+### Certificate
+
+For security reasons, some files are **not versioned in the
+repository**:
+
+-   `certs/`\
+    Contains the SSL certificate (`.crt`) and private key (`.key`) used
+    by the agent.
+
+**These files are generated during the installation process of the agent.**
+
 ---
 
 ## 🏗️ Architecture
@@ -426,18 +437,7 @@ This separation ensures low coupling, easier testing, and future evolution witho
 
 ---
 
-## ⚙️ Configuration Files and Certificates
-
-For security reasons, some files are **not versioned in the
-repository**:
-
--   `certs/`\
-    Contains the SSL certificate (`.crt`) and private key (`.key`) used
-    by the agent.
-
-**These files are generated during the installation process of the agent.**
-
-### 🧪 Development Environment (Manual Execution)
+## 🧪 Development Setup (Manual Execution)
 
 When running the agent directly via Python (development mode), you must
 manually ensure that:
@@ -446,7 +446,7 @@ manually ensure that:
 -   the SSL certificate and private key are present\
 -   the API-KEY is set as a Environment Variable `MULTIPRINT_API_KEY`  
 
-## 🔐 Generating a Localhost SSL Certificate (Development Only)
+### 🔐 Generating a Localhost SSL Certificate (Development Only)
 
 For development environments, you must manually generate a **self-signed
 certificate** for `localhost`.
@@ -487,7 +487,7 @@ This will generate:
 
 The certificate will be valid for **365 days**.
 
-## Set the API Key
+### Set the API Key
 
 ### PowerShell
 
@@ -497,7 +497,7 @@ setx MULTIPRINT_API_KEY "mp_dev_your_generated_key_here"
 
 ---
 
-## 🛠️ Development Setup (Poetry)
+### 🛠️ Poetry
 
 MultiPrint Web Agent uses **Poetry** for dependency management and
 packaging.
