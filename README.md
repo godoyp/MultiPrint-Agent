@@ -55,11 +55,11 @@ This project is ideal for systems that need to **print locally** without dealing
 - [🔌 API – Main Endpoints](#-api--main-endpoints)
 - [🚀 Integration Example (JavaScript)](#-integration-example-javascript)
 - [🧪 Local UI (Configuration)](#-local-ui-configuration)
+- [🏗️ Architecture](#️-architecture)
 - [🔐 Security](#-security)
 - [🔐 Security Configuration](#-security-configuration)
-- [🏗️ Architecture](#️-architecture)
-- [⚙️ Configuration Files and Certificates](#️-configuration-files-and-certificates)
-- [🛠️ Development Setup (Poetry)](#️-development-setup-poetry)
+- [🧪 Development Setup (Manual Execution)](#-development-setup-manual-execution)
+- [🛠️ Poetry](#️-poetry)
 - [📦 Project Status](#-project-status)
 - [🧭 Roadmap](#-roadmap)
 - [📝 License](#-license)
@@ -319,6 +319,49 @@ The agent includes a **local UI** used only for:
 
 ---
 
+## 🏗️ Architecture
+
+MultiPrint Web Agent is designed with a focus on **modularity**, **clear responsibilities**, and **ease of evolution**.
+
+> ℹ️ Currently, the agent is focused on **Windows** environments due to direct integration with the OS printing subsystem.
+
+### 🔧 Technical overview
+
+- **Flask** backend organized with **Blueprints**
+- Modular print engines:
+  - `print_zebra` (thermal / ZPL printing)
+  - `print_laser` (generic / OS printing)
+- Centralized configuration loading
+- Real-time logs via **SSE (Server-Sent Events)**
+- Local Web UI built with **JavaScript ES6+ (ES Modules)**
+- Local server running with **HTTPS** and a self-signed certificate
+
+### 🧠 Internal architecture (by responsibility)
+
+The codebase is organized into well-defined domains:
+
+- **security**  
+  Authentication, sessions, rate limiting, and access control
+
+- **payload**  
+  Detection, normalization, and validation of print data
+
+- **printers**  
+  Printer detection, status checks, and classification
+
+- **printing**  
+  Rendering and dispatching print jobs to the OS
+
+- **observability**  
+  Logs, events, and diagnostics
+
+- **core**  
+  Central configuration and agent runtime state
+
+This separation ensures low coupling, easier testing, and future evolution without breaking existing integrations.
+
+---
+
 ## 🔐 Security
 
 - Session tokens required for protected routes
@@ -391,49 +434,6 @@ repository**:
     by the agent.
 
 **These files are generated during the installation process of the agent.**
-
----
-
-## 🏗️ Architecture
-
-MultiPrint Web Agent is designed with a focus on **modularity**, **clear responsibilities**, and **ease of evolution**.
-
-> ℹ️ Currently, the agent is focused on **Windows** environments due to direct integration with the OS printing subsystem.
-
-### 🔧 Technical overview
-
-- **Flask** backend organized with **Blueprints**
-- Modular print engines:
-  - `print_zebra` (thermal / ZPL printing)
-  - `print_laser` (generic / OS printing)
-- Centralized configuration loading
-- Real-time logs via **SSE (Server-Sent Events)**
-- Local Web UI built with **JavaScript ES6+ (ES Modules)**
-- Local server running with **HTTPS** and a self-signed certificate
-
-### 🧠 Internal architecture (by responsibility)
-
-The codebase is organized into well-defined domains:
-
-- **security**  
-  Authentication, sessions, rate limiting, and access control
-
-- **payload**  
-  Detection, normalization, and validation of print data
-
-- **printers**  
-  Printer detection, status checks, and classification
-
-- **printing**  
-  Rendering and dispatching print jobs to the OS
-
-- **observability**  
-  Logs, events, and diagnostics
-
-- **core**  
-  Central configuration and agent runtime state
-
-This separation ensures low coupling, easier testing, and future evolution without breaking existing integrations.
 
 ---
 
