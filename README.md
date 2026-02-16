@@ -370,13 +370,13 @@ This separation ensures low coupling, easier testing, and future evolution witho
 
 The sections below describe how security is configured and enforced.
 
-## 🔐 Security Configuration
+### Security Configuration
 
 The MultiPrint Web Agent separates **secrets** from **behavioral security settings**.
 
 This ensures a secure setup while keeping the system easy to configure across different environments.
 
-### Environment Variable
+#### Environment Variable
 
 The API key used to authenticate external clients **is provided via environment variable and is generated during the installation process**.
 
@@ -389,7 +389,7 @@ This value is considered sensitive and **must not be stored in configuration fil
 
 If this variable is not set, the agent will **fail to start**.
 
-### Session TTL Configuration
+#### Session TTL Configuration
 
 The session expiration time is configurable via the `security.json` file.
 
@@ -406,7 +406,7 @@ This setting defines how long a session token remains valid after being issued.
 - It is safe to keep it under version control
 - If the file or value is missing, a safe default is used
 
-### How Session Expiration Works
+#### How Session Expiration Works
 
 - The session TTL is loaded from `security.json`
 - The value is applied during `/auth/handshake`
@@ -415,7 +415,7 @@ This setting defines how long a session token remains valid after being issued.
 
 This design keeps session policy explicit, configurable, and isolated from core security bootstrap logic.
 
-### Design Rationale
+#### Design Rationale
 
 - **Secrets** (API keys) are loaded from environment variables
 - **Security behavior** (such as session lifetime) is loaded from configuration files
@@ -423,7 +423,7 @@ This design keeps session policy explicit, configurable, and isolated from core 
 
 This separation avoids accidental secret exposure while keeping the agent flexible across environments.
 
-### Certificate
+#### Certificate
 
 For security reasons, some files are **not versioned in the
 repository**:
