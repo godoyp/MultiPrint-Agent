@@ -1,40 +1,31 @@
-```{=html}
 <p align="center">
-```
-`<picture>`{=html}
-`<source media="(prefers-color-scheme: dark)" srcset="/multiprint_web_agent/static/images/logo-white.png">`{=html}
-`<source media="(prefers-color-scheme: light)" srcset="/multiprint_web_agent/static/images/logo.png">`{=html}
-`<img src="/multiprint_web_agent/static/images/logo-white.png" width="150">`{=html}
-`</picture>`{=html}
-```{=html}
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="/multiprint_web_agent/static/images/logo-white.png">
+    <source media="(prefers-color-scheme: light)" srcset="/multiprint_web_agent/static/images/logo.png">
+    <img src="/multiprint_web_agent/static/images/logo-white.png" width="150">
+  </picture>
 </p>
-```
-```{=html}
-<h1 align="center">
-```
-MultiPrint Web Agent
-```{=html}
-</h1>
-```
-::: {align="center"}
-`<img src="https://img.shields.io/badge/PYTHON-3.11.9-blue?style=for-the-badge&logo=python" />`{=html}
-  
-`<img src="https://img.shields.io/badge/JAVASCRIPT-ES6+-yellow?style=for-the-badge&logo=javascript" />`{=html}
-  
-`<img src="https://img.shields.io/badge/FLASK-Backend-black?style=for-the-badge&logo=flask" />`{=html}
-:::
 
-::: {align="center"}
-`<img src="https://img.shields.io/badge/HTTPS-Local%20Secure-success?style=for-the-badge" />`{=html}
-  
-`<img src="https://img.shields.io/badge/License-MIT-blue?style=for-the-badge" />`{=html}
-  
-`<img src="https://img.shields.io/badge/STATUS-Active-success?style=for-the-badge" />`{=html}
-:::
+<h1 align="center">MultiPrint Web Agent</h1>
 
-::: {align="center"}
-`<img src="https://img.shields.io/badge/POETRY-Dependency%20Management-blueviolet?style=for-the-badge&logo=python" />`{=html}
-:::
+
+  <div align="center">
+    <img src="https://img.shields.io/badge/PYTHON-3.11.9-blue?style=for-the-badge&logo=python" />
+    &nbsp;&nbsp;
+    <img src="https://img.shields.io/badge/JAVASCRIPT-ES6+-yellow?style=for-the-badge&logo=javascript" />
+    &nbsp;&nbsp;
+    <img src="https://img.shields.io/badge/FLASK-Backend-black?style=for-the-badge&logo=flask" />
+  </div>
+  <div align="center">
+    <img src="https://img.shields.io/badge/HTTPS-Local%20Secure-success?style=for-the-badge" />
+    &nbsp;&nbsp;
+    <img src="https://img.shields.io/badge/License-MIT-blue?style=for-the-badge" />
+    &nbsp;&nbsp;
+    <img src="https://img.shields.io/badge/STATUS-Active-success?style=for-the-badge" />
+  </div>
+  <div align="center">
+    <img src="https://img.shields.io/badge/POETRY-Dependency%20Management-blueviolet?style=for-the-badge&logo=python" />
+  </div>
 
 ## Language
 
