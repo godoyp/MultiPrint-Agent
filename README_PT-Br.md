@@ -59,7 +59,7 @@ sem lidar diretamente com:
 -   [🧠 Filosofia de Design](#-filosofia-de-design)
 -   [❌ O Que Este Projeto Não É](#-o-que-este-projeto-não-é)
 -   [📦 Payload de Impressão](#-payload-de-impressão)
--   [🔌 API -- Principais Endpoints](#-api--principais-endpoints)
+-   [🔌 API – Principais Endpoints](#-api--principais-endpoints)
 -   [🚀 Exemplo de Integração (JavaScript)](#-exemplo-de-integração-javascript)
 -   [🧪 Interface Local (Configuração)](#-interface-local-configuração)
 -   [🏗️ Arquitetura](#️-arquitetura)
@@ -234,7 +234,7 @@ ajudam o agente a tomar decisões mais precisas em cenários ambíguos.
 
 ------------------------------------------------------------------------
 
-## 🔌 API -- Principais Endpoints
+## 🔌 API – Principais Endpoints
 
 ### 🔐 POST /api/auth/handshake
 
