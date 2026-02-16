@@ -334,9 +334,9 @@ The MultiPrint Web Agent separates **secrets** from **behavioral security settin
 
 This ensures a secure setup while keeping the system easy to configure across different environments.
 
-### Environment Variable (Required)
+### Environment Variable
 
-The API key used to authenticate external clients **must be provided via environment variable**.
+The API key used to authenticate external clients **is provided via environment variable and is generated during the installation process**.
 
 This value is considered sensitive and **must not be stored in configuration files or version control**.
 
@@ -444,6 +444,7 @@ manually ensure that:
 
 -   the `certs/` directory exists\
 -   the SSL certificate and private key are present\
+-   the API-KEY is set as a Environment Variable `MULTIPRINT_API_KEY`  
 
 ## 🔐 Generating a Localhost SSL Certificate (Development Only)
 
@@ -485,6 +486,14 @@ This will generate:
 -   `certs/agent.crt`
 
 The certificate will be valid for **365 days**.
+
+## Set the API Key
+
+### PowerShell
+
+``` powershell
+setx MULTIPRINT_API_KEY "mp_dev_your_generated_key_here"
+```
 
 ---
 
