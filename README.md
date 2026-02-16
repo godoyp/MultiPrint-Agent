@@ -61,7 +61,6 @@ This project is ideal for systems that need to **print locally** without dealing
 - [🧪 Development Setup (Manual Execution)](#-development-setup-manual-execution)
 - [🛠️ Poetry](#️-poetry)
 - [📦 Project Status](#-project-status)
-- [🧭 Roadmap](#-roadmap)
 - [📝 License](#-license)
 
 ---
@@ -563,34 +562,6 @@ There is no `requirements.txt` file in this project.
 ✔️ Architecture consolidated  
 ✔️ Well-defined flows  
 ✔️ Ready for local production use  
-
----
-
-## 🧭 Roadmap
-
-### ✅ Phase 1 — Initial Setup
-Base agent structure, project setup, and server bootstrap.
-
-### ✅ Phase 2 — Generic Payload
-Support for multiple payload types (ZPL, PDF, images) with automatic detection.
-
-### ✅ Phase 3 — Printer Configuration
-Selection and persistence of laser and thermal printers.
-
-### ✅ Phase 4 — Web UI
-Creation of the local UI for configuration and diagnostics.
-
-### ✅ Phase 5 — UI & UX Refinement
-Visual improvements, feedback, states, and user experience.
-
-### ✅ Phase 6 — New Features
-Test print, logs, printer classification, and additional capabilities.
-
-### ✅ Phase 7 — Robustness & Security
-Session tokens, rate limiting, validation, failure handling, and hardening.
-
-### ⬜ Phase 8 — Production
-Final packaging, complete documentation, and production readiness.
 
 ---
 
