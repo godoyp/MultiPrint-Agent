@@ -586,9 +586,9 @@ Não existe arquivo `requirements.txt` neste projeto.
 
 **Versão atual:** `v1.0.0`
 
-✔️ Arquitetura consolidada
-✔️ Fluxos bem definidos
-✔️ Pronto para uso local em produção
+✔️ Arquitetura consolidada  
+✔️ Fluxos bem definidos 
+✔️ Pronto para uso local em produção  
 
 ---
 
