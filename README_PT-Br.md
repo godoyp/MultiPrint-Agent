@@ -30,7 +30,7 @@
 ## Idioma:
 🇺🇸 English \| 🇧🇷 [Português](README_PT-Br.md)
 
-------------------------------------------------------------------------
+---
 
 **MultiPrint Web Agent** é um agente de impressão local que expõe uma
 **API HTTP simples** para integração com sistemas externos, abstraindo a
@@ -48,7 +48,7 @@ sem lidar diretamente com:
 -   spoolers do sistema operacional
 -   diferenças entre impressoras laser e térmicas
 
-------------------------------------------------------------------------
+---
 
 ## 📑 Índice
 
@@ -69,7 +69,7 @@ sem lidar diretamente com:
 -   [📦 Status do Projeto](#-status-do-projeto)
 -   [📝 Licença](#-licença)
 
-------------------------------------------------------------------------
+---
 
 ## ✨ Principais Funcionalidades
 
@@ -82,7 +82,7 @@ sem lidar diretamente com:
 -   🧪 Interface local para configuração e diagnósticos
 -   🧱 Arquitetura modular e extensível
 
-------------------------------------------------------------------------
+---
 
 ## 🏗️ Visão Geral
 
@@ -101,7 +101,7 @@ agente.
 > em\
 > `config/agent.json` ajustando a propriedade `agent_port`.
 
-------------------------------------------------------------------------
+---
 
 ## 🔐 Por Que HTTPS É Necessário
 
@@ -121,7 +121,7 @@ Executar o agente utilizando **HTTPS** evita:
 > ⚠️ O certificado SSL utilizado é **autoassinado** e **gerado
 > automaticamente durante o processo de instalação do agente**.
 
-------------------------------------------------------------------------
+---
 
 ## 🌐 Aviso do Navegador (Esperado)
 
@@ -137,7 +137,7 @@ Como o certificado SSL é **autoassinado**, o navegador exibirá um
 
 Após isso, o aviso não aparecerá novamente para o mesmo navegador.
 
-------------------------------------------------------------------------
+---
 
 ## 🧠 Filosofia de Design
 
@@ -167,7 +167,7 @@ sistema operacional.
 Esse modelo reduz acoplamento, simplifica manutenção e permite que o
 ambiente de impressão evolua sem impactar integrações existentes.
 
-------------------------------------------------------------------------
+---
 
 ## ❌ O Que Este Projeto Não É
 
@@ -181,7 +181,7 @@ Para definir claramente o escopo, o MultiPrint Web Agent:
 O objetivo do projeto é **centralizar e abstrair a complexidade da
 impressão local**, mantendo integrações simples e estáveis.
 
-------------------------------------------------------------------------
+---
 
 ## 📦 Payload de Impressão
 
@@ -194,7 +194,7 @@ confiável.
 
 ### Campos suportados
 
-  ------------------------------------------------------------------------
+  ---
   Campo                        Obrigatório            Descrição
   ---------------------------- ---------------------- --------------------
   `raw`                        ✅ Sim                 Conteúdo bruto a ser
@@ -207,7 +207,7 @@ confiável.
   `encoding`                   ❌ Não                 Codificação do
                                                       payload (ex:
                                                       `base64`)
-  ------------------------------------------------------------------------
+  ---
 
 ### 🔍 Como o agente detecta o payload
 
@@ -232,7 +232,7 @@ O agente utiliza uma combinação de **inspeção de conteúdo** e
 Campos como `contentType` e `encoding` **não são obrigatórios**, mas
 ajudam o agente a tomar decisões mais precisas em cenários ambíguos.
 
-------------------------------------------------------------------------
+---
 
 ## 🔌 API – Principais Endpoints
 
@@ -264,7 +264,7 @@ Envia um trabalho de impressão.
 }
 ```
 
-------------------------------------------------------------------------
+---
 
 ## 🚀 Exemplo de Integração (JavaScript)
 
@@ -331,7 +331,7 @@ O agente inclui uma **interface local (UI)** utilizada apenas para:
   <img src="/multiprint_web_agent/static/images/MultiPrint.png">
 </p>
 
-------------------------------------------------------------------------
+---
 
 ## 🏗️ Arquitetura
 
@@ -378,7 +378,7 @@ O código é organizado em domínios bem definidos:
 Essa separação garante baixo acoplamento, facilidade de testes e
 evolução futura sem quebrar integrações existentes.
 
-------------------------------------------------------------------------
+---
 
 ## 🔐 Segurança
 
@@ -459,7 +459,7 @@ repositório**:
 **Esses arquivos são gerados durante o processo de instalação do
 agente.**
 
-------------------------------------------------------------------------
+---
 
 ## 🧪 Setup de Desenvolvimento (Execução Manual)
 
@@ -520,7 +520,7 @@ O certificado será válido por **365 dias**.
 setx MULTIPRINT_API_KEY "mp_dev_your_generated_key_here"
 ```
 
-------------------------------------------------------------------------
+---
 
 ## 🛠️ Poetry
 
@@ -580,17 +580,17 @@ Todas as dependências são definidas em:
 
 Não existe arquivo `requirements.txt` neste projeto.
 
-------------------------------------------------------------------------
+---
 
 ## 📦 Status do Projeto
 
 **Versão atual:** `v1.0.0`
 
-✔️ Arquitetura consolidada\
-✔️ Fluxos bem definidos\
+✔️ Arquitetura consolidada
+✔️ Fluxos bem definidos
 ✔️ Pronto para uso local em produção
 
-------------------------------------------------------------------------
+---
 
 ## 📝 Licença
 
