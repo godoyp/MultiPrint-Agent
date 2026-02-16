@@ -428,28 +428,95 @@ This separation ensures low coupling, easier testing, and future evolution witho
 
 ## ⚙️ Configuration Files and Certificates
 
-For security reasons, some files are **not versioned in the repository**:
+For security reasons, some files are **not versioned in the
+repository**:
 
-- `certs/`  
-  Contains the SSL certificate and private key used by the agent.
+-   `certs/`\
+    Contains the SSL certificate (`.crt`) and private key (`.key`) used
+    by the agent.
 
-- `config/security.json`  
-  Contains sensitive security-related configuration for the agent.
+-   `config/security.json`\
+    Contains non-sensitive security configuration such as session
+    behavior.
 
-These files are **automatically generated during the agent installation process**.
+These files are generated during the installation or initial setup
+process.
 
-### Manual execution (development environment)
+### 🧪 Development Environment (Manual Execution)
 
-If the agent is executed directly via Python, you must ensure that:
+When running the agent directly via Python (development mode), you must
+manually ensure that:
 
-- the `certs/` directory exists
-- the `config/security.json` file is present
+-   the `certs/` directory exists\
+-   the SSL certificate and private key are present\
+-   the `config/security.json` file exists
 
-The repository includes **example configuration files** that can be used as a starting point:
+## 🔐 Generating a Localhost SSL Certificate (Development Only)
 
-- `config/security.example.json`
+For development environments, you must manually generate a **self-signed
+certificate** for `localhost`.
 
-These files should be copied and adjusted locally before running the agent.
+### Step 1 --- Install OpenSSL
+
+Make sure OpenSSL is installed and available in your system PATH.
+
+To verify:
+
+``` bash
+openssl version
+```
+
+If the command is not recognized, install OpenSSL and restart your
+terminal.
+
+### Step 2 --- Create the `certs` directory
+
+Inside the project root:
+
+``` bash
+mkdir certs
+```
+
+### Step 3 --- Generate the certificate and key
+
+Run the following command inside the project root:
+
+``` bash
+openssl req -x509 -newkey rsa:2048 -nodes -keyout certs/localhost.key -out certs/localhost.crt -days 365 -subj "/CN=localhost"
+```
+
+This will generate:
+
+-   `certs/localhost.key`
+-   `certs/localhost.crt`
+
+The certificate will be valid for **365 days**.
+
+### ⚠️ Important Notes
+
+-   This certificate is **self-signed**
+-   Browsers will show a security warning on first access
+-   This setup is intended **only for local development**
+-   Production environments should use properly issued certificates
+
+### 🛡️ Security Configuration
+
+The `config/security.json` file must also exist before starting the
+agent.
+
+Example:
+
+``` json
+{
+  "session_ttl": 1800
+}
+```
+
+-   `session_ttl` is expressed in seconds
+-   This file does not contain secrets
+-   The API key must still be provided via the `MULTIPRINT_API_KEY`
+    environment variable
+
 
 ---
 
@@ -463,7 +530,7 @@ packaging.
 -   Python 3.11+
 -   Poetry installed
 
-### Install Poetry
+### Install Poetryper
 
 If Poetry is not installed:
 
