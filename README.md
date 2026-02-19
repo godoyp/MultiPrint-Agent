@@ -31,8 +31,8 @@
 </div>
 
 ## Language: 
-<p align="right">
-  <img src="https://flagcdn.com/us.svg" width="18"/> <a href="README.md">English</a> |
+<p>
+  <img src="https://flagcdn.com/us.svg" width="18"/> English</a> |
   <img src="https://flagcdn.com/br.svg" width="18"/> <a href="README-pt.md">Português</a>
 </p>
 
