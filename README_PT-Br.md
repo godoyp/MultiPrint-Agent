@@ -71,7 +71,7 @@ sem lidar diretamente com:
 -   [🏗️ Arquitetura](#️-arquitetura)
 -   [🔐 Segurança](#-segurança)
 -   [🧪 Setup de Desenvolvimento (Execução Manual)](#-setup-de-desenvolvimento-execução-manual)
--   [📦 Distribuição (Executável)](#️-distribuição-executável)
+-   [📦 Distribuição (Executável)](#-distribui%C3%A7%C3%A3o-execut%C3%A1vel)
 -   [📊 Status do Projeto](#-status-do-projeto)
 -   [📝 Licença](#-licença)
 
