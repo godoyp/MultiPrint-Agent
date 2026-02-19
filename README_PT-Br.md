@@ -33,7 +33,7 @@
 ## Idioma:
 <p>
   <img src="https://flagcdn.com/us.svg" width="18"/> <a href="README.md">English</a> |
-  <img src="https://flagcdn.com/br.svg" width="18"/> Português</a>
+  <img src="https://flagcdn.com/br.svg" width="18"/> Português
 </p>
 
 ---
