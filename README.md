@@ -1,5 +1,9 @@
 <p align="center">
-  <img src="/multiprint_web_agent/static/images/logo-white.png" width="150">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="/multiprint_web_agent/static/images/logo-white.png">
+    <source media="(prefers-color-scheme: light)" srcset="/multiprint_web_agent/static/images/logo.png">
+    <img src="/multiprint_web_agent/static/images/logo-white.png" width="150">
+  </picture>
 </p>
 
 <h1 align="center">MultiPrint Web Agent</h1>
@@ -36,6 +40,27 @@ This project is ideal for systems that need to **print locally** without dealing
 - printer drivers
 - operating system spoolers
 - differences between laser and thermal printers
+
+---
+
+## 📑 Table of Contents
+
+- [✨ Key Features](#-key-features)
+- [🏗️ Overview](#️-overview)
+- [🔐 Why HTTPS Is Required](#-why-https-is-required)
+- [🌐 Browser Warning (Expected)](#-browser-warning-expected)
+- [🧠 Design Philosophy](#-design-philosophy)
+- [❌ What This Project Is Not](#-what-this-project-is-not)
+- [📦 Print Payload](#-print-payload)
+- [🔌 API – Main Endpoints](#-api--main-endpoints)
+- [🚀 Integration Example (JavaScript)](#-integration-example-javascript)
+- [🧪 Local UI (Configuration)](#-local-ui-configuration)
+- [🏗️ Architecture](#️-architecture)
+- [🔐 Security](#-security)
+- [🧪 Development Setup (Manual Execution)](#-development-setup-manual-execution)
+- [🛠️ Poetry](#️-poetry)
+- [📦 Project Status](#-project-status)
+- [📝 License](#-license)
 
 ---
 
@@ -292,70 +317,6 @@ The agent includes a **local UI** used only for:
 
 ---
 
-## 🔐 Security
-
-- Session tokens required for protected routes
-- Per-route rate limiting
-- Handshake restricted to the local environment
-- Tokens automatically renewable by the client when expired
-
-The sections below describe how security is configured and enforced.
-
-## 🔐 Security Configuration
-
-The MultiPrint Web Agent separates **secrets** from **behavioral security settings**.
-
-This ensures a secure setup while keeping the system easy to configure across different environments.
-
-### Environment Variable (Required)
-
-The API key used to authenticate external clients **must be provided via environment variable**.
-
-This value is considered sensitive and **must not be stored in configuration files or version control**.
-
-#### Required variable
-
-- `MULTIPRINT_API_KEY`  
-  API key used by external systems to authenticate print requests.
-
-If this variable is not set, the agent will **fail to start**.
-
-### Session TTL Configuration
-
-The session expiration time is configurable via the `security.json` file.
-
-This setting defines how long a session token remains valid after being issued.
-
-```json
-{
-  "session_ttl": 1800 // 30 minutes
-}
-```
-
-- The value is expressed in **seconds**
-- This file contains **non-sensitive configuration**
-- It is safe to keep it under version control
-- If the file or value is missing, a safe default is used
-
-### How Session Expiration Works
-
-- The session TTL is loaded from `security.json`
-- The value is applied during `/auth/handshake`
-- Each issued token receives its own expiration timestamp
-- Expired tokens are automatically invalidated
-
-This design keeps session policy explicit, configurable, and isolated from core security bootstrap logic.
-
-### Design Rationale
-
-- **Secrets** (API keys) are loaded from environment variables
-- **Security behavior** (such as session lifetime) is loaded from configuration files
-- **Session logic** remains stateless and policy-agnostic
-
-This separation avoids accidental secret exposure while keeping the agent flexible across environments.
-
----
-
 ## 🏗️ Architecture
 
 MultiPrint Web Agent is designed with a focus on **modularity**, **clear responsibilities**, and **ease of evolution**.
@@ -399,34 +360,140 @@ This separation ensures low coupling, easier testing, and future evolution witho
 
 ---
 
-## ⚙️ Configuration Files and Certificates
+## 🔐 Security
 
-For security reasons, some files are **not versioned in the repository**:
+- Session tokens required for protected routes
+- Per-route rate limiting
+- Handshake restricted to the local environment
+- Tokens automatically renewable by the client when expired
 
-- `certs/`  
-  Contains the SSL certificate and private key used by the agent.
+The sections below describe how security is configured and enforced.
 
-- `config/security.json`  
-  Contains sensitive security-related configuration for the agent.
+### Security Configuration
 
-These files are **automatically generated during the agent installation process**.
+The MultiPrint Web Agent separates **secrets** from **behavioral security settings**.
 
-### Manual execution (development environment)
+This ensures a secure setup while keeping the system easy to configure across different environments.
 
-If the agent is executed directly via Python, you must ensure that:
+### Environment Variable
 
-- the `certs/` directory exists
-- the `config/security.json` file is present
+The API key used to authenticate external clients **is provided via environment variable and is generated during the installation process**.
 
-The repository includes **example configuration files** that can be used as a starting point:
+This value is considered sensitive and **must not be stored in configuration files or version control**.
 
-- `config/security.example.json`
+### Required variable
 
-These files should be copied and adjusted locally before running the agent.
+- `MULTIPRINT_API_KEY`  
+  API key used by external systems to authenticate print requests.
+
+If this variable is not set, the agent will **fail to start**.
+
+### Session TTL Configuration
+
+The session expiration time is configurable via the `security.json` file.
+
+This setting defines how long a session token remains valid after being issued.
+
+```json
+{
+  "session_ttl": 1800 // 30 minutes
+}
+```
+
+- The value is expressed in **seconds**
+- This file contains **non-sensitive configuration**
+- It is safe to keep it under version control
+- If the file or value is missing, a safe default is used
+
+### How Session Expiration Works
+
+- The session TTL is loaded from `security.json`
+- The value is applied during `/auth/handshake`
+- Each issued token receives its own expiration timestamp
+- Expired tokens are automatically invalidated
+
+This design keeps session policy explicit, configurable, and isolated from core security bootstrap logic.
+
+### Design Rationale
+
+- **Secrets** (API keys) are loaded from environment variables
+- **Security behavior** (such as session lifetime) is loaded from configuration files
+- **Session logic** remains stateless and policy-agnostic
+
+This separation avoids accidental secret exposure while keeping the agent flexible across environments.
+
+### Certificate
+
+For security reasons, some files are **not versioned in the
+repository**:
+
+-   `certs/`\
+    Contains the SSL certificate (`.crt`) and private key (`.key`) used
+    by the agent.
+
+**These files are generated during the installation process of the agent.**
 
 ---
 
-## 🛠️ Development Setup (Poetry)
+## 🧪 Development Setup (Manual Execution)
+
+When running the agent directly via Python (development mode), you must
+manually ensure that:
+
+-   the `certs/` directory exists\
+-   the SSL certificate and private key are present\
+-   the API-KEY is set as a Environment Variable `MULTIPRINT_API_KEY`  
+
+### 🔐 Generating a Localhost SSL Certificate (Development Only)
+
+For development environments, you must manually generate a **self-signed
+certificate** for `localhost`.
+
+### Step 1 --- Install OpenSSL
+
+Make sure OpenSSL is installed and available in your system PATH.
+
+To verify:
+
+``` bash
+openssl version
+```
+
+If the command is not recognized, install OpenSSL and restart your
+terminal.
+
+### Step 2 --- Create the `certs` directory
+
+Inside the project root:
+
+``` bash
+mkdir certs
+```
+
+### Step 3 --- Generate the certificate and key
+
+Run the following command inside the project root:
+
+``` bash
+openssl req -x509 -newkey rsa:2048 -nodes -keyout certs/agent.key -out certs/agent.crt -days 365 -subj "/CN=localhost"
+```
+
+This will generate:
+
+-   `certs/agent.key`
+-   `certs/agent.crt`
+
+The certificate will be valid for **365 days**.
+
+### Set the API Key
+
+#### PowerShell
+
+``` powershell
+setx MULTIPRINT_API_KEY "mp_dev_your_generated_key_here"
+```
+
+### 🛠️ Poetry
 
 MultiPrint Web Agent uses **Poetry** for dependency management and
 packaging.
@@ -436,7 +503,7 @@ packaging.
 -   Python 3.11+
 -   Poetry installed
 
-### Install Poetry
+### Install Poetryper
 
 If Poetry is not installed:
 
@@ -494,34 +561,6 @@ There is no `requirements.txt` file in this project.
 ✔️ Architecture consolidated  
 ✔️ Well-defined flows  
 ✔️ Ready for local production use  
-
----
-
-## 🧭 Roadmap
-
-### ✅ Phase 1 — Initial Setup
-Base agent structure, project setup, and server bootstrap.
-
-### ✅ Phase 2 — Generic Payload
-Support for multiple payload types (ZPL, PDF, images) with automatic detection.
-
-### ✅ Phase 3 — Printer Configuration
-Selection and persistence of laser and thermal printers.
-
-### ✅ Phase 4 — Web UI
-Creation of the local UI for configuration and diagnostics.
-
-### ✅ Phase 5 — UI & UX Refinement
-Visual improvements, feedback, states, and user experience.
-
-### ✅ Phase 6 — New Features
-Test print, logs, printer classification, and additional capabilities.
-
-### ✅ Phase 7 — Robustness & Security
-Session tokens, rate limiting, validation, failure handling, and hardening.
-
-### ⬜ Phase 8 — Production
-Final packaging, complete documentation, and production readiness.
 
 ---
 

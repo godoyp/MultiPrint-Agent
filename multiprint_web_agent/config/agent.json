@@ -3,7 +3,7 @@
   "agent_version": "1.0.0",
   "printers": {
     "thermal": {
-      "name": "Zebra ZT411"
+      "name": null
     },
     "laser": {
       "name": "Microsoft Print to PDF"
