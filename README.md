@@ -65,7 +65,7 @@ This project is ideal for systems that need to **print locally** without dealing
 - [🔐 Security](#-security)
 - [🧪 Development Setup (Manual Execution)](#-development-setup-manual-execution)
 - [📦 Distribution (Executable)](#-distribution-executable)
-- [📦 Project Status](#-project-status)
+- [📊 Project Status](#-project-status)
 - [📝 License](#-license)
 
 ---
@@ -566,7 +566,7 @@ The project supports standalone Windows builds via PyInstaller.
 
 ---
 
-## 📦 Project Status
+## 📊 Project Status
 
 **Current version:** `v0.1.0`
 
