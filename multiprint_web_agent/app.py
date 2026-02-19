@@ -9,9 +9,10 @@ from multiprint_web_agent.routes.ui.state import bp as state_bp
 from multiprint_web_agent.routes.ui.logs import bp as logs_bp
 from multiprint_web_agent.routes.ui.print_test import bp as print_test_bp
 from multiprint_web_agent.routes.ui.ui import bp as ui_bp
+from multiprint_web_agent.core.paths import STATIC_DIR
 
 
-app = Flask(__name__)
+app = Flask(__name__, static_folder=str(STATIC_DIR))
 CORS(app)
 
 app.register_blueprint(print_bp)

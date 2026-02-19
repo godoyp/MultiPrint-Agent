@@ -19,6 +19,7 @@ reportlab = "^4.4.10"
 pytest = "^8.0"
 black = "^24.0"
 ruff = "^0.3"
+pyinstaller = "^6.19.0"
 
 [tool.poetry.scripts]
 multiprint = "multiprint_web_agent.app:run"
