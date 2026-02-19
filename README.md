@@ -559,11 +559,12 @@ There is no `requirements.txt` file in this project.
 
 ## 📦 Project Status
 
-**Current version:** `v1.0.0`
+**Current version:** `v0.1.0`
 
-✔️ Architecture consolidated  
-✔️ Well-defined flows  
-✔️ Ready for local production use  
+✔️ Stable local execution  
+✔️ Executable distribution (PyInstaller)  
+✔️ HTTPS-secured communication  
+🚧 REST architecture evolution in progress  
 
 ---
 
