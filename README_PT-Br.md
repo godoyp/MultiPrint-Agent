@@ -124,7 +124,7 @@ Executar o agente utilizando **HTTPS** evita:
 -   Erros de conteúdo misto
 -   Bloqueios de segurança do navegador
 
-> ⚠️ O certificado SSL utilizado é **autoassinado** e **destinado exclusivamente à comunicação segura em ambiente local.**.
+> ⚠️ O certificado SSL utilizado é **autoassinado** e **destinado exclusivamente à comunicação segura em ambiente local.**
 
 ---
 
