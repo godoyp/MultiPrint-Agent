@@ -32,7 +32,7 @@
 
 ## Language: 
 <p>
-  <img src="https://flagcdn.com/us.svg" width="18"/> English</a> |
+  <img src="https://flagcdn.com/us.svg" width="18"/> English |
   <img src="https://flagcdn.com/br.svg" width="18"/> <a href="README_PT-Br.md">Português</a>
 </p>
 
