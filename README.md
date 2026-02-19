@@ -25,6 +25,7 @@
   </div>
   <div align="center">
     <img src="https://img.shields.io/badge/POETRY-Packaging%20%26%20Build-blueviolet?style=for-the-badge&logo=python" />
+    <img src="https://img.shields.io/badge/POETRY-Packaging%20%26%20Build-6F42C1?style=for-the-badge&logo=python" />
   </div>
 
 ## Language: 
