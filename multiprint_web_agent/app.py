@@ -22,8 +22,7 @@ app.register_blueprint(logs_bp)
 app.register_blueprint(print_test_bp)
 app.register_blueprint(ui_bp)
 
-
-if __name__ == "__main__":
+def run():
     print("🖨️ MultiPrint Web Agent Initialized")
 
     ssl_context = get_ssl_context()
@@ -37,3 +36,6 @@ if __name__ == "__main__":
         ssl_context=ssl_context,
         debug=False,
     )
+
+if __name__ == "__main__":
+    run()
