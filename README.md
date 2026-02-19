@@ -64,7 +64,7 @@ This project is ideal for systems that need to **print locally** without dealing
 - [🏗️ Architecture](#️-architecture)
 - [🔐 Security](#-security)
 - [🧪 Development Setup (Manual Execution)](#-development-setup-manual-execution)
-- [🛠️ Poetry](#️-poetry)
+- [📦 Distribution (Executable)](#️-distribution-executable)
 - [📦 Project Status](#-project-status)
 - [📝 License](#-license)
 
@@ -557,6 +557,12 @@ All dependencies are defined in:
 `pyproject.toml`
 
 There is no `requirements.txt` file in this project.
+
+---
+
+## 📦 Distribution (Executable)
+
+The project supports standalone Windows builds via PyInstaller.
 
 ---
 
