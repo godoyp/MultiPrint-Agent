@@ -31,7 +31,10 @@
 </div>
 
 ## Idioma:
-🇺🇸 [English](README.md)| 🇧🇷 Português
+<p>
+  <img src="https://flagcdn.com/us.svg" width="18"/> <a href="README.md">English</a> |
+  <img src="https://flagcdn.com/br.svg" width="18"/> Português</a>
+</p>
 
 ---
 
