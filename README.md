@@ -8,17 +8,14 @@
 
 <h1 align="center">MultiPrint Web Agent</h1>
 
-
-  <div align="center">
+<div align="center">
   <img src="https://img.shields.io/badge/Python-3.11.9-3776AB?style=for-the-badge&logo=python&logoColor=white" />
   &nbsp;&nbsp;
   <img src="https://img.shields.io/badge/JavaScript-ES6+-C9A227?style=for-the-badge&logo=javascript&logoColor=white" />
   &nbsp;&nbsp;
   <img src="https://img.shields.io/badge/Flask-Backend-000000?style=for-the-badge&logo=flask&logoColor=white" />
 </div>
-
 <br>
-
 <div align="center">
   <img src="https://img.shields.io/badge/Poetry-Packaging%20%26%20Build-6F42C1?style=for-the-badge&logo=python&logoColor=white" />
   &nbsp;&nbsp;
@@ -26,9 +23,7 @@
   &nbsp;&nbsp;
   <img src="https://img.shields.io/badge/HTTPS-Local%20Secure-2E8B57?style=for-the-badge" />
 </div>
-
 <br>
-
 <div align="center">
   <img src="https://img.shields.io/badge/License-MIT-1E90FF?style=for-the-badge" />
   &nbsp;&nbsp;
