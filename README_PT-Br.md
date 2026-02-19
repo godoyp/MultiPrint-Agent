@@ -71,8 +71,8 @@ sem lidar diretamente com:
 -   [🏗️ Arquitetura](#️-arquitetura)
 -   [🔐 Segurança](#-segurança)
 -   [🧪 Setup de Desenvolvimento (Execução Manual)](#-setup-de-desenvolvimento-execução-manual)
--   [🛠️ Poetry](#️-poetry)
--   [📦 Status do Projeto](#-status-do-projeto)
+-   [📦 Distribuição (Executável)](#️-distribuição-executável)
+-   [📊 Status do Projeto](#-status-do-projeto)
 -   [📝 Licença](#-licença)
 
 ---
@@ -588,7 +588,13 @@ Não existe arquivo `requirements.txt` neste projeto.
 
 ---
 
-## 📦 Status do Projeto
+## 📦 Distribuição (Executável)
+
+O projeto disponibiliza builds standalone para Windows geradas com PyInstaller.
+
+---
+
+## 📊 Status do Projeto
 
 **Versão atual:** `v0.1.0`
 
