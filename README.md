@@ -63,7 +63,7 @@ This project is ideal for systems that need to **print locally** without dealing
 - [🧪 Local UI (Configuration)](#-local-ui-configuration)
 - [🏗️ Architecture](#️-architecture)
 - [🔐 Security](#-security)
-- [🧪 Development Setup (Manual Execution)](#-development-setup-manual-execution)
+- [🧪 Development Setup](#-development-setup)
 - [📦 Distribution (Executable)](#-distribution-executable)
 - [📊 Project Status](#-project-status)
 - [📝 License](#-license)
@@ -114,7 +114,7 @@ Running the agent using **HTTPS** avoids:
 - Mixed content errors
 - Browser security blocks
 
-> ⚠️ The SSL certificate used is **self-signed** and **automatically generated during the agent installation process**.
+> ⚠️ The SSL certificate used is **self-signed** and **intended for local secure communication**.
 
 
 ## 🌐 Browser Warning (Expected)
@@ -441,7 +441,7 @@ repository**:
 
 ---
 
-## 🧪 Development Setup (Manual Execution)
+## 🧪 Development Setup
 
 When running the agent directly via Python (development mode), you must
 manually ensure that:

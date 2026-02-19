@@ -70,7 +70,7 @@ sem lidar diretamente com:
 -   [🧪 Interface Local (Configuração)](#-interface-local-configuração)
 -   [🏗️ Arquitetura](#️-arquitetura)
 -   [🔐 Segurança](#-segurança)
--   [🧪 Setup de Desenvolvimento (Execução Manual)](#-setup-de-desenvolvimento-execução-manual)
+-   [🧪 Setup de Desenvolvimento](#-setup-de-desenvolvimento)
 -   [📦 Distribuição (Executável)](#-distribui%C3%A7%C3%A3o-execut%C3%A1vel)
 -   [📊 Status do Projeto](#-status-do-projeto)
 -   [📝 Licença](#-licença)
@@ -124,8 +124,7 @@ Executar o agente utilizando **HTTPS** evita:
 -   Erros de conteúdo misto
 -   Bloqueios de segurança do navegador
 
-> ⚠️ O certificado SSL utilizado é **autoassinado** e **gerado
-> automaticamente durante o processo de instalação do agente**.
+> ⚠️ O certificado SSL utilizado é **autoassinado** e **destinado exclusivamente à comunicação segura em ambiente local.**.
 
 ---
 
@@ -467,7 +466,7 @@ agente.**
 
 ---
 
-## 🧪 Setup de Desenvolvimento (Execução Manual)
+## 🧪 Setup de Desenvolvimento
 
 Ao executar o agente diretamente via Python (modo de desenvolvimento),
 você deve garantir manualmente que:
