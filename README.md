@@ -562,7 +562,22 @@ There is no `requirements.txt` file in this project.
 
 ## 📦 Distribution (Executable)
 
-The project supports standalone Windows builds via PyInstaller.
+The project supports standalone Windows builds generated via PyInstaller (onedir mode).
+
+The distributed package includes:
+
+- Executable binary
+- Configuration files
+- Static assets
+- SSL certificates
+
+Download the latest version from the **Releases** section.
+
+### ▶️ Running the Executable
+
+1. Extract the ZIP file  
+2. Run `MultiPrintAgent.exe`  
+3. Access: https://localhost:9108/ui 
 
 ---
 
