@@ -1,5 +1,6 @@
 import os
-from ..core.paths import SSL_CERT_PATH, SSL_KEY_PATH
+from .paths import SSL_CERT_PATH, SSL_KEY_PATH
+
 
 def get_ssl_context():
     enable_https = os.environ.get(

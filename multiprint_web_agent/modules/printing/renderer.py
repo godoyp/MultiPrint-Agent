@@ -1,8 +1,8 @@
+import io
+import base64
 import fitz  # PyMuPDF
 from PIL import Image, ImageDraw, ImageFont
 from typing import List
-import io
-import base64
 
 
 def render_pdf(pdf_bytes: bytes, dpi: int = 400) -> List[Image.Image]:

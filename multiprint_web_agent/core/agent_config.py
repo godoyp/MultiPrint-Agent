@@ -1,5 +1,3 @@
-import json
-from pathlib import Path
 from .paths import AGENT_CONFIG_PATH
 from multiprint_web_agent.core.json_utils import load_json, save_json
 from multiprint_web_agent.core.constants import DEFAULT_AGENT_PORT

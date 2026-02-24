@@ -1,5 +1,6 @@
 import win32print
 
+
 def print_zebra(printer_name: str, raw_zpl: str):
     hPrinter = win32print.OpenPrinter(printer_name)
     try:

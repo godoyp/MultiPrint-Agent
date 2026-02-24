@@ -1,8 +1,9 @@
-from datetime import datetime
 import queue
+from datetime import datetime
 from collections import deque
 from multiprint_web_agent.core.paths import LOGS_DIR, AGENT_LOG_PATH
 from multiprint_web_agent.core.constants import LOG_BUFFER_SIZE
+
 
 LOGS_DIR.mkdir(parents=True, exist_ok=True)
 

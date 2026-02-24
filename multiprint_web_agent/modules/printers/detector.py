@@ -1,7 +1,5 @@
-import json
 from functools import lru_cache
 from typing import Optional, Iterable
-from pathlib import Path
 from multiprint_web_agent.core.paths import ZEBRA_CONFIG_PATH
 from multiprint_web_agent.core.json_utils import load_json
 

@@ -1,5 +1,6 @@
 import base64
 
+
 def detect_payload(raw, content_type=None, encoding=None):
     if isinstance(raw, str) and "^XA" in raw and "^XZ" in raw:
         return {

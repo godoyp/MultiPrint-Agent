@@ -1,9 +1,4 @@
-from .limits import (
-    MAX_ZPL_BYTES,
-    MAX_TEXT_BYTES,
-    MAX_PDF_BYTES,
-    MAX_IMAGE_BYTES,
-)
+from .limits import MAX_ZPL_BYTES, MAX_TEXT_BYTES, MAX_PDF_BYTES, MAX_IMAGE_BYTES
 from .errors import PayloadValidationError
 from .utils import payload_size_bytes
 

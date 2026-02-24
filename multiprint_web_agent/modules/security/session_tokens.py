@@ -1,6 +1,7 @@
 import secrets
 import time
 
+
 _SESSIONS: dict[str, float] = {}
 
 def issue_session(ttl: int) -> str:
