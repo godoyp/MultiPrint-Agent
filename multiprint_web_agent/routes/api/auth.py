@@ -4,7 +4,7 @@ from multiprint_web_agent.modules.security.rate_limit import rate_limit, rate_ke
 from multiprint_web_agent.modules.security.config import get_session_ttl
 
 
-bp = Blueprint("auth", __name__, url_prefix="/api")
+bp = Blueprint("auth", __name__)
 
 @bp.route("/auth/handshake", methods=["POST"])
 def handshake_route():

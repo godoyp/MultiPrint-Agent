@@ -6,7 +6,7 @@ from multiprint_web_agent.modules.security.auth import require_session_token
 from multiprint_web_agent.modules.printers.detector import is_zebra_printer
 
 
-bp = Blueprint("printers", __name__, url_prefix="/ui")
+bp = Blueprint("printers", __name__)
 
 @bp.route("/printers", methods=["GET"])
 def list_printers_route():

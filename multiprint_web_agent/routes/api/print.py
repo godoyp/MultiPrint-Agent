@@ -9,7 +9,7 @@ from multiprint_web_agent.modules.security.auth import require_session_token
 from multiprint_web_agent.modules.security.rate_limit import rate_limit, rate_key_from_request, PRINT_LIMIT, PRINT_WINDOW
 
 
-bp = Blueprint("print", __name__, url_prefix="/api")
+bp = Blueprint("print", __name__)
 
 @bp.route("/print", methods=["POST"])
 def print_route():

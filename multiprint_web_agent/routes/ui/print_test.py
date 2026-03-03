@@ -11,7 +11,7 @@ from multiprint_web_agent.modules.security.auth import require_session_token
 from multiprint_web_agent.modules.security.rate_limit import rate_limit, rate_key_from_request, TEST_PRINT_LIMIT, TEST_PRINT_WINDOW
 
 
-bp = Blueprint("print_test", __name__, url_prefix="/ui")
+bp = Blueprint("print_test", __name__)
 
 
 @bp.route("/test-print", methods=["POST"])

@@ -3,7 +3,7 @@ from multiprint_web_agent.core.agent_config import get_port, get_version, get_la
 from multiprint_web_agent.core.agent_state import AGENT_STATE
 
 
-bp = Blueprint("state", __name__, url_prefix="/ui")
+bp = Blueprint("state", __name__)
 
 @bp.route("/state", methods=["GET"])
 def state_route():

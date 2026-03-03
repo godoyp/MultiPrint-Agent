@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, Blueprint
 from flask_cors import CORS
 from multiprint_web_agent.core.agent_config import get_port
 from multiprint_web_agent.core.ssl_config import get_ssl_context
@@ -15,13 +15,27 @@ from multiprint_web_agent.core.paths import STATIC_DIR
 app = Flask(__name__, static_folder=str(STATIC_DIR))
 CORS(app)
 
-app.register_blueprint(print_bp)
-app.register_blueprint(auth_bp)
-app.register_blueprint(printers_bp)
-app.register_blueprint(state_bp)
-app.register_blueprint(logs_bp)
-app.register_blueprint(print_test_bp)
-app.register_blueprint(ui_bp)
+# Root API v1
+api_v1_root = Blueprint("api_v1", __name__, url_prefix="/api/v1")
+
+# Root UI
+ui_root = Blueprint("ui_root", __name__, url_prefix="/ui")
+
+# API Children
+api_v1_root.register_blueprint(print_bp)
+api_v1_root.register_blueprint(auth_bp)
+
+# UI Children
+ui_root.register_blueprint(printers_bp)
+ui_root.register_blueprint(state_bp)
+ui_root.register_blueprint(logs_bp)
+ui_root.register_blueprint(print_test_bp)
+ui_root.register_blueprint(ui_bp)
+
+# Roots in APP
+app.register_blueprint(api_v1_root)
+app.register_blueprint(ui_root)
+
 
 def run():
     print("🖨️ MultiPrint Web Agent Initialized")
