@@ -301,7 +301,7 @@ async function printPayload(payload) {
     body: JSON.stringify(payload)
   });
 
-  // Token expired → renew and retry
+  // Token expirado → renova e tenta novamente
   if (res.status === 401) {
     token = await getToken(true);
     res = await fetch("https://localhost:9108/api/v1/print", {
@@ -319,19 +319,19 @@ async function printPayload(payload) {
   }
 }
 
-// ZPL example (auxiliary fields not required)
+// ZPL example (campos auxiliares não são obrigatorios)
 printPayload({
   raw: "^XA^FO50,50^FDHello World^FS^XZ"
 });
 
-// PDF example (base64 + auxiliary metadata)
+// PDF example (base64 + metadata auxiliar)
 printPayload({
   raw: pdfBase64,
   encoding: "base64",
   contentType: "application/pdf"
 });
 
-// Image example (PNG/JPEG in base64)
+// Image example (PNG/JPEG em base64)
 printPayload({
   raw: imageBase64,
   encoding: "base64",
