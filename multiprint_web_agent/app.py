@@ -41,8 +41,6 @@ app.register_blueprint(ui_root)
 
 
 def run():
-    print("🖨️ MultiPrint Web Agent Initialized")
-
     ssl_context = get_ssl_context()
 
     if not ssl_context:

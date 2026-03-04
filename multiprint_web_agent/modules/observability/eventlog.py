@@ -20,7 +20,6 @@ def log_event(message: str):
     log_buffer.append(full_msg)
     log_queue.put(full_msg)
 
-    print(full_msg)
 
 def event_stream():
     yield "data: Log Stream Initialized\n\n"
