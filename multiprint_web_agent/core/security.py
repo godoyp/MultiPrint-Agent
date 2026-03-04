@@ -1,8 +1,8 @@
 import os
 
+
 class SecurityConfigError(RuntimeError):
     pass
-
 
 def get_api_key() -> str:
 

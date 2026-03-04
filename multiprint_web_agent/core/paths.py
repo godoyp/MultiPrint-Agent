@@ -1,12 +1,11 @@
 from pathlib import Path
 import sys
 
+
 def get_package_root() -> Path:
-    # Rodando como .exe (PyInstaller)
     if getattr(sys, "frozen", False):
         return Path(sys._MEIPASS) / "multiprint_web_agent"
 
-    # Rodando como código
     return Path(__file__).resolve().parents[1]
 
 PACKAGE_ROOT = get_package_root()

@@ -22,7 +22,6 @@ def require_api_key(func):
 
     return wrapper
 
-
 def require_session_token(func):
     @wraps(func)
     def wrapper(*args, **kwargs):
