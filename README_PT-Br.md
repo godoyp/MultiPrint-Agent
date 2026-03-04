@@ -1,12 +1,12 @@
 <p align="center">
   <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="/multiprint_web_agent/static/images/logo-white.png">
-    <source media="(prefers-color-scheme: light)" srcset="/multiprint_web_agent/static/images/logo.png">
-    <img src="/multiprint_web_agent/static/images/logo-white.png" width="150">
+    <source media="(prefers-color-scheme: dark)" srcset="/multiprint_agent/static/images/logo-white.png">
+    <source media="(prefers-color-scheme: light)" srcset="/multiprint_agent/static/images/logo.png">
+    <img src="/multiprint_agent/static/images/logo-white.png" width="150">
   </picture>
 </p>
 
-<h1 align="center">MultiPrint Web Agent</h1>
+<h1 align="center">MultiPrint Agent</h1>
 
 <div align="center">
   <img src="https://img.shields.io/badge/Python-3.11.9-3776AB?style=for-the-badge&logo=python&logoColor=white" />
@@ -38,7 +38,7 @@
 
 ---
 
-**MultiPrint Web Agent** é um agente de impressão local que expõe uma
+**MultiPrint Agent** é um agente de impressão local que expõe uma
 **API HTTP simples** para integração com sistemas externos, abstraindo a
 complexidade de drivers de impressora, tipos de impressora e do sistema
 operacional.
@@ -94,7 +94,7 @@ sem lidar diretamente com:
 
     External Client
           ↓
-    MultiPrint Web Agent
+    MultiPrint Agent
           ↓
     System Printers (Laser / Thermal)
 
@@ -146,7 +146,7 @@ Após isso, o aviso não aparecerá novamente para o mesmo navegador.
 
 ## 🧠 Filosofia de Design
 
-O MultiPrint Web Agent foi projetado para **simplificar integrações** e
+O MultiPrint Agent foi projetado para **simplificar integrações** e
 **isolar a complexidade de impressão** do lado do cliente.
 
 Princípios principais:
@@ -165,7 +165,7 @@ Isso garante integrações que são:
 -   ✅ Independentes de impressora
 
 O campo `raw` atua como o **contrato da API** entre sistemas externos e
-o MultiPrint Web Agent, permitindo que clientes enviem dados sem
+o MultiPrint Agent, permitindo que clientes enviem dados sem
 precisar entender detalhes de renderização, drivers ou spoolers do
 sistema operacional.
 
@@ -176,7 +176,7 @@ ambiente de impressão evolua sem impactar integrações existentes.
 
 ## ❌ O Que Este Projeto Não É
 
-Para definir claramente o escopo, o MultiPrint Web Agent:
+Para definir claramente o escopo, o MultiPrint Agent:
 
 -   ❌ Não é um serviço de impressão em nuvem
 -   ❌ Não expõe impressoras diretamente na rede
@@ -353,14 +353,14 @@ O agente inclui uma **interface local (UI)** utilizada apenas para:
 > Ela existe apenas para configuração local e diagnósticos.
 
 <p align="center">
-  <img src="/multiprint_web_agent/static/images/MultiPrint.png">
+  <img src="/multiprint_agent/static/images/MultiPrint.png">
 </p>
 
 ---
 
 ## 🏗️ Arquitetura
 
-O MultiPrint Web Agent foi projetado com foco em **modularidade**,
+O MultiPrint Agent foi projetado com foco em **modularidade**,
 **responsabilidades claras** e **facilidade de evolução**.
 
 > ℹ️ Atualmente, o agente é focado em ambientes **Windows**, devido à
@@ -416,7 +416,7 @@ As seções abaixo descrevem como a segurança é configurada e aplicada.
 
 ### Configuração de Segurança
 
-O MultiPrint Web Agent separa **segredos** de **configurações
+O MultiPrint Agent separa **segredos** de **configurações
 comportamentais de segurança**.
 
 Isso garante uma configuração segura mantendo o sistema flexível entre
@@ -549,7 +549,7 @@ setx MULTIPRINT_API_KEY "mp_dev_your_generated_key_here"
 
 ## 🛠️ Poetry
 
-O MultiPrint Web Agent utiliza **Poetry** para gerenciamento de
+O MultiPrint Agent utiliza **Poetry** para gerenciamento de
 dependências e empacotamento.
 
 ### Requisitos
@@ -578,7 +578,7 @@ poetry install
 ### Executar o agente (Modo Desenvolvimento)
 
 ``` bash
-poetry run python -m multiprint_web_agent.app
+poetry run python -m multiprint_agent.app
 ```
 
 O agente iniciará utilizando HTTPS na porta configurada.
@@ -643,4 +643,4 @@ Baixe a versão mais recente na seção **Releases**.
 
 MIT License
 
-Copyright © 2026 --- Pedro Godoy - MultiPrint Web Agent
+Copyright © 2026 --- Pedro Godoy - MultiPrint Agent

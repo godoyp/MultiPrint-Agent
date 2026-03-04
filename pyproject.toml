@@ -1,10 +1,10 @@
 [tool.poetry]
-name = "multiprint-web-agent"
+name = "multiprint-agent"
 version = "0.5.0"
 description = "Local print agent for Zebra and Laser printers with secure REST API."
 authors = ["Pedro Godoy <pedro_godoy2@hotmail.com>"]
 readme = "README.md"
-packages = [{ include = "multiprint_web_agent" }]
+packages = [{ include = "multiprint_agent" }]
 
 [tool.poetry.dependencies]
 python = ">=3.11,<3.12"
@@ -22,7 +22,7 @@ ruff = "^0.3"
 pyinstaller = "^6.19.0"
 
 [tool.poetry.scripts]
-multiprint = "multiprint_web_agent.app:run"
+multiprint = "multiprint_agent.app:run"
 
 [build-system]
 requires = ["poetry-core>=2.0.0,<3.0.0"]

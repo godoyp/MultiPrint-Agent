@@ -1,12 +1,12 @@
 <p align="center">
   <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="/multiprint_web_agent/static/images/logo-white.png">
-    <source media="(prefers-color-scheme: light)" srcset="/multiprint_web_agent/static/images/logo.png">
-    <img src="/multiprint_web_agent/static/images/logo-white.png" width="150">
+    <source media="(prefers-color-scheme: dark)" srcset="/multiprint_agent/static/images/logo-white.png">
+    <source media="(prefers-color-scheme: light)" srcset="/multiprint_agent/static/images/logo.png">
+    <img src="/multiprint_agent/static/images/logo-white.png" width="150">
   </picture>
 </p>
 
-<h1 align="center">MultiPrint Web Agent</h1>
+<h1 align="center">MultiPrint Agent</h1>
 
 <div align="center">
   <img src="https://img.shields.io/badge/Python-3.11.9-3776AB?style=for-the-badge&logo=python&logoColor=white" />
@@ -38,7 +38,7 @@
 
 ---
 
-**MultiPrint Web Agent** is a local printing agent that exposes a **simple HTTP API** for integration with external systems, abstracting the complexity of printer drivers, printer types, and the operating system.
+**MultiPrint Agent** is a local printing agent that exposes a **simple HTTP API** for integration with external systems, abstracting the complexity of printer drivers, printer types, and the operating system.
 
 It allows any application to send print jobs via HTTP, while the agent handles security, validation, and dispatching to **laser** or **thermal (Zebra)** printers.
 
@@ -88,7 +88,7 @@ This project is ideal for systems that need to **print locally** without dealing
 ```
 External Client
       ↓
-MultiPrint Web Agent
+MultiPrint Agent
       ↓
 System Printers (Laser / Thermal)
 ```
@@ -133,7 +133,7 @@ After this, the warning will no longer appear for the same browser.
 
 ## 🧠 Design Philosophy
 
-MultiPrint Web Agent is designed to **simplify integrations** and **isolate printing complexity** from the client side.
+MultiPrint Agent is designed to **simplify integrations** and **isolate printing complexity** from the client side.
 
 Core principles:
 
@@ -148,13 +148,13 @@ This ensures integrations that are:
 - ✅ Stable  
 - ✅ Printer-agnostic  
 
-The `raw` field acts as the **API contract** between external systems and the MultiPrint Web Agent, allowing clients to send data without needing to understand rendering details, drivers, or OS-level spooling.
+The `raw` field acts as the **API contract** between external systems and the MultiPrint Agent, allowing clients to send data without needing to understand rendering details, drivers, or OS-level spooling.
 
 This model reduces coupling, simplifies maintenance, and allows the printing environment to evolve without impacting existing integrations.
 
 ## ❌ What This Project Is Not
 
-To clearly define scope, MultiPrint Web Agent:
+To clearly define scope, MultiPrint Agent:
 
 - ❌ Is not a cloud printing service
 - ❌ Does not expose printers directly to the network
@@ -320,14 +320,14 @@ The agent includes a **local UI** used only for:
 > It exists only for local setup and diagnostics.
 
 <p align="center">
-  <img src="/multiprint_web_agent/static/images/MultiPrint.png">
+  <img src="/multiprint_agent/static/images/MultiPrint.png">
 </p>
 
 ---
 
 ## 🏗️ Architecture
 
-MultiPrint Web Agent is designed with a focus on **modularity**, **clear responsibilities**, and **ease of evolution**.
+MultiPrint Agent is designed with a focus on **modularity**, **clear responsibilities**, and **ease of evolution**.
 
 > ℹ️ Currently, the agent is focused on **Windows** environments due to direct integration with the OS printing subsystem.
 
@@ -379,7 +379,7 @@ The sections below describe how security is configured and enforced.
 
 ### Security Configuration
 
-The MultiPrint Web Agent separates **secrets** from **behavioral security settings**.
+The MultiPrint Agent separates **secrets** from **behavioral security settings**.
 
 This ensures a secure setup while keeping the system easy to configure across different environments.
 
@@ -503,7 +503,7 @@ setx MULTIPRINT_API_KEY "mp_dev_your_generated_key_here"
 
 ### 🛠️ Poetry
 
-MultiPrint Web Agent uses **Poetry** for dependency management and
+MultiPrint Agent uses **Poetry** for dependency management and
 packaging.
 
 ### Requirements
@@ -533,7 +533,7 @@ poetry install
 ### Run the Agent (Development Mode)
 
 ``` bash
-poetry run python -m multiprint_web_agent.app
+poetry run python -m multiprint_agent.app
 ```
 
 The agent will start using HTTPS on the configured port.
@@ -598,4 +598,4 @@ Download the latest version from the **Releases** section.
 
 MIT License
 
-Copyright © 2026 — Pedro Godoy - MultiPrint Web Agent
+Copyright © 2026 — Pedro Godoy - MultiPrint Agent

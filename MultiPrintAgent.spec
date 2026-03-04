@@ -2,10 +2,10 @@
 
 
 a = Analysis(
-    ['multiprint_web_agent\\app.py'],
+    ['multiprint_agent\\app.py'],
     pathex=[],
     binaries=[],
-    datas=[('multiprint_web_agent/config', 'multiprint_web_agent/config'), ('multiprint_web_agent/static', 'multiprint_web_agent/static'), ('multiprint_web_agent/certs', 'multiprint_web_agent/certs')],
+    datas=[('multiprint_agent/config', 'multiprint_agent/config'), ('multiprint_agent/static', 'multiprint_agent/static'), ('multiprint_agent/certs', 'multiprint_agent/certs')],
     hiddenimports=[],
     hookspath=[],
     hooksconfig={},
