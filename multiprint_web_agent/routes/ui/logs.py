@@ -6,11 +6,7 @@ from multiprint_web_agent.modules.security.auth import require_session_token
 bp = Blueprint("logs", __name__)
 
 @bp.route("/logs/stream")
-def logs_stream_route():
-
-    auth = require_session_token()
-    if auth:
-        return auth
-    
+@require_session_token
+def logs_stream_route():    
     return Response(event_stream(), mimetype="text/event-stream", headers={"Cache-Control": "no-cache", "X-Accel-Buffering": "no"}
     )

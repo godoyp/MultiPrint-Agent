@@ -1,4 +1,5 @@
-from flask import Blueprint, request, jsonify
+from flask import Blueprint, request, abort, g
+from multiprint_web_agent.core.response import success_response
 from multiprint_web_agent.modules.printing.dispatcher import dispatch_print
 from multiprint_web_agent.modules.observability.eventlog import log_event
 from multiprint_web_agent.modules.printers.utils import printer_is_online, resolve_printer_by_payload, PrinterNotConfiguredError
@@ -12,36 +13,27 @@ from multiprint_web_agent.modules.security.rate_limit import rate_limit, rate_ke
 bp = Blueprint("print", __name__)
 
 @bp.route("/print", methods=["POST"])
+@require_session_token
 def print_route():
-
-    auth = require_session_token()
-    if auth:
-        return auth
-
-    token = (
-        request.headers.get("Authorization", "")
-        .replace("Bearer ", "")
-        .strip()
-    )
 
     key = rate_key_from_request(
         route="print",
-        token=token,
+        token=g.session_token,
         ip=request.remote_addr,
     )
 
     if not rate_limit(key, PRINT_LIMIT, PRINT_WINDOW):
         log_event("RATE LIMIT | /print")
-        return jsonify({"error": "Rate limit exceeded"}), 429
+        abort(429, "Rate limit exceeded")
 
 
     data = request.get_json(silent=True)
     if not data:
-        return jsonify({"error": "Invalid JSON payload"}), 400
+        abort(400, "Invalid JSON payload")
 
     raw = data.get("raw")
     if not raw:
-        return jsonify({"error": "raw is required"}), 400
+        abort(400, "raw is required")
     
     try:
         payload = detect_payload(
@@ -54,32 +46,25 @@ def print_route():
 
     except PayloadValidationError as e:
         log_event(f"PRINT REJECTED | {e.message}")
-        return jsonify({"error": e.message}), 400
+        abort(400, e.message)
     
     try:
         printer = resolve_printer_by_payload(payload)
 
         if not printer_is_online(printer):
             log_event(f"PRINT FAILED | PRINTER OFFLINE | {printer}")
-            return jsonify({
-                "error": "Printer offline or unavailable",
-                "printer": printer,
-            }), 503
+            abort(503, "Printer offline or unavailable")
 
         dispatch_print(printer, payload)
 
     except PrinterNotConfiguredError as e:
         log_event(f"PRINT FAILED | {str(e)}")
-        return jsonify({"error": str(e)}), 409
+        abort(409, str(e))
     
-    except Exception as e:
-        log_event(f"PRINT ERROR | {str(e)}")
-        return jsonify({"error": "Internal print error"}), 500
-
     size = payload_size_bytes(payload)
 
     log_event(
         f"PRINT OK | printer={printer} | type={payload['kind']} | bytes={size}"
     )
 
-    return jsonify({"status": "ok"})
+    return success_response({"status": "ok"})

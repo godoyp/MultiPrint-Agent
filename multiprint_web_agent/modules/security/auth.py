@@ -1,32 +1,45 @@
-from flask import request, jsonify
+from functools import wraps
+from flask import request, abort, g
 from multiprint_web_agent.core.security import get_api_key, SecurityConfigError
-from .session_tokens import validate_session
+from multiprint_web_agent.modules.security.session_tokens import validate_session
 
 
-def require_api_key():
-    api_key = request.headers.get("X-API-KEY")
+def require_api_key(func):
+    @wraps(func)
+    def wrapper(*args, **kwargs):
 
-    try:
-        expected_key = get_api_key()
-    except SecurityConfigError as e:
-        return jsonify({"error": "Server security misconfiguration"}), 500
+        api_key = request.headers.get("X-API-KEY")
 
-    if not api_key or api_key != expected_key:
-        return jsonify({"error": "Unauthorized"}), 401
+        try:
+            expected_key = get_api_key()
+        except SecurityConfigError:
+            abort(500, "Server security misconfiguration")
 
-    return None
+        if not api_key or api_key != expected_key:
+            abort(401, "Unauthorized")
+
+        return func(*args, **kwargs)
+
+    return wrapper
 
 
-def require_session_token():
-    token = (
-        request.headers.get("Authorization", "")
-        .replace("Bearer ", "")
-        .strip()
-        or request.headers.get("X-SESSION-TOKEN")
-        or request.args.get("token") 
-    )
+def require_session_token(func):
+    @wraps(func)
+    def wrapper(*args, **kwargs):
 
-    if not token or not validate_session(token):
-        return jsonify({"error": "Unauthorized"}), 401
+        token = (
+            request.headers.get("Authorization", "")
+            .replace("Bearer ", "")
+            .strip()
+            or request.headers.get("X-SESSION-TOKEN")
+            or request.args.get("token")
+        )
 
-    return None
+        if not token or not validate_session(token):
+            abort(401, "Unauthorized")
+
+        g.session_token = token
+
+        return func(*args, **kwargs)
+
+    return wrapper

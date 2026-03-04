@@ -1,4 +1,4 @@
-from flask import Blueprint, request, jsonify
+from flask import Blueprint, request, jsonify, abort, g
 from multiprint_web_agent.modules.printing.dispatcher import dispatch_print
 from multiprint_web_agent.core.agent_config import get_thermal_printer, get_laser_printer
 from multiprint_web_agent.modules.printers.utils import printer_is_online
@@ -15,33 +15,24 @@ bp = Blueprint("print_test", __name__)
 
 
 @bp.route("/test-print", methods=["POST"])
+@require_session_token
 def print_test_route():
-
-    auth = require_session_token()
-    if auth:
-        return auth
-
-    token = (
-        request.headers.get("Authorization", "")
-        .replace("Bearer ", "")
-        .strip()
-    )
 
     key = rate_key_from_request(
         route="test-print",
-        token=token,
+        token=g.session_token,
         ip=request.remote_addr,
     )
 
     if not rate_limit(key, TEST_PRINT_LIMIT, TEST_PRINT_WINDOW):
         log_event("RATE LIMIT | /test-print")
-        return jsonify({"error": "Rate limit exceeded"}), 429
+        abort(429, "Rate limit exceeded")
 
     thermal = get_thermal_printer()
     laser = get_laser_printer()
 
     if not thermal and not laser:
-        return jsonify({"error": "No printers configured"}), 400
+        abort(400, "No printers configured")
 
     results = {"thermal": None, "laser": None}
 
@@ -94,16 +85,16 @@ def print_test_route():
 
     except PayloadValidationError as e:
         log_event(f"TEST PRINT REJECTED | {e.message}")
-        return jsonify({"error": e.message}), 400
+        abort(400, e.message)
 
     except Exception as e:
         log_event(f"TEST PRINT ERROR | {str(e)}")
-        return jsonify({"error": "Internal test print error"}), 500
+        abort(500, "Internal test print error")
 
     if all(v == "offline" for v in results.values() if v is not None):
         return jsonify(results), 503
 
     if any(v == "offline" for v in results.values()):
-        return jsonify(results), 207  # partial success
+        return jsonify(results), 207
 
-    return jsonify(results), 200
+    return jsonify(results)

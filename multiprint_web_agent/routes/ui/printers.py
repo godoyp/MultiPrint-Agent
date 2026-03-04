@@ -1,5 +1,5 @@
 import win32print
-from flask import Blueprint, request, jsonify
+from flask import Blueprint, request, jsonify, abort
 from multiprint_web_agent.core.agent_config import set_printer
 from multiprint_web_agent.modules.observability.eventlog import log_event
 from multiprint_web_agent.modules.security.auth import require_session_token
@@ -9,12 +9,14 @@ from multiprint_web_agent.modules.printers.detector import is_zebra_printer
 bp = Blueprint("printers", __name__)
 
 @bp.route("/printers", methods=["GET"])
+@require_session_token
 def list_printers_route():
     printers = [p[2] for p in win32print.EnumPrinters(2)]
     log_event("PRINTER LIST UPDATED")
     return jsonify(printers)
 
 @bp.route("/printers/classified", methods=["GET"])
+@require_session_token
 def list_printers_classified_route():
     printers = [p[2] for p in win32print.EnumPrinters(2)]
 
@@ -28,24 +30,21 @@ def list_printers_classified_route():
     return jsonify(classified)
 
 @bp.route("/printer", methods=["PUT"])
+@require_session_token
 def select_printer_route():
-
-    auth = require_session_token()
-    if auth:
-        return auth
 
     data = request.get_json(silent=True)
     if not data:
-        return jsonify({"error": "Invalid JSON payload"}), 400
+        abort(400, "Invalid JSON payload")
 
     role = data.get("role", "thermal")
     printer = data.get("printer")
 
     if role not in ("laser", "thermal"):
-        return jsonify({"error": "Invalid role"}), 400
+        abort(400, "Invalid role")
 
     if printer is not None and not isinstance(printer, str):
-        return jsonify({"error": "Invalid printer name"}), 400
+        abort(400, "Invalid printer name")
 
     set_printer(role, printer)
 
@@ -58,4 +57,3 @@ def select_printer_route():
         "role": role,
         "printer": printer,
     })
-

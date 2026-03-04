@@ -1,4 +1,4 @@
-let SESSION_TOKEN = null;
+let SESSION_TOKEN = 'teste de token';
 
 export function getSessionToken() {
     return SESSION_TOKEN;
@@ -17,6 +17,6 @@ export async function handshake() {
         throw new Error("Unable to authenticate with agent");
     }
 
-    const data = await res.json();
-    SESSION_TOKEN = data.token;
+    const response = await res.json();
+    SESSION_TOKEN = response.data.token;
 }

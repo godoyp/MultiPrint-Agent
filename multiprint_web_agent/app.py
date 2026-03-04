@@ -2,6 +2,7 @@ from flask import Flask, Blueprint
 from flask_cors import CORS
 from multiprint_web_agent.core.agent_config import get_port
 from multiprint_web_agent.core.ssl_config import get_ssl_context
+from multiprint_web_agent.core.handlers import register_api_error_handlers, register_ui_error_handlers
 from multiprint_web_agent.routes.api.print import bp as print_bp
 from multiprint_web_agent.routes.api.auth import bp as auth_bp
 from multiprint_web_agent.routes.ui.printers import bp as printers_bp
@@ -17,9 +18,11 @@ CORS(app)
 
 # Root API v1
 api_v1_root = Blueprint("api_v1", __name__, url_prefix="/api/v1")
+register_api_error_handlers(api_v1_root)
 
 # Root UI
 ui_root = Blueprint("ui_root", __name__, url_prefix="/ui")
+register_ui_error_handlers(ui_root)
 
 # API Children
 api_v1_root.register_blueprint(print_bp)
