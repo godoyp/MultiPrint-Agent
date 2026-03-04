@@ -273,8 +273,6 @@ Envia um trabalho de impressão.
 
 ## 🚀 Exemplo de Integração (JavaScript)
 
-(O código permanece exatamente igual ao original.)
-
 ``` js
 let cachedToken = null;
 
