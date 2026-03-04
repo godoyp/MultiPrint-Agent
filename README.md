@@ -585,7 +585,7 @@ Download the latest version from the **Releases** section.
 
 ## 📊 Project Status
 
-**Current version:** `v0.1.0`
+**Current version:** `v0.5.0`
 
 ✔️ Stable local execution  
 ✔️ Executable distribution (PyInstaller)  

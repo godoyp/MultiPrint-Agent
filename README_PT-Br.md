@@ -630,7 +630,7 @@ Baixe a versão mais recente na seção **Releases**.
 
 ## 📊 Status do Projeto
 
-**Versão atual:** `v0.1.0`
+**Versão atual:** `v0.5.0`
 
 ✔️ Execução local estável  
 ✔️ Distribuição via executável (PyInstaller)  

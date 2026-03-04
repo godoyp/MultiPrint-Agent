@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "multiprint-web-agent"
-version = "0.1.0"
+version = "0.5.0"
 description = "Local print agent for Zebra and Laser printers with secure REST API."
 authors = ["Pedro Godoy <pedro_godoy2@hotmail.com>"]
 readme = "README.md"
