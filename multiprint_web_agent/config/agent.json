@@ -6,7 +6,7 @@
       "name": "Zebra ZT411"
     },
     "laser": {
-      "name": "Microsoft Print to PDF"
+      "name": null
     }
   }
 }

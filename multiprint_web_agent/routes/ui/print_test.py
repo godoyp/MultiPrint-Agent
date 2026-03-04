@@ -8,25 +8,16 @@ from multiprint_web_agent.modules.payload.utils import detect_payload, payload_s
 from multiprint_web_agent.modules.payload.validator import validate_payload
 from multiprint_web_agent.modules.payload.errors import PayloadValidationError
 from multiprint_web_agent.modules.security.auth import require_session_token
-from multiprint_web_agent.modules.security.rate_limit import rate_limit, rate_key_from_request, TEST_PRINT_LIMIT, TEST_PRINT_WINDOW
+from multiprint_web_agent.modules.security.rate_limit import rate_limited, TEST_PRINT_LIMIT, TEST_PRINT_WINDOW
 
 
 bp = Blueprint("print_test", __name__)
 
 
 @bp.route("/test-print", methods=["POST"])
+@rate_limited(TEST_PRINT_LIMIT, TEST_PRINT_WINDOW)
 @require_session_token
 def print_test_route():
-
-    key = rate_key_from_request(
-        route="test-print",
-        token=g.session_token,
-        ip=request.remote_addr,
-    )
-
-    if not rate_limit(key, TEST_PRINT_LIMIT, TEST_PRINT_WINDOW):
-        log_event("RATE LIMIT | /test-print")
-        abort(429, "Rate limit exceeded")
 
     thermal = get_thermal_printer()
     laser = get_laser_printer()
