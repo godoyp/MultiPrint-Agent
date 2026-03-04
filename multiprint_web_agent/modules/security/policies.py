@@ -1,6 +1,7 @@
 from functools import wraps
-from flask import request, abort
+from flask import request
 from multiprint_web_agent.modules.observability.eventlog import log_event
+from multiprint_web_agent.core.exceptions import UnauthorizedError
 
 
 def localhost_only():
@@ -12,7 +13,7 @@ def localhost_only():
 
             if ip not in ("127.0.0.1", "::1"):
                 log_event(f"HANDSHAKE BLOCKED | IP={ip}")
-                abort(401, "Unauthorized")
+                raise UnauthorizedError("Unauthorized")
 
             return f(*args, **kwargs)
 

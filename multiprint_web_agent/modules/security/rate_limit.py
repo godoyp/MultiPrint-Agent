@@ -1,11 +1,11 @@
 import time
 from collections import defaultdict
 from functools import wraps
-from flask import request, g, abort
+from flask import request, g
 from multiprint_web_agent.modules.observability.eventlog import log_event
+from multiprint_web_agent.core.exceptions import TooManyRequestsError
 
 
-# LIMITS
 PRINT_LIMIT = 20
 PRINT_WINDOW = 10
 
@@ -53,8 +53,8 @@ def rate_limited(limit: int, window: int):
             key = rate_key_from_request(route, token, ip)
 
             if not rate_limit_check(key, limit, window):
-                log_event(f"RATE LIMIT EXCEEDED")
-                abort(429, "Rate limit exceeded")
+                log_event("RATE LIMIT EXCEEDED")
+                raise TooManyRequestsError("Rate limit exceeded")
 
             return f(*args, **kwargs)
 

@@ -1,4 +1,5 @@
-from flask import Blueprint, request, jsonify, abort, g
+from flask import Blueprint, jsonify
+from multiprint_web_agent.core.exceptions import BadRequestError
 from multiprint_web_agent.modules.printing.dispatcher import dispatch_print
 from multiprint_web_agent.core.agent_config import get_thermal_printer, get_laser_printer
 from multiprint_web_agent.modules.printers.utils import printer_is_online
@@ -23,7 +24,7 @@ def print_test_route():
     laser = get_laser_printer()
 
     if not thermal and not laser:
-        abort(400, "No printers configured")
+        raise BadRequestError("No printers configured")
 
     results = {"thermal": None, "laser": None}
 
@@ -76,11 +77,11 @@ def print_test_route():
 
     except PayloadValidationError as e:
         log_event(f"TEST PRINT REJECTED | {e.message}")
-        abort(400, e.message)
+        raise BadRequestError(e.message)
 
     except Exception as e:
         log_event(f"TEST PRINT ERROR | {str(e)}")
-        abort(500, "Internal test print error")
+        raise
 
     if all(v == "offline" for v in results.values() if v is not None):
         return jsonify(results), 503

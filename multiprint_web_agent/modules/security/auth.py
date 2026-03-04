@@ -1,7 +1,8 @@
 from functools import wraps
-from flask import request, abort, g
+from flask import request, g
 from multiprint_web_agent.core.security import get_api_key, SecurityConfigError
 from multiprint_web_agent.modules.security.session_tokens import validate_session
+from multiprint_web_agent.core.exceptions import UnauthorizedError, AppError
 
 
 def require_api_key(func):
@@ -13,14 +14,15 @@ def require_api_key(func):
         try:
             expected_key = get_api_key()
         except SecurityConfigError:
-            abort(500, "Server security misconfiguration")
+            raise AppError("Server security misconfiguration")
 
         if not api_key or api_key != expected_key:
-            abort(401, "Unauthorized")
+            raise UnauthorizedError("Unauthorized")
 
         return func(*args, **kwargs)
 
     return wrapper
+
 
 def require_session_token(func):
     @wraps(func)
@@ -35,7 +37,7 @@ def require_session_token(func):
         )
 
         if not token or not validate_session(token):
-            abort(401, "Unauthorized")
+            raise UnauthorizedError("Unauthorized")
 
         g.session_token = token
 
