@@ -240,21 +240,23 @@ Content-Type: application/json
 ## 🚀 Integration Example (JavaScript)
 
 ```js
+let cachedToken = null;
+
 async function getToken(forceRenew = false) {
-  if (!window.cachedToken || forceRenew) {
-    const res = await fetch("https://localhost:9108/api/auth/handshake", {
+  if (!cachedToken || forceRenew) {
+    const res = await fetch("https://localhost:9108/api/v1/auth/handshake", {
       method: "POST"
     });
-    const { token } = await res.json();
-    window.cachedToken = token;
+    const { data } = await res.json();
+    cachedToken = data.token;
   }
-  return window.cachedToken;
+  return cachedToken;
 }
 
 async function printPayload(payload) {
   let token = await getToken();
 
-  let res = await fetch("https://localhost:9108/api/print", {
+  let res = await fetch("https://localhost:9108/api/v1/print", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -266,7 +268,7 @@ async function printPayload(payload) {
   // Token expired → renew and retry
   if (res.status === 401) {
     token = await getToken(true);
-    res = await fetch("https://localhost:9108/api/print", {
+    res = await fetch("https://localhost:9108/api/v1/print", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
