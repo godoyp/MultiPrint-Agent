@@ -18,9 +18,8 @@ CORS(app)
 
 # OpenAPI config
 app.config["API_TITLE"] = "MultiPrint Agent API"
-app.config["API_VERSION"] = "1.0"
+app.config["API_VERSION"] = "0.5.0"
 app.config["OPENAPI_VERSION"] = "3.0.3"
-
 app.config["OPENAPI_URL_PREFIX"] = "/docs"
 app.config["OPENAPI_SWAGGER_UI_PATH"] = "/"
 app.config["OPENAPI_SWAGGER_UI_URL"] = "https://cdn.jsdelivr.net/npm/swagger-ui-dist/"
