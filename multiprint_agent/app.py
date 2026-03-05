@@ -1,5 +1,6 @@
-from flask import Flask, Blueprint
+from flask import Flask, Blueprint as FlaskBlueprint
 from flask_cors import CORS
+from flask_smorest import Api, Blueprint as SmorestBlueprint
 from multiprint_agent.core.agent_config import get_port
 from multiprint_agent.core.ssl_config import get_ssl_context
 from multiprint_agent.core.handlers import register_api_error_handlers, register_ui_error_handlers
@@ -15,12 +16,23 @@ from multiprint_agent.core.paths import STATIC_DIR
 app = Flask(__name__, static_folder=str(STATIC_DIR))
 CORS(app)
 
+# OpenAPI config
+app.config["API_TITLE"] = "MultiPrint Agent API"
+app.config["API_VERSION"] = "1.0"
+app.config["OPENAPI_VERSION"] = "3.0.3"
+
+app.config["OPENAPI_URL_PREFIX"] = "/docs"
+app.config["OPENAPI_SWAGGER_UI_PATH"] = "/"
+app.config["OPENAPI_SWAGGER_UI_URL"] = "https://cdn.jsdelivr.net/npm/swagger-ui-dist/"
+
+api = Api(app)
+
 # Root API v1
-api_v1_root = Blueprint("api_v1", __name__, url_prefix="/api/v1")
+api_v1_root = SmorestBlueprint("api_v1", __name__, url_prefix="/api/v1")
 register_api_error_handlers(api_v1_root)
 
 # Root UI
-ui_root = Blueprint("ui_root", __name__, url_prefix="/ui")
+ui_root = FlaskBlueprint("ui_root", __name__, url_prefix="/ui")
 register_ui_error_handlers(ui_root)
 
 # API Children
@@ -34,7 +46,7 @@ ui_root.register_blueprint(logs_bp)
 ui_root.register_blueprint(ui_bp)
 
 # Roots in APP
-app.register_blueprint(api_v1_root)
+api.register_blueprint(api_v1_root)
 app.register_blueprint(ui_root)
 
 
@@ -50,6 +62,7 @@ def run():
         ssl_context=ssl_context,
         debug=False,
     )
+
 
 if __name__ == "__main__":
     run()

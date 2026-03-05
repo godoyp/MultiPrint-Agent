@@ -48,4 +48,9 @@ class ServiceUnavailableError(AppError):
     status_code = 503
     error_code = "service_unavailable"
     default_message = "Service temporarily unavailable"
-    
+
+
+class ValidationError(AppError):
+    status_code = 422
+    error_code = "unprocessable_entity"
+    default_message = "Validation failed"

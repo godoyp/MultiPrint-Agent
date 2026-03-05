@@ -88,7 +88,7 @@ export async function testPrint() {
     try {
 
         await apiPost("/api/v1/print", {
-            kind: "test"
+            mode: "test"
         });
 
         showToast("Print Test Successful", "success");

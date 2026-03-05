@@ -9,115 +9,80 @@ from multiprint_agent.core.agent_config import get_thermal_printer, get_laser_pr
 from multiprint_agent.core.exceptions import BadRequestError, ConflictError, ServiceUnavailableError
 
 
-def process_print_request(data: dict, request_kind: str):
+def execute_print(printer, payload, request_mode):
 
-    if request_kind == "test":
-
-        thermal = get_thermal_printer()
-        laser = get_laser_printer()
-
-        if not thermal and not laser:
-            raise BadRequestError("No printers configured")
-
-        results = {"thermal": None, "laser": None}
-
-        if thermal:
-            if not printer_is_online(thermal):
-                log_event(f"PRINT FAILED | request={request_kind} | PRINTER OFFLINE | {thermal}")
-                results["thermal"] = "offline"
-            else:
-
-                raw = generate_thermal_test_zpl(thermal)
-
-                payload = {
-                    "kind": "zpl",
-                    "raw": raw,
-                    "encoding": None,
-                }
-
-                validate_payload(payload)
-
-                dispatch_print(thermal, payload)
-
-                size = payload_size_bytes(payload)
-
-                log_event(
-                    f"PRINT OK | request={request_kind} | printer={thermal} | payload={payload['kind']} | bytes={size}"
-                )
-
-                results["thermal"] = "ok"
-
-        if laser:
-            if not printer_is_online(laser):
-                log_event(f"PRINT FAILED | request={request_kind} | PRINTER OFFLINE | {laser}")
-                results["laser"] = "offline"
-            else:
-
-                raw = generate_laser_test_pdf_base64(laser)
-
-                payload = detect_payload(
-                    raw=raw,
-                    content_type="application/pdf",
-                    encoding="base64",
-                )
-
-                validate_payload(payload)
-
-                dispatch_print(laser, payload)
-
-                size = payload_size_bytes(payload)
-
-                log_event(
-                    f"PRINT OK | request={request_kind} | printer={laser} | payload={payload['kind']} | bytes={size}"
-                )
-
-                results["laser"] = "ok"
-
-        return results
-
-    raw = data.get("raw")
-
-    if not raw:
-        raise BadRequestError("raw is required")
+    if not printer_is_online(printer):
+        log_event(f"PRINT FAILED | request={request_mode} | PRINTER OFFLINE | {printer}")
+        raise ServiceUnavailableError("Printer offline or unavailable")
 
     try:
-
-        payload = detect_payload(
-            raw=raw,
-            content_type=data.get("contentType"),
-            encoding=data.get("encoding"),
-        )
-
         validate_payload(payload)
-
     except PayloadValidationError as e:
-
-        log_event(f"PRINT REJECTED | request={request_kind} | {e.message}")
+        log_event(f"PRINT REJECTED | request={request_mode} | {e.message}")
         raise BadRequestError(e.message)
 
-    try:
-
-        printer = resolve_printer_by_payload(payload)
-
-        if not printer_is_online(printer):
-
-            log_event(
-                f"PRINT FAILED | request={request_kind} | PRINTER OFFLINE | {printer}"
-            )
-
-            raise ServiceUnavailableError("Printer offline or unavailable")
-
-        dispatch_print(printer, payload)
-
-    except PrinterNotConfiguredError as e:
-
-        log_event(f"PRINT FAILED | request={request_kind} | {str(e)}")
-        raise ConflictError(str(e))
+    dispatch_print(printer, payload)
 
     size = payload_size_bytes(payload)
+    log_event(f"PRINT OK | request={request_mode} | printer={printer} | payload={payload['kind']} | bytes={size}")
 
-    log_event(
-        f"PRINT OK | request={request_kind} | printer={printer} | payload={payload['kind']} | bytes={size}"
-    )
+    return "ok"
 
-    return {"status": "ok"}
+
+def process_print_request(dto):
+
+    request_mode = dto.mode
+
+    if request_mode == "test":
+        return build_test_print(request_mode)
+
+    status = build_real_print(request_mode, dto.raw, dto.content_type, dto.encoding)
+    return {"status": status}
+
+
+def build_test_print(request_mode):
+
+    thermal = get_thermal_printer()
+    laser = get_laser_printer()
+
+    if not thermal and not laser:
+        raise BadRequestError("No printers configured")
+
+    results = {"thermal": None, "laser": None}
+
+    if thermal:
+        payload = {
+            "kind": "zpl",
+            "raw": generate_thermal_test_zpl(thermal),
+            "encoding": None,
+        }
+        results["thermal"] = execute_print(thermal, payload, request_mode)
+
+    if laser:
+        payload = detect_payload(
+            raw=generate_laser_test_pdf_base64(laser),
+            content_type="application/pdf",
+        )
+        results["laser"] = execute_print(laser, payload, request_mode)
+
+    return results
+
+
+def build_real_print(request_mode, raw, content_type, encoding):
+
+    if not raw:
+        raise BadRequestError("raw is required for real print")
+
+    try:
+        payload = detect_payload(raw=raw, content_type=content_type, encoding=encoding)
+        printer = resolve_printer_by_payload(payload)
+        return execute_print(printer, payload, request_mode)
+
+    except PayloadValidationError as e:
+        log_event(f"PRINT REJECTED | request={request_mode} | {e.message}")
+        raise BadRequestError(e.message)
+
+    except PrinterNotConfiguredError as e:
+        log_event(f"PRINT FAILED | request={request_mode} | {str(e)}")
+        raise ConflictError(str(e))
+    
