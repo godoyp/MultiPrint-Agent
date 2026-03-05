@@ -8,7 +8,6 @@ from multiprint_agent.routes.api.auth import bp as auth_bp
 from multiprint_agent.routes.ui.printers import bp as printers_bp
 from multiprint_agent.routes.ui.state import bp as state_bp
 from multiprint_agent.routes.ui.logs import bp as logs_bp
-from multiprint_agent.routes.ui.print_test import bp as print_test_bp
 from multiprint_agent.routes.ui.ui import bp as ui_bp
 from multiprint_agent.core.paths import STATIC_DIR
 
@@ -32,7 +31,6 @@ api_v1_root.register_blueprint(auth_bp)
 ui_root.register_blueprint(printers_bp)
 ui_root.register_blueprint(state_bp)
 ui_root.register_blueprint(logs_bp)
-ui_root.register_blueprint(print_test_bp)
 ui_root.register_blueprint(ui_bp)
 
 # Roots in APP

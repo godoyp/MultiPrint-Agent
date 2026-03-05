@@ -82,11 +82,17 @@ export async function reloadPrinters() {
 }
 
 export async function testPrint() {
+
     showToast("Sending Print Test...", "info", 2000);
 
     try {
-        await apiPost("/ui/test-print");
+
+        await apiPost("/api/v1/print", {
+            kind: "test"
+        });
+
         showToast("Print Test Successful", "success");
+
     } catch (err) {
 
         if (err.message === "RATE_LIMIT") {
