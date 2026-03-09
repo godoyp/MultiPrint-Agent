@@ -12,41 +12,44 @@ from multiprint_agent.routes.ui.logs import bp as logs_bp
 from multiprint_agent.routes.ui.ui import bp as ui_bp
 from multiprint_agent.core.paths import STATIC_DIR
 
+def create_app():
 
-app = Flask(__name__, static_folder=str(STATIC_DIR))
-CORS(app)
+    app = Flask(__name__, static_folder=str(STATIC_DIR))
+    CORS(app)
 
-# OpenAPI config
-app.config["API_TITLE"] = "MultiPrint Agent API"
-app.config["API_VERSION"] = "0.5.0"
-app.config["OPENAPI_VERSION"] = "3.0.3"
-app.config["OPENAPI_URL_PREFIX"] = "/docs"
-app.config["OPENAPI_SWAGGER_UI_PATH"] = "/"
-app.config["OPENAPI_SWAGGER_UI_URL"] = "https://cdn.jsdelivr.net/npm/swagger-ui-dist/"
+    # OpenAPI config
+    app.config["API_TITLE"] = "MultiPrint Agent API"
+    app.config["API_VERSION"] = "0.5.0"
+    app.config["OPENAPI_VERSION"] = "3.0.3"
+    app.config["OPENAPI_URL_PREFIX"] = "/docs"
+    app.config["OPENAPI_SWAGGER_UI_PATH"] = "/"
+    app.config["OPENAPI_SWAGGER_UI_URL"] = "https://cdn.jsdelivr.net/npm/swagger-ui-dist/"
 
-api = Api(app)
+    api = Api(app)
 
-# Root API v1
-api_v1_root = SmorestBlueprint("api_v1", __name__, url_prefix="/api/v1")
-register_api_error_handlers(api_v1_root)
+    # Root API v1
+    api_v1_root = SmorestBlueprint("api_v1", __name__, url_prefix="/api/v1")
+    register_api_error_handlers(api_v1_root)
 
-# Root UI
-ui_root = FlaskBlueprint("ui_root", __name__, url_prefix="/ui")
-register_ui_error_handlers(ui_root)
+    # Root UI
+    ui_root = FlaskBlueprint("ui_root", __name__, url_prefix="/ui")
+    register_ui_error_handlers(ui_root)
 
-# API Children
-api_v1_root.register_blueprint(print_bp)
-api_v1_root.register_blueprint(auth_bp)
+    # API Children
+    api_v1_root.register_blueprint(print_bp)
+    api_v1_root.register_blueprint(auth_bp)
 
-# UI Children
-ui_root.register_blueprint(printers_bp)
-ui_root.register_blueprint(state_bp)
-ui_root.register_blueprint(logs_bp)
-ui_root.register_blueprint(ui_bp)
+    # UI Children
+    ui_root.register_blueprint(printers_bp)
+    ui_root.register_blueprint(state_bp)
+    ui_root.register_blueprint(logs_bp)
+    ui_root.register_blueprint(ui_bp)
 
-# Roots in APP
-api.register_blueprint(api_v1_root)
-app.register_blueprint(ui_root)
+    # Roots in APP
+    api.register_blueprint(api_v1_root)
+    app.register_blueprint(ui_root)
+
+    return app
 
 
 def run():
@@ -55,7 +58,7 @@ def run():
     if not ssl_context:
         raise RuntimeError("HTTPS is mandatory but SSL context could not be loaded")
 
-    app.run(
+    create_app().run(
         host="127.0.0.1",
         port=get_port(),
         ssl_context=ssl_context,

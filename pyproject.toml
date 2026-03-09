@@ -16,6 +16,8 @@ pillow = "^12.1.1"
 reportlab = "^4.4.10"
 flask-smorest = "^0.46.2"
 marshmallow = "^4.2.2"
+pystray = "^0.19.5"
+cryptography = "^46.0.5"
 
 [tool.poetry.group.dev.dependencies]
 pytest = "^8.0"
